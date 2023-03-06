@@ -58,13 +58,8 @@ export class CustomizableDashboardComponent extends AppComponentBase implements 
   }
 
   ngOnInit() {
-    this.loading = true;
-    
-    var header = document.querySelector<HTMLElement>('.mobile-subscription-warning')
-    var fotter = document.getElementById('kt_footer');
-    header.style.display ='none'
-    fotter.style.display = 'none';
-
+    this.loading = true;  
+  
     this._dashboardCustomizationServiceProxy.getDashboardDefinition(this.dashboardName, DashboardCustomizationConst.Applications.Angular)
       .subscribe((dashboardDefinitionResult: DashboardOutput) => {
         this.dashboardDefinition = dashboardDefinitionResult;

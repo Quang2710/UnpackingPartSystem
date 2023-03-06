@@ -97,5 +97,16 @@
         public const string Pages_Administration_Host_Settings = "Pages.Administration.Host.Settings";
         public const string Pages_Administration_Host_Dashboard = "Pages.Administration.Host.Dashboard";
 
+
+
+        public const string Pages_Master = "Pages.Master";
+
+        // Master - Working Pattern
+        public const string Pages_Master_WorkingPattern = "Pages.Master.WorkingPattern";
+
+        // Master - Working Pattern - WorkingTime
+        public const string Pages_Master_WorkingPattern_WorkingTime = "Pages.Master.WorkingPattern.WorkingTime";
+		public const string Pages_Master_WorkingPattern_WorkingTime_CreateEdit = "Pages.Master.WorkingPattern.WorkingTime.CreateEdit";
+		public const string Pages_Master_WorkingPattern_WorkingTime_Delete = "Pages.Master.WorkingPattern.WorkingTime.Delete";
     }
 }

@@ -1,138 +1,102 @@
-/* The switch - the box around the slider */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 24px;
-    margin: 0;
-    top: 0;
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-/* The slider */
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-}
-
-input:checked + .slider {
-    background-color: #2196f3;
-}
-
-input:focus + .slider {
-    box-shadow: 0 0 1px #2196f3;
-}
-
-input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
-}
-
-.deleteWidgetButton {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 22px;
-    padding: 0 7px !important;
-    height: 22px;
-    border-radius: 0 0 0 10px;
-    box-shadow: none;
-    outline: none;
-    text-align: center;
-    border: 0 !important;
-    z-index: 1002;
-}
-
-gridster {
-    height: calc(100vh - 300px);
-    background: none;
-}
-
-gridster.no-tab {
-    height: calc(100vh - 230px);
-}
-
-:host ::ng-deep gridster .gridster-row {
-    border-top: 1px dotted #c1c1c1 !important;
-    border-bottom: 1px dotted #c1c1c1 !important;
-}
-
-:host ::ng-deep gridster .gridster-column {
-    border-left: 1px dotted #c1c1c1 !important;
-    border-right: 1px dotted #c1c1c1 !important;
-}
-
-.div-dashboard-customization {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 120;
-    background-color: #cecece;
-    border-radius: 10px;
-    padding: 15px;
-}
-
-.div-dashboard-customization .vr {
-    border-right: 1px solid white;
+.dashboard-home .dashboard-home-left {
     float: left;
-    margin-right: 8px;
+    width: 70%;
+    background: #ffffff66;
+    border-radius: 4px;
+    box-shadow: 0px 1px 2px #0000007d;
+}
+.dashboard-home .dashboard-home-right {
+    float: right;
+    width: 29%;
+    background: #ffffff66;
+    border-radius: 4px;
+    box-shadow: 0px 1px 2px #0000007d;
 }
 
-:host ::ng-deep tabset.nav-hidden .nav-tabs {
-    display: none;
+.bg-dashboard {
+    position: relative;
+    width: 100%;
+    padding: 10px;
 }
 
-.btn-filter {
-    margin-right: 8px;
+.dashboard-home .dashboard-home-right-title {
+    height: 34px;
+    line-height: 34px;
+    position: relative;
+    padding-left: 10px;
+    border-radius: 4px 4px 0 0;
+    color: black;
+    background: #ffa80087;
+}
+.dashboard-home .dashboard-home-right-content {
+    font-size: 12px;
+    min-height: 100px;
+    padding: 10px;
+    border-radius: 0 0 4px 4px;
+    background-color: white;
 }
 
-:host ::ng-deep gridster .kt-portlet {
-    margin: 0;
-    height: 100%;
+.dashboard_logo {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    margin-top: -45px;
 }
-
-:host ::ng-deep gridster .kt-portlet__body {
-    overflow: auto;
+.container {
+    width: 100%;
+    height: 100vh;
 }
-
-.div-dashboard-customization button {
-    margin: 0 3px;
+header.masthead {
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 4.5rem);
+    background: linear-gradient(
+            to bottom,
+            rgba(-72, 56, 96, 0.8) 0%,
+            rgba(73, 69, 74, 0.8) 100%
+        ),
+        url("/assets/common/images/toyota_background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
 }
-
-.filterModal h5 {
-    margin-bottom: 10px;
+header.masthead h1,
+header.masthead .h1 {
+    font-family: Brush Script MT;
+    font-size: 4.25rem;
+}
+@media (min-width: 992px) {
+    header.masthead {
+        height: 100vh;
+        min-height: 40rem;
+        padding-top: 4.5rem;
+        padding-bottom: 0;
+    }
+    header.masthead p {
+        font-size: 1.15rem;
+    }
+    header.masthead h1,
+    header.masthead .h1 {
+        font-size: 3rem;
+    }
+}
+@media (min-width: 1200px) {
+    header.masthead h1,
+    header.masthead .h1 {
+        font-size: 9.5rem;
+    }
+}
+hr.divider {
+    height: 0.2rem;
+    max-width: 3.25rem;
+    margin: 1.5rem auto;
+    background-color: #f4623a;
+    opacity: 1;
+}
+.text-white-75 {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+.icon_support {
+    display: flex;
+    justify-content: center;
 }

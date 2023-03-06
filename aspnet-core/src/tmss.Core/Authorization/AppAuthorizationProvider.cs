@@ -115,6 +115,14 @@ namespace tmss.Authorization
             administration.CreateChildPermission(AppPermissions.Pages_Administration_Host_Maintenance, L("Maintenance"), multiTenancySides: _isMultiTenancyEnabled ? MultiTenancySides.Host : MultiTenancySides.Tenant);
             administration.CreateChildPermission(AppPermissions.Pages_Administration_HangfireDashboard, L("HangfireDashboard"), multiTenancySides: _isMultiTenancyEnabled ? MultiTenancySides.Host : MultiTenancySides.Tenant);
             administration.CreateChildPermission(AppPermissions.Pages_Administration_Host_Dashboard, L("Dashboard"), multiTenancySides: MultiTenancySides.Host);
+
+            var master = pages.CreateChildPermission(AppPermissions.Pages_Master, L("Master"), multiTenancySides: MultiTenancySides.Tenant);
+            var masterWorkingPattern = master.CreateChildPermission(AppPermissions.Pages_Master_WorkingPattern, L("MasterWorkingPattern"), multiTenancySides: MultiTenancySides.Tenant);
+
+      		var perMstWptWorkingTime = master.CreateChildPermission(AppPermissions.Pages_Master_WorkingPattern_WorkingTime, L( "MasterWorkingPatternWorkingTime"));
+            perMstWptWorkingTime.CreateChildPermission(AppPermissions.Pages_Master_WorkingPattern_WorkingTime_CreateEdit, L("MasterWorkingPatternWorkingTimeCreateEdit"));
+            perMstWptWorkingTime.CreateChildPermission(AppPermissions.Pages_Master_WorkingPattern_WorkingTime_Delete, L("MasterWorkingPatternWorkingTimeDelete")); 
+
         }
 
         private static ILocalizableString L(string name)

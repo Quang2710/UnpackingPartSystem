@@ -10,6 +10,20 @@ import { DashboardComponent } from './dashboard/dashboard.component';
                 children: [
                     { path: 'dashboard', component: DashboardComponent, data: { permission: 'Pages.Tenant.Dashboard' } },
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+                    // {
+                    //     path: 'master/workingpattern',
+                    //     loadChildren: () => import('./master/workingpattern/dashborad-custome.module').then(m => m.DashBoradCustomeModule),
+                    //  },
+                    {
+                        path: 'master/workingpattern/workingtime',
+                        loadChildren: () => import('./master/workingpattern/workingtime/workingtime.module').then(m => m.WorkingTimeModule),
+                     },
+                    // {
+                    //     path: 'master/workingpattern',
+                    //     loadChildren: () => import('./master/workingpatter/dashborad-custome.module').then(m => m.DashBoradCustomeModule),
+                    //     data: { permission: 'Pages.Master.WorkingPattern' }
+                    // },
+                  
                     { path: '**', redirectTo: 'dashboard' }
                 ]
             }

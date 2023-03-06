@@ -60,8 +60,8 @@
     <div headerNotifications class="kt-header__topbar-item dropdown" dropdown id="header_notification_bar"></div>
     <div class="kt-header__topbar-item kt-header__topbar-item--user ng-star-inserted  dropdown" dropdown
         placement="bottom-right">
-        <div class="kt-header__topbar-wrapper dropdown-toggle" data-toggle="dropdown"
-            aria-expanded="false" aria-haspopup="true" dropdownToggle>
+        <div class="kt-header__topbar-wrapper dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
+            aria-haspopup="true" dropdownToggle>
             <div class="kt-header__topbar-user">
                 <i *ngIf="isImpersonatedLogin" class="fa fa-reply kt-font-danger mr-2"></i>
                 <span class="kt-header__topbar-username kt-hidden-mobile">
@@ -126,7 +126,8 @@
                         </li>
                     </ul>
                 </div>
-                <a *ngIf="appSession.application.userDelegationIsEnabled && !isImpersonatedLogin" href="javascript:;" class="kt-notification__item" (click)="showUserDelegations()">
+                <a *ngIf="appSession.application.userDelegationIsEnabled && !isImpersonatedLogin" href="javascript:;"
+                    class="kt-notification__item" (click)="showUserDelegations()">
                     <div class="kt-notification__item-icon">
                         <i class="flaticon-users"></i>
                     </div>

@@ -5946,6 +5946,74 @@ export class LanguageServiceProxy {
 }
 
 @Injectable()
+export class MstWptWorkingTimeExcelExporterServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    exportToFile(body: MstWptWorkingTimeDto[] | null | undefined): Observable<FileDto> {
+        let url_ = this.baseUrl + "/api/services/app/MstWptWorkingTimeExcelExporter/ExportToFile";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json", 
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportToFile(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportToFile(<any>response_);
+                } catch (e) {
+                    return <Observable<FileDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processExportToFile(response: HttpResponseBase): Observable<FileDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FileDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileDto>(<any>null);
+    }
+}
+
+@Injectable()
 export class NotificationServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -19481,6 +19549,86 @@ export interface IUpdateLanguageTextInput {
     sourceName: string;
     key: string;
     value: string;
+}
+
+export class MstWptWorkingTimeDto implements IMstWptWorkingTimeDto {
+    shiftNo!: number;
+    shopId!: number;
+    workingType!: number;
+    startTime!: string | undefined;
+    endTime!: string | undefined;
+    description!: string | undefined;
+    patternHId!: number;
+    seasonType!: string | undefined;
+    dayOfWeek!: string | undefined;
+    weekWorkingDays!: number;
+    isActive!: string | undefined;
+    id!: number | undefined;
+
+    constructor(data?: IMstWptWorkingTimeDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.shiftNo = _data["shiftNo"];
+            this.shopId = _data["shopId"];
+            this.workingType = _data["workingType"];
+            this.startTime = _data["startTime"];
+            this.endTime = _data["endTime"];
+            this.description = _data["description"];
+            this.patternHId = _data["patternHId"];
+            this.seasonType = _data["seasonType"];
+            this.dayOfWeek = _data["dayOfWeek"];
+            this.weekWorkingDays = _data["weekWorkingDays"];
+            this.isActive = _data["isActive"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): MstWptWorkingTimeDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new MstWptWorkingTimeDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["shiftNo"] = this.shiftNo;
+        data["shopId"] = this.shopId;
+        data["workingType"] = this.workingType;
+        data["startTime"] = this.startTime;
+        data["endTime"] = this.endTime;
+        data["description"] = this.description;
+        data["patternHId"] = this.patternHId;
+        data["seasonType"] = this.seasonType;
+        data["dayOfWeek"] = this.dayOfWeek;
+        data["weekWorkingDays"] = this.weekWorkingDays;
+        data["isActive"] = this.isActive;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface IMstWptWorkingTimeDto {
+    shiftNo: number;
+    shopId: number;
+    workingType: number;
+    startTime: string | undefined;
+    endTime: string | undefined;
+    description: string | undefined;
+    patternHId: number;
+    seasonType: string | undefined;
+    dayOfWeek: string | undefined;
+    weekWorkingDays: number;
+    isActive: string | undefined;
+    id: number | undefined;
 }
 
 export enum UserNotificationState {

@@ -8,6 +8,7 @@ using tmss.Authorization.Users;
 using tmss.Chat;
 using tmss.Editions;
 using tmss.Friendships;
+using tmss.Master.WorkingPattern;
 using tmss.MultiTenancy;
 using tmss.MultiTenancy.Accounting;
 using tmss.MultiTenancy.Payments;
@@ -36,6 +37,9 @@ namespace tmss.EntityFrameworkCore
         public virtual DbSet<SubscriptionPaymentExtensionData> SubscriptionPaymentExtensionDatas { get; set; }
 
         public virtual DbSet<UserDelegation> UserDelegations { get; set; }
+
+        public virtual DbSet<MstWptWorkingTime> MstWptWorkingTimes { get; set; }
+
 
         public tmssDbContext(DbContextOptions<tmssDbContext> options)
             : base(options)
