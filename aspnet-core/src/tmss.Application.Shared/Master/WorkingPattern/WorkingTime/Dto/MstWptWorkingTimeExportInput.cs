@@ -1,7 +1,7 @@
 ﻿using Abp.Application.Services.Dto;
 using System;
 using System.ComponentModel.DataAnnotations;
-namespace vovina.Master.WorkingPattern.Dto
+namespace tmss.Master.WorkingPattern.Dto
 {
 
 	public class MstWptWorkingTimeExportInput

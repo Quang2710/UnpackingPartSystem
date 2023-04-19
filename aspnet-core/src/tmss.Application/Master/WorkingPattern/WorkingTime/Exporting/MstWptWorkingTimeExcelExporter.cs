@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using vovina.Master.WorkingPattern.Dto;
 using tmss.Dto;
 using tmss.DataExporting.Excel.NPOI;
 using tmss.Storage;
+using tmss.Master.WorkingPattern.Dto;
 
-namespace vovina.Master.WorkingPattern.Exporting
+namespace tmss.Master.WorkingPattern.Exporting
 {
 	public class MstWptWorkingTimeExcelExporter : NpoiExcelExporterBase, IMstWptWorkingTimeExcelExporter
 	{

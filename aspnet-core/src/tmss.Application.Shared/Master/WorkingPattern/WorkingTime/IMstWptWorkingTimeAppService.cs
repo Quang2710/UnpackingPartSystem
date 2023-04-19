@@ -1,9 +1,8 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using System.Threading.Tasks;
-using vovina.Master.WorkingPattern.Dto;
-
-namespace vovina.Master.WorkingPattern
+using tmss.Master.WorkingPattern.Dto;
+namespace tmss.Master.WorkingPattern
 {
 
 	public interface IMstWptWorkingTimeAppService : IApplicationService

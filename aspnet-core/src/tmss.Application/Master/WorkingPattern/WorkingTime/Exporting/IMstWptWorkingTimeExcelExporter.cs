@@ -1,11 +1,9 @@
 ﻿using Abp.Application.Services;
-using Abp.Application.Services.Dto;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using vovina.Master.WorkingPattern.Dto;
 using tmss.Dto;
+using tmss.Master.WorkingPattern.Dto;
 
-namespace vovina.Master.WorkingPattern.Exporting
+namespace tmss.Master.WorkingPattern.Exporting
 {
 
 	public interface IMstWptWorkingTimeExcelExporter : IApplicationService

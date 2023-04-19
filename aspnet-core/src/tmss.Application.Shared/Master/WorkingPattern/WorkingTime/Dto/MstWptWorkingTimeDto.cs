@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using tmss.Master.WorkingPattern;
 
-namespace vovina.Master.WorkingPattern.Dto
+namespace tmss.Master.WorkingPattern.Dto
 {
 
 	public class MstWptWorkingTimeDto : EntityDto<long?>
