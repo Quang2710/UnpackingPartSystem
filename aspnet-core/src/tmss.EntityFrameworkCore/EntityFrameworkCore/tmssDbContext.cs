@@ -8,6 +8,7 @@ using tmss.Authorization.Users;
 using tmss.Chat;
 using tmss.Editions;
 using tmss.Friendships;
+using tmss.Master;
 using tmss.Master.WorkingPattern;
 using tmss.MultiTenancy;
 using tmss.MultiTenancy.Accounting;
@@ -40,6 +41,7 @@ namespace tmss.EntityFrameworkCore
 
         public virtual DbSet<MstWptWorkingTime> MstWptWorkingTimes { get; set; }
 
+        public virtual DbSet<LgwContainer> LgwContainers { get; set; }        
 
         public tmssDbContext(DbContextOptions<tmssDbContext> options)
             : base(options)
