@@ -20,10 +20,10 @@ namespace tmss.Master
         public virtual string ContainerNo { get; set; }
 
         [StringLength(MaxRenbanLength)]
-        public virtual int Renban { get; set; }
+        public virtual string Renban { get; set; }
 
         [StringLength(MaxSuppilerNoLength)]
-        public virtual int SuppilerNo { get; set; }
+        public virtual string SuppilerNo { get; set; }
 
     }
 }
