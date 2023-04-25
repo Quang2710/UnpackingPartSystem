@@ -41,7 +41,12 @@ namespace tmss.EntityFrameworkCore
 
         public virtual DbSet<MstWptWorkingTime> MstWptWorkingTimes { get; set; }
 
-        public virtual DbSet<LgwContainer> LgwContainers { get; set; }        
+        public virtual DbSet<LgwContainer> LgwContainers { get; set; }
+
+        public virtual DbSet<DvnContList> DvnContLists { get; set; }
+        public virtual DbSet<LupContModule> LupContModules { get; set; }
+        public virtual DbSet<UnPackingPart> UnPackingParts { get; set; }
+        public virtual DbSet<Part> Parts { get; set; }
 
         public tmssDbContext(DbContextOptions<tmssDbContext> options)
             : base(options)
