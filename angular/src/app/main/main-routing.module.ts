@@ -18,12 +18,20 @@ import { DashboardComponent } from './dashboard/dashboard.component';
                         path: 'master/workingpattern/workingtime',
                         loadChildren: () => import('./master/workingpattern/workingtime/workingtime.module').then(m => m.WorkingTimeModule),
                      },
+                    {
+                        path: 'devaning/devaningCont',
+                        loadChildren: () => import('./devaning/devaningCont/devaningCont.module').then(m => m.DevaningContModule),
+                     },
+                    {
+                        path: 'devaning/devaningScreen',
+                        loadChildren: () => import('./devaning/devaningScreen/devaningScreen.module').then(m => m.DevaningScreenModule),
+                     },
                     // {
                     //     path: 'master/workingpattern',
                     //     loadChildren: () => import('./master/workingpatter/dashborad-custome.module').then(m => m.DashBoradCustomeModule),
                     //     data: { permission: 'Pages.Master.WorkingPattern' }
                     // },
-                  
+
                     { path: '**', redirectTo: 'dashboard' }
                 ]
             }
