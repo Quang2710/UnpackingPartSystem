@@ -1,6 +1,6 @@
-import { IFloatingFilterComp } from '@ag-grid-community/angular';
-import { IFloatingFilterParams } from '@ag-grid-enterprise/all-modules';
 import { Component } from '@angular/core';
+import { IFloatingFilterComp, IFloatingFilterParams } from 'ag-grid-community';
+import { AgPromise } from 'ag-grid-community/dist/lib/utils';
 
 @Component({
     selector: 'app-ag-floating-filter-grid',
@@ -13,6 +13,18 @@ export class AgFloatingFilterGridComponent implements IFloatingFilterComp {
     currentValue: string = '';
 
     constructor() { }
+    afterGuiAttached?(): void {
+        throw new Error('Method not implemented.');
+    }
+    getGui(): HTMLElement {
+        throw new Error('Method not implemented.');
+    }
+    destroy?(): void {
+        throw new Error('Method not implemented.');
+    }
+    init?(params: IFloatingFilterParams<any, any, any>): void | AgPromise<void> {
+        throw new Error('Method not implemented.');
+    }
 
     ngOnInit(): void {
     }

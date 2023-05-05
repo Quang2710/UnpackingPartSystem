@@ -1,6 +1,9 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { PaginationParamsModel } from '@app/shared/common/models/base.model';
+import { GridParams, PaginationParamsModel } from '@app/shared/common/models/base.model';
+import { GridTableService } from '@app/shared/common/services/grid-table.service';
 import { MstWptWorkingTimeServiceProxy } from '@shared/service-proxies/service-proxies';
+import { ceil } from 'lodash';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'app-workingtime',
@@ -18,6 +21,9 @@ export class WorkingtimeComponent implements OnInit {
         totalPage: 1,
     };
 
+    rowData: any[] = [];
+    dataParams: GridParams | undefined;
+
     shiftNo: number = 0;
     shopId: number = 0;
     shopName: string = '';
@@ -34,12 +40,14 @@ export class WorkingtimeComponent implements OnInit {
     constructor(
         injector: Injector,
         private _service: MstWptWorkingTimeServiceProxy,
-
+        private gridTableService: GridTableService,
     ) {
 
     }
 
     ngOnInit() {
+        this.paginationParams = { pageNum: 1, pageSize: 20, totalCount: 0 };
+        this.getDatas();
     }
 
     getDatas(paginationParams?: PaginationParamsModel) {
@@ -56,7 +64,12 @@ export class WorkingtimeComponent implements OnInit {
             '',
             this.paginationParams.skipCount,
             this.paginationParams.pageSize
-        );
+        ).pipe(finalize(() => this.gridTableService.selectFirstRow(this.dataParams!.api)))
+            .subscribe((result) => {
+                this.paginationParams.totalCount = result.totalCount;
+                this.rowData = result.items;
+                this.paginationParams.totalPage = ceil(result.totalCount / (this.paginationParams.pageSize ?? 0));
+            });
     }
 
 }

@@ -1,6 +1,6 @@
 import { AgFilterComponent } from '@ag-grid-community/angular';
-import { IDoesFilterPassParams, IFilterParams, RowNode } from '@ag-grid-enterprise/all-modules';
 import { Component } from '@angular/core';
+import { IDoesFilterPassParams, IFilterParams } from 'ag-grid-community';
 
 @Component({
     selector: 'app-ag-filter-grid',

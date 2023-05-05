@@ -1,11 +1,11 @@
 import { AgFilterGridComponent } from './../grid/ag-filter-grid/ag-filter-grid.component';
 import { AgFloatingFilterGridComponent } from '../grid/ag-floating-filter-grid/ag-floating-filter-grid.component';
 import { AgCheckboxRendererComponent } from './../grid/ag-checkbox-renderer/ag-checkbox-renderer.component';
-import { ColDef, Column, ColumnApi, GridApi, ICellEditorParams, IsColumnFunc } from '@ag-grid-enterprise/all-modules';
 import { AgCellButtonRendererComponent } from '../grid/ag-cell-button-renderer/ag-cell-button-renderer.component';
 import { AgDropdownRendererComponent } from '../grid/ag-dropdown-renderer/ag-dropdown-renderer.component';
 import { AgDatepickerRendererComponent } from '../grid/ag-datepicker-renderer/ag-datepicker-renderer.component';
 import { AgCellButtonTransparentRendererComponent } from '../grid/ag-cell-button-transparent-renderer/ag-cell-button-transparent-renderer.component';
+import { ColDef, Column, ColumnApi, GridApi, ICellEditorParams, IsColumnFunc } from 'ag-grid-community';
 
 export interface PaginationParamsModel {
   totalCount?: number | undefined;

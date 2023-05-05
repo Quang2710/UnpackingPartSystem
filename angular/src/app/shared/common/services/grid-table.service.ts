@@ -1,7 +1,7 @@
 import { FormStoringService } from './form-storing.service';
 import { NotifyService } from 'abp-ng2-module';
 import { Injectable } from '@angular/core';
-import { GridApi, RowNode } from '@ag-grid-enterprise/all-modules';
+import { GridApi, RowNode } from 'ag-grid-community';
 
 @Injectable({
   providedIn: 'root'

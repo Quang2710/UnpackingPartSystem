@@ -35,6 +35,7 @@ NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
         BsDropdownModule.forRoot(),
         PopoverModule.forRoot()
     ],
+
     declarations: [
         DashboardComponent
     ],
