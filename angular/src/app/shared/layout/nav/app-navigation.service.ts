@@ -29,7 +29,7 @@ export class AppNavigationService {
             ]),
             new AppMenuItem('Devaning', '', 'flaticon-interface-8', '', [], [
                 new AppMenuItem('DvnContainer', '', 'flaticon-line-graph', '/app/main/devaning/devaningCont'),
-                new AppMenuItem('DvnScreen', '', 'flaticon-line-graph', '/app/main/devaning/devaningScreen')
+                new AppMenuItem('DvnScreen', '', 'flaticon-line-graph', '/screens/devaningScreen')
 
             ]),
 

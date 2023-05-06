@@ -1,3 +1,57 @@
-<div class="container">
 
+<div class="container">
+    <div class="title">
+        <h1>Working time</h1>
+    </div>
+    <div></div>
+    <div class="card">
+        <p-table
+            [value]="rowdata"
+            [tableStyle]="{ 'min-width': '50rem' }"
+            [paginator]="true"
+            [rows]="5"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of
+            {totalRecords} entries"
+            [rowsPerPageOptions]="[10, 25, 50]">
+            <ng-template pTemplate="header" class="header-p-table">
+                <tr>
+                    <th>Shift No</th>
+                    <th>Shop Id</th>
+                    <th>Working Type</th>
+                    <th>StartTime</th>
+                    <th>End Time</th>
+                    <th>Description</th>
+                    <th>PatternH Id</th>
+                    <th>Season Type</th>
+                    <th>Day Of Week</th>
+                    <th>WeekWorking Days</th>
+                    <th>Is Active</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowdata class="body-p-table">
+                <tr>
+                    <td>{{ rowdata.shiftNo }}</td>
+                    <td>{{ rowdata.shopId }}</td>
+                    <td>{{ rowdata.workingType }}</td>
+                    <td>{{ rowdata.startTime }}</td>
+                    <td>{{ rowdata.endTime }}</td>
+                    <td>{{ rowdata.description }}</td>
+                    <td>{{ rowdata.patternHId }}</td>
+                    <td>{{ rowdata.seasonType }}</td>
+                    <td>{{ rowdata.dayOfWeek }}</td>
+                    <td>{{ rowdata.weekWorkingDays }}</td>
+                    <td>{{ rowdata.isActive }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus"
+                    styleClass="p-button-text"></p-button>
+            </ng-template>
+            <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="pi pi-cloud"
+                    styleClass="p-button-text"></p-button>
+            </ng-template>
+        </p-table>
+    </div>
 </div>

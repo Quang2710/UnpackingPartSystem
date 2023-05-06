@@ -16,11 +16,13 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BsDatepickerConfig, BsDaterangepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxBootstrapDatePickerConfigService } from 'assets/ngx-bootstrap/ngx-bootstrap-datepicker-config.service';
+import { TableModule } from 'primeng';
 
 NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
 
 @NgModule({
     imports: [
+        TableModule,
         CommonModule,
         FormsModule,
         ModalModule,

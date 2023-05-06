@@ -1,17 +1,19 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { GridParams, PaginationParamsModel } from '@app/shared/common/models/base.model';
 import { GridTableService } from '@app/shared/common/services/grid-table.service';
-import { MstWptWorkingTimeServiceProxy } from '@shared/service-proxies/service-proxies';
+import { AppComponentBase } from '@shared/common/app-component-base';
+import { MstWptWorkingTimeDto, MstWptWorkingTimeServiceProxy } from '@shared/service-proxies/service-proxies';
 import { ceil } from 'lodash';
+import { LazyLoadEvent, Paginator } from 'primeng';
 import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'app-workingtime',
     templateUrl: './workingtime.component.html',
-    styleUrls: ['./workingtime.component.less']
+    styleUrls: ['./workingtime.component.less'],
 })
-export class WorkingtimeComponent implements OnInit {
-
+export class WorkingtimeComponent extends AppComponentBase implements OnInit {
+    @ViewChild('paginator', { static: true }) paginator: Paginator;
     paginationParams: PaginationParamsModel = {
         pageNum: 1,
         pageSize: 20,
@@ -20,8 +22,11 @@ export class WorkingtimeComponent implements OnInit {
         sorting: '',
         totalPage: 1,
     };
-
-    rowData: any[] = [];
+    indexShort: number = 0;
+    filterText: string = '';
+    isLoading;
+    rowdata: any[] = [];
+    data: MstWptWorkingTimeDto = new MstWptWorkingTimeDto();
     dataParams: GridParams | undefined;
 
     shiftNo: number = 0;
@@ -42,16 +47,17 @@ export class WorkingtimeComponent implements OnInit {
         private _service: MstWptWorkingTimeServiceProxy,
         private gridTableService: GridTableService,
     ) {
-
+        super(injector)
     }
 
     ngOnInit() {
         this.paginationParams = { pageNum: 1, pageSize: 20, totalCount: 0 };
         this.getDatas();
+
     }
 
-    getDatas(paginationParams?: PaginationParamsModel) {
-        return this._service.getAll(
+    getDatas() {
+        this._service.getAll(
             this.shiftNo,
             this.shopId,
             this.workingType,
@@ -64,12 +70,14 @@ export class WorkingtimeComponent implements OnInit {
             '',
             this.paginationParams.skipCount,
             this.paginationParams.pageSize
-        ).pipe(finalize(() => this.gridTableService.selectFirstRow(this.dataParams!.api)))
+        )
             .subscribe((result) => {
-                this.paginationParams.totalCount = result.totalCount;
-                this.rowData = result.items;
-                this.paginationParams.totalPage = ceil(result.totalCount / (this.paginationParams.pageSize ?? 0));
+                this.rowdata = result.items;
+                console.log(this.rowdata);
             });
+
     }
+
+
 
 }
