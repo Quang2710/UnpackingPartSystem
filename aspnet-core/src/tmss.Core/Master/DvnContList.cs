@@ -50,6 +50,6 @@ namespace tmss.Master
 
         [StringLength(MaxDevaningStatusLength)]
         public virtual string DevaningStatus { get; set; }
-
     }
+
 }

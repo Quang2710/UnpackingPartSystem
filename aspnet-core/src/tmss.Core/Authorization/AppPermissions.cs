@@ -108,5 +108,10 @@
         public const string Pages_Master_WorkingPattern_WorkingTime = "Pages.Master.WorkingPattern.WorkingTime";
 		public const string Pages_Master_WorkingPattern_WorkingTime_CreateEdit = "Pages.Master.WorkingPattern.WorkingTime.CreateEdit";
 		public const string Pages_Master_WorkingPattern_WorkingTime_Delete = "Pages.Master.WorkingPattern.WorkingTime.Delete";
+
+        //Master - DevaningContModule
+        public const string Pages_Master_DevaningContModule = "Pages.Master.DevaningContModule";
+        public const string Pages_Master_DevaningContModule_CreateEdit = "Pages.Master.DevaningContModule.CreateEdit";
+        public const string Pages_Master_DevaningContModule_Delete = "Pages.Master.DevaningContModule.Delete";
     }
 }
