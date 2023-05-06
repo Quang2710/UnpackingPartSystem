@@ -26,6 +26,16 @@ import { DashboardComponent } from './dashboard/dashboard.component';
                         path: 'devaning/devaningScreen',
                         loadChildren: () => import('./devaning/devaningScreen/devaningScreen.module').then(m => m.DevaningScreenModule),
                      },
+                    {
+                        path: 'unpacking/unpackingLot',
+                        loadChildren: () => import('./unpacking/unpackingLot/unpackingLot.module').then(m => m.UnpackingLotModule),
+                     },
+
+                    {
+                        path: 'unpacking/unpackingLot',
+                        loadChildren: () => import('./unpacking/unpackingScreen/unpackingScreen.module').then(m => m.UnpackingScreenModule),
+                     },
+
                     // {
                     //     path: 'master/workingpattern',
                     //     loadChildren: () => import('./master/workingpatter/dashborad-custome.module').then(m => m.DashBoradCustomeModule),

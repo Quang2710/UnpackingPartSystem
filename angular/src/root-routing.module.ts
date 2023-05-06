@@ -17,6 +17,11 @@ const routes: Routes = [
                 loadChildren: () => import('app/main/devaning/devaningScreen/devaningScreen.module').then(m => m.DevaningScreenModule), //Lazy load main module
                 data: { preload: true }
             },
+            {
+                path: 'unpackingScreen',
+                loadChildren: () => import('app/main/unpacking/unpackingScreen/unpackingScreen.module').then(m => m.UnpackingScreenModule), //Lazy load main module
+                data: { preload: true }
+            },
         ]
     },
     { path: '**', redirectTo: '/app/main/dashboard' }
