@@ -1,5 +1,54 @@
-.container{
+.container {
     width: 100%;
     height: 100vh;
     background-color: aliceblue;
+    .title{
+        h1{
+            text-align: center;
+        }
+    }
+}
+
+.card {
+    padding: 10px;
+}
+
+:host ::ng-deep {
+    .ui-table {
+        position: relative;
+        height: 50vw;
+    }
+
+    .ui-paginator-bottom {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+.card {
+    height: 50vw;
+
+    p-table {
+        height: 50vw;
+
+        body .ui-widget {
+            height: 50vw;
+        }
+
+        .header-p-table {
+            margin-bottom: 10px;
+        }
+
+        tr {
+            th {
+                background-color: rgb(68, 143, 255);
+            }
+        }
+
+        .body-p-table:not(tr) {
+            height: 50vw;
+        }
+    }
+
 }

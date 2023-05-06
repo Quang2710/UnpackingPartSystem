@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ModuleWithProviders, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppLocalizationService } from '@app/shared/common/localization/app-localization.service';
 import { AppNavigationService } from '@app/shared/layout/nav/app-navigation.service';
@@ -47,6 +47,11 @@ import { ComboboxInputTypeComponent } from './input-types/combobox-input-type/co
 import { CheckboxInputTypeComponent } from './input-types/checkbox-input-type/checkbox-input-type.component';
 import { MultipleSelectComboboxInputTypeComponent } from './input-types/multiple-select-combobox-input-type/multiple-select-combobox-input-type.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { AgDatepickerRendererComponent } from './grid/ag-datepicker-renderer/ag-datepicker-renderer.component';
+import { AgDropdownRendererComponent } from './grid/ag-dropdown-renderer/ag-dropdown-renderer.component';
+import { AgCheckboxRendererComponent } from './grid/ag-checkbox-renderer/ag-checkbox-renderer.component';
+import { AgFilterGridComponent } from './grid/ag-filter-grid/ag-filter-grid.component';
+import { AgFloatingFilterGridComponent } from './grid/ag-floating-filter-grid/ag-floating-filter-grid.component';
 
 @NgModule({
     imports: [
@@ -69,6 +74,11 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
         AutoCompleteModule
     ],
     declarations: [
+        AgFloatingFilterGridComponent,
+        AgFilterGridComponent,
+        AgCheckboxRendererComponent,
+        AgDropdownRendererComponent,
+        AgDatepickerRendererComponent,
         TimeZoneComboComponent,
         CommonLookupModalComponent,
         EntityTypeHistoryModalComponent,
@@ -96,6 +106,11 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
         MultipleSelectComboboxInputTypeComponent
     ],
     exports: [
+        AgFloatingFilterGridComponent,
+        AgFilterGridComponent,
+        AgCheckboxRendererComponent,
+        AgDropdownRendererComponent,
+        AgDatepickerRendererComponent,
         TimeZoneComboComponent,
         CommonLookupModalComponent,
         EntityTypeHistoryModalComponent,
@@ -132,7 +147,10 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
         ComboboxInputTypeComponent,
         CheckboxInputTypeComponent,
         MultipleSelectComboboxInputTypeComponent
-    ]
+    ],
+    schemas: [
+        NO_ERRORS_SCHEMA
+    ],
 })
 export class AppCommonModule {
     static forRoot(): ModuleWithProviders<AppCommonModule> {

@@ -5946,6 +5946,317 @@ export class LanguageServiceProxy {
 }
 
 @Injectable()
+export class MstWptWorkingTimeServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    createOrEdit(body: CreateOrEditMstWptWorkingTimeDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/MstWptWorkingTime/CreateOrEdit";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json", 
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOrEdit(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOrEdit(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreateOrEdit(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    delete(id: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/MstWptWorkingTime/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param shiftNo (optional) 
+     * @param shopId (optional) 
+     * @param workingType (optional) 
+     * @param description (optional) 
+     * @param patternHId (optional) 
+     * @param seasonType (optional) 
+     * @param dayOfWeek (optional) 
+     * @param weekWorkingDays (optional) 
+     * @param isActive (optional) 
+     * @param sorting (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return Success
+     */
+    getAll(shiftNo: number | undefined, shopId: number | undefined, workingType: number | undefined, description: string | null | undefined, patternHId: number | undefined, seasonType: string | null | undefined, dayOfWeek: string | null | undefined, weekWorkingDays: number | undefined, isActive: string | null | undefined, sorting: string | null | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PagedResultDtoOfMstWptWorkingTimeDto> {
+        let url_ = this.baseUrl + "/api/services/app/MstWptWorkingTime/GetAll?";
+        if (shiftNo === null)
+            throw new Error("The parameter 'shiftNo' cannot be null.");
+        else if (shiftNo !== undefined)
+            url_ += "ShiftNo=" + encodeURIComponent("" + shiftNo) + "&"; 
+        if (shopId === null)
+            throw new Error("The parameter 'shopId' cannot be null.");
+        else if (shopId !== undefined)
+            url_ += "ShopId=" + encodeURIComponent("" + shopId) + "&"; 
+        if (workingType === null)
+            throw new Error("The parameter 'workingType' cannot be null.");
+        else if (workingType !== undefined)
+            url_ += "WorkingType=" + encodeURIComponent("" + workingType) + "&"; 
+        if (description !== undefined)
+            url_ += "Description=" + encodeURIComponent("" + description) + "&"; 
+        if (patternHId === null)
+            throw new Error("The parameter 'patternHId' cannot be null.");
+        else if (patternHId !== undefined)
+            url_ += "PatternHId=" + encodeURIComponent("" + patternHId) + "&"; 
+        if (seasonType !== undefined)
+            url_ += "SeasonType=" + encodeURIComponent("" + seasonType) + "&"; 
+        if (dayOfWeek !== undefined)
+            url_ += "DayOfWeek=" + encodeURIComponent("" + dayOfWeek) + "&"; 
+        if (weekWorkingDays === null)
+            throw new Error("The parameter 'weekWorkingDays' cannot be null.");
+        else if (weekWorkingDays !== undefined)
+            url_ += "WeekWorkingDays=" + encodeURIComponent("" + weekWorkingDays) + "&"; 
+        if (isActive !== undefined)
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAll(<any>response_);
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfMstWptWorkingTimeDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfMstWptWorkingTimeDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAll(response: HttpResponseBase): Observable<PagedResultDtoOfMstWptWorkingTimeDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PagedResultDtoOfMstWptWorkingTimeDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PagedResultDtoOfMstWptWorkingTimeDto>(<any>null);
+    }
+
+    /**
+     * @param shiftNo (optional) 
+     * @param shopId (optional) 
+     * @param workingType (optional) 
+     * @param startTime (optional) 
+     * @param endTime (optional) 
+     * @param description (optional) 
+     * @param patternHId (optional) 
+     * @param seasonType (optional) 
+     * @param dayOfWeek (optional) 
+     * @param weekWorkingDays (optional) 
+     * @param isActive (optional) 
+     * @return Success
+     */
+    getWorkingTimeToExcel(shiftNo: number | undefined, shopId: number | undefined, workingType: number | undefined, startTime: string | null | undefined, endTime: string | null | undefined, description: string | null | undefined, patternHId: number | undefined, seasonType: string | null | undefined, dayOfWeek: string | null | undefined, weekWorkingDays: number | undefined, isActive: string | null | undefined): Observable<FileDto> {
+        let url_ = this.baseUrl + "/api/services/app/MstWptWorkingTime/GetWorkingTimeToExcel?";
+        if (shiftNo === null)
+            throw new Error("The parameter 'shiftNo' cannot be null.");
+        else if (shiftNo !== undefined)
+            url_ += "ShiftNo=" + encodeURIComponent("" + shiftNo) + "&"; 
+        if (shopId === null)
+            throw new Error("The parameter 'shopId' cannot be null.");
+        else if (shopId !== undefined)
+            url_ += "ShopId=" + encodeURIComponent("" + shopId) + "&"; 
+        if (workingType === null)
+            throw new Error("The parameter 'workingType' cannot be null.");
+        else if (workingType !== undefined)
+            url_ += "WorkingType=" + encodeURIComponent("" + workingType) + "&"; 
+        if (startTime !== undefined)
+            url_ += "StartTime=" + encodeURIComponent("" + startTime) + "&"; 
+        if (endTime !== undefined)
+            url_ += "EndTime=" + encodeURIComponent("" + endTime) + "&"; 
+        if (description !== undefined)
+            url_ += "Description=" + encodeURIComponent("" + description) + "&"; 
+        if (patternHId === null)
+            throw new Error("The parameter 'patternHId' cannot be null.");
+        else if (patternHId !== undefined)
+            url_ += "PatternHId=" + encodeURIComponent("" + patternHId) + "&"; 
+        if (seasonType !== undefined)
+            url_ += "SeasonType=" + encodeURIComponent("" + seasonType) + "&"; 
+        if (dayOfWeek !== undefined)
+            url_ += "DayOfWeek=" + encodeURIComponent("" + dayOfWeek) + "&"; 
+        if (weekWorkingDays === null)
+            throw new Error("The parameter 'weekWorkingDays' cannot be null.");
+        else if (weekWorkingDays !== undefined)
+            url_ += "WeekWorkingDays=" + encodeURIComponent("" + weekWorkingDays) + "&"; 
+        if (isActive !== undefined)
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetWorkingTimeToExcel(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetWorkingTimeToExcel(<any>response_);
+                } catch (e) {
+                    return <Observable<FileDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetWorkingTimeToExcel(response: HttpResponseBase): Observable<FileDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FileDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileDto>(<any>null);
+    }
+}
+
+@Injectable()
 export class MstWptWorkingTimeExcelExporterServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -19551,6 +19862,86 @@ export interface IUpdateLanguageTextInput {
     value: string;
 }
 
+export class CreateOrEditMstWptWorkingTimeDto implements ICreateOrEditMstWptWorkingTimeDto {
+    shiftNo!: number;
+    shopId!: number;
+    workingType!: number;
+    startTime!: string | undefined;
+    endTime!: string | undefined;
+    description!: string | undefined;
+    patternHId!: number;
+    seasonType!: string | undefined;
+    dayOfWeek!: string | undefined;
+    weekWorkingDays!: number;
+    isActive!: string | undefined;
+    id!: number | undefined;
+
+    constructor(data?: ICreateOrEditMstWptWorkingTimeDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.shiftNo = _data["shiftNo"];
+            this.shopId = _data["shopId"];
+            this.workingType = _data["workingType"];
+            this.startTime = _data["startTime"];
+            this.endTime = _data["endTime"];
+            this.description = _data["description"];
+            this.patternHId = _data["patternHId"];
+            this.seasonType = _data["seasonType"];
+            this.dayOfWeek = _data["dayOfWeek"];
+            this.weekWorkingDays = _data["weekWorkingDays"];
+            this.isActive = _data["isActive"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): CreateOrEditMstWptWorkingTimeDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateOrEditMstWptWorkingTimeDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["shiftNo"] = this.shiftNo;
+        data["shopId"] = this.shopId;
+        data["workingType"] = this.workingType;
+        data["startTime"] = this.startTime;
+        data["endTime"] = this.endTime;
+        data["description"] = this.description;
+        data["patternHId"] = this.patternHId;
+        data["seasonType"] = this.seasonType;
+        data["dayOfWeek"] = this.dayOfWeek;
+        data["weekWorkingDays"] = this.weekWorkingDays;
+        data["isActive"] = this.isActive;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface ICreateOrEditMstWptWorkingTimeDto {
+    shiftNo: number;
+    shopId: number;
+    workingType: number;
+    startTime: string | undefined;
+    endTime: string | undefined;
+    description: string | undefined;
+    patternHId: number;
+    seasonType: string | undefined;
+    dayOfWeek: string | undefined;
+    weekWorkingDays: number;
+    isActive: string | undefined;
+    id: number | undefined;
+}
+
 export class MstWptWorkingTimeDto implements IMstWptWorkingTimeDto {
     shiftNo!: number;
     shopId!: number;
@@ -19629,6 +20020,54 @@ export interface IMstWptWorkingTimeDto {
     weekWorkingDays: number;
     isActive: string | undefined;
     id: number | undefined;
+}
+
+export class PagedResultDtoOfMstWptWorkingTimeDto implements IPagedResultDtoOfMstWptWorkingTimeDto {
+    totalCount!: number;
+    items!: MstWptWorkingTimeDto[] | undefined;
+
+    constructor(data?: IPagedResultDtoOfMstWptWorkingTimeDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalCount = _data["totalCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(MstWptWorkingTimeDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PagedResultDtoOfMstWptWorkingTimeDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedResultDtoOfMstWptWorkingTimeDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCount"] = this.totalCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IPagedResultDtoOfMstWptWorkingTimeDto {
+    totalCount: number;
+    items: MstWptWorkingTimeDto[] | undefined;
 }
 
 export enum UserNotificationState {

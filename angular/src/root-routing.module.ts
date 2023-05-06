@@ -9,6 +9,16 @@ const routes: Routes = [
         loadChildren: () => import('account/account.module').then(m => m.AccountModule), //Lazy load account module
         data: { preload: true }
     },
+    {
+        path: 'screens',
+        children: [
+            {
+                path: 'devaningScreen',
+                loadChildren: () => import('app/main/devaning/devaningScreen/devaningScreen.module').then(m => m.DevaningScreenModule), //Lazy load main module
+                data: { preload: true }
+            },
+        ]
+    },
     { path: '**', redirectTo: '/app/main/dashboard' }
 ];
 
