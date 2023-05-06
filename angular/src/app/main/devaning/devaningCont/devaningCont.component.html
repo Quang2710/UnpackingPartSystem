@@ -1,0 +1,57 @@
+
+<div class="container">
+    <div class="title">
+        <h1>DEVANING CONTAINER</h1>
+    </div>
+    <div></div>
+    <div class="card">
+        <p-table
+            [value]="rowdata"
+            [tableStyle]="{ 'min-width': '50rem' }"
+            [paginator]="true"
+            [rows]="5"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of
+            {totalRecords} entries"
+            [rowsPerPageOptions]="[10, 25, 50]">
+            <ng-template pTemplate="header" class="header-p-table">
+                <tr>
+                    <th>Devaning No</th>
+                    <th>Container No</th>
+                    <th>Renban</th>
+                    <th>Suppiler No</th>
+                    <th>Shift No</th>
+                    <th>Working Date</th>
+                    <th>Plan Devaning Date</th>
+                    <th>Act Devaning Date</th>
+                    <th>Act Devaning Date Finish</th>
+                    <th>Devaning Type</th>
+                    <th>Devaning Status</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowdata class="body-p-table">
+                <tr>
+                    <td>{{ rowdata.devaningNo }}</td>
+                    <td>{{ rowdata.containerNo }}</td>
+                    <td>{{ rowdata.renban }}</td>
+                    <td>{{ rowdata.suppilerNo }}</td>
+                    <td>{{ rowdata.shiftNo }}</td>
+                    <td>{{ rowdata.workingDate }}</td>
+                    <td>{{ rowdata.planDevaningDate }}</td>
+                    <td>{{ rowdata.actDevaningDate }}</td>
+                    <td>{{ rowdata.actDevaningDateFinish }}</td>
+                    <td>{{ rowdata.devaningType }}</td>
+                    <td>{{ rowdata.devaningStatus }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus"
+                    styleClass="p-button-text"></p-button>
+            </ng-template>
+            <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="pi pi-cloud"
+                    styleClass="p-button-text"></p-button>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

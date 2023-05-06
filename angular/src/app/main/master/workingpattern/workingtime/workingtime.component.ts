@@ -3,9 +3,7 @@ import { GridParams, PaginationParamsModel } from '@app/shared/common/models/bas
 import { GridTableService } from '@app/shared/common/services/grid-table.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { MstWptWorkingTimeDto, MstWptWorkingTimeServiceProxy } from '@shared/service-proxies/service-proxies';
-import { ceil } from 'lodash';
-import { LazyLoadEvent, Paginator } from 'primeng';
-import { finalize } from 'rxjs/operators';
+import { Paginator } from 'primeng';
 
 @Component({
     selector: 'app-workingtime',

@@ -2551,6 +2551,367 @@ export class DemoUiComponentsServiceProxy {
 }
 
 @Injectable()
+export class DevaningContModuleServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    createOrEdit(body: CreateOrEditDevaningContModuleDto | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/DevaningContModule/CreateOrEdit";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json", 
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateOrEdit(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateOrEdit(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreateOrEdit(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    delete(id: number | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/DevaningContModule/Delete?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("delete", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processDelete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processDelete(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processDelete(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param devaningNo (optional) 
+     * @param containerNo (optional) 
+     * @param renban (optional) 
+     * @param suppilerNo (optional) 
+     * @param shiftNo (optional) 
+     * @param devaningType (optional) 
+     * @param devaningStatus (optional) 
+     * @param sorting (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return Success
+     */
+    getAll(devaningNo: string | null | undefined, containerNo: string | null | undefined, renban: string | null | undefined, suppilerNo: string | null | undefined, shiftNo: string | null | undefined, devaningType: string | null | undefined, devaningStatus: string | null | undefined, sorting: string | null | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PagedResultDtoOfDevaningContModuleDto> {
+        let url_ = this.baseUrl + "/api/services/app/DevaningContModule/GetAll?";
+        if (devaningNo !== undefined)
+            url_ += "DevaningNo=" + encodeURIComponent("" + devaningNo) + "&"; 
+        if (containerNo !== undefined)
+            url_ += "ContainerNo=" + encodeURIComponent("" + containerNo) + "&"; 
+        if (renban !== undefined)
+            url_ += "Renban=" + encodeURIComponent("" + renban) + "&"; 
+        if (suppilerNo !== undefined)
+            url_ += "SuppilerNo=" + encodeURIComponent("" + suppilerNo) + "&"; 
+        if (shiftNo !== undefined)
+            url_ += "ShiftNo=" + encodeURIComponent("" + shiftNo) + "&"; 
+        if (devaningType !== undefined)
+            url_ += "DevaningType=" + encodeURIComponent("" + devaningType) + "&"; 
+        if (devaningStatus !== undefined)
+            url_ += "DevaningStatus=" + encodeURIComponent("" + devaningStatus) + "&"; 
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAll(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAll(<any>response_);
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfDevaningContModuleDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfDevaningContModuleDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAll(response: HttpResponseBase): Observable<PagedResultDtoOfDevaningContModuleDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = PagedResultDtoOfDevaningContModuleDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PagedResultDtoOfDevaningContModuleDto>(<any>null);
+    }
+
+    /**
+     * @param devaningNo (optional) 
+     * @param containerNo (optional) 
+     * @param renban (optional) 
+     * @param suppilerNo (optional) 
+     * @param shiftNo (optional) 
+     * @param workingDate (optional) 
+     * @param planDevaningDate (optional) 
+     * @param actDevaningDate (optional) 
+     * @param actDevaningDateFinish (optional) 
+     * @param devaningType (optional) 
+     * @param devaningStatus (optional) 
+     * @return Success
+     */
+    getDevaningContModuleToExcel(devaningNo: string | null | undefined, containerNo: string | null | undefined, renban: string | null | undefined, suppilerNo: string | null | undefined, shiftNo: string | null | undefined, workingDate: moment.Moment | undefined, planDevaningDate: moment.Moment | undefined, actDevaningDate: moment.Moment | undefined, actDevaningDateFinish: moment.Moment | undefined, devaningType: string | null | undefined, devaningStatus: string | null | undefined): Observable<FileDto> {
+        let url_ = this.baseUrl + "/api/services/app/DevaningContModule/GetDevaningContModuleToExcel?";
+        if (devaningNo !== undefined)
+            url_ += "DevaningNo=" + encodeURIComponent("" + devaningNo) + "&"; 
+        if (containerNo !== undefined)
+            url_ += "ContainerNo=" + encodeURIComponent("" + containerNo) + "&"; 
+        if (renban !== undefined)
+            url_ += "Renban=" + encodeURIComponent("" + renban) + "&"; 
+        if (suppilerNo !== undefined)
+            url_ += "SuppilerNo=" + encodeURIComponent("" + suppilerNo) + "&"; 
+        if (shiftNo !== undefined)
+            url_ += "ShiftNo=" + encodeURIComponent("" + shiftNo) + "&"; 
+        if (workingDate === null)
+            throw new Error("The parameter 'workingDate' cannot be null.");
+        else if (workingDate !== undefined)
+            url_ += "WorkingDate=" + encodeURIComponent(workingDate ? "" + workingDate.toJSON() : "") + "&"; 
+        if (planDevaningDate === null)
+            throw new Error("The parameter 'planDevaningDate' cannot be null.");
+        else if (planDevaningDate !== undefined)
+            url_ += "PlanDevaningDate=" + encodeURIComponent(planDevaningDate ? "" + planDevaningDate.toJSON() : "") + "&"; 
+        if (actDevaningDate === null)
+            throw new Error("The parameter 'actDevaningDate' cannot be null.");
+        else if (actDevaningDate !== undefined)
+            url_ += "ActDevaningDate=" + encodeURIComponent(actDevaningDate ? "" + actDevaningDate.toJSON() : "") + "&"; 
+        if (actDevaningDateFinish === null)
+            throw new Error("The parameter 'actDevaningDateFinish' cannot be null.");
+        else if (actDevaningDateFinish !== undefined)
+            url_ += "ActDevaningDateFinish=" + encodeURIComponent(actDevaningDateFinish ? "" + actDevaningDateFinish.toJSON() : "") + "&"; 
+        if (devaningType !== undefined)
+            url_ += "DevaningType=" + encodeURIComponent("" + devaningType) + "&"; 
+        if (devaningStatus !== undefined)
+            url_ += "DevaningStatus=" + encodeURIComponent("" + devaningStatus) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetDevaningContModuleToExcel(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetDevaningContModuleToExcel(<any>response_);
+                } catch (e) {
+                    return <Observable<FileDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetDevaningContModuleToExcel(response: HttpResponseBase): Observable<FileDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FileDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileDto>(<any>null);
+    }
+}
+
+@Injectable()
+export class DevaningContModuleExcelExporterServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    exportToFile(body: DevaningContModuleDto[] | null | undefined): Observable<FileDto> {
+        let url_ = this.baseUrl + "/api/services/app/DevaningContModuleExcelExporter/ExportToFile";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json", 
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processExportToFile(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processExportToFile(<any>response_);
+                } catch (e) {
+                    return <Observable<FileDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processExportToFile(response: HttpResponseBase): Observable<FileDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FileDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileDto>(<any>null);
+    }
+}
+
+@Injectable()
 export class DynamicEntityParameterDefinitionServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -16412,6 +16773,214 @@ export class StringOutput implements IStringOutput {
 
 export interface IStringOutput {
     output: string | undefined;
+}
+
+export class CreateOrEditDevaningContModuleDto implements ICreateOrEditDevaningContModuleDto {
+    devaningNo!: string | undefined;
+    containerNo!: string | undefined;
+    renban!: string | undefined;
+    suppilerNo!: string | undefined;
+    shiftNo!: string | undefined;
+    workingDate!: moment.Moment;
+    planDevaningDate!: moment.Moment;
+    actDevaningDate!: moment.Moment;
+    actDevaningDateFinish!: moment.Moment;
+    devaningType!: string | undefined;
+    devaningStatus!: string | undefined;
+    id!: number | undefined;
+
+    constructor(data?: ICreateOrEditDevaningContModuleDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.devaningNo = _data["devaningNo"];
+            this.containerNo = _data["containerNo"];
+            this.renban = _data["renban"];
+            this.suppilerNo = _data["suppilerNo"];
+            this.shiftNo = _data["shiftNo"];
+            this.workingDate = _data["workingDate"] ? moment(_data["workingDate"].toString()) : <any>undefined;
+            this.planDevaningDate = _data["planDevaningDate"] ? moment(_data["planDevaningDate"].toString()) : <any>undefined;
+            this.actDevaningDate = _data["actDevaningDate"] ? moment(_data["actDevaningDate"].toString()) : <any>undefined;
+            this.actDevaningDateFinish = _data["actDevaningDateFinish"] ? moment(_data["actDevaningDateFinish"].toString()) : <any>undefined;
+            this.devaningType = _data["devaningType"];
+            this.devaningStatus = _data["devaningStatus"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): CreateOrEditDevaningContModuleDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateOrEditDevaningContModuleDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["devaningNo"] = this.devaningNo;
+        data["containerNo"] = this.containerNo;
+        data["renban"] = this.renban;
+        data["suppilerNo"] = this.suppilerNo;
+        data["shiftNo"] = this.shiftNo;
+        data["workingDate"] = this.workingDate ? this.workingDate.toISOString() : <any>undefined;
+        data["planDevaningDate"] = this.planDevaningDate ? this.planDevaningDate.toISOString() : <any>undefined;
+        data["actDevaningDate"] = this.actDevaningDate ? this.actDevaningDate.toISOString() : <any>undefined;
+        data["actDevaningDateFinish"] = this.actDevaningDateFinish ? this.actDevaningDateFinish.toISOString() : <any>undefined;
+        data["devaningType"] = this.devaningType;
+        data["devaningStatus"] = this.devaningStatus;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface ICreateOrEditDevaningContModuleDto {
+    devaningNo: string | undefined;
+    containerNo: string | undefined;
+    renban: string | undefined;
+    suppilerNo: string | undefined;
+    shiftNo: string | undefined;
+    workingDate: moment.Moment;
+    planDevaningDate: moment.Moment;
+    actDevaningDate: moment.Moment;
+    actDevaningDateFinish: moment.Moment;
+    devaningType: string | undefined;
+    devaningStatus: string | undefined;
+    id: number | undefined;
+}
+
+export class DevaningContModuleDto implements IDevaningContModuleDto {
+    devaningNo!: string | undefined;
+    containerNo!: string | undefined;
+    renban!: string | undefined;
+    suppilerNo!: string | undefined;
+    shiftNo!: string | undefined;
+    workingDate!: moment.Moment;
+    planDevaningDate!: moment.Moment;
+    actDevaningDate!: moment.Moment;
+    actDevaningDateFinish!: moment.Moment;
+    devaningType!: string | undefined;
+    devaningStatus!: string | undefined;
+    id!: number | undefined;
+
+    constructor(data?: IDevaningContModuleDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.devaningNo = _data["devaningNo"];
+            this.containerNo = _data["containerNo"];
+            this.renban = _data["renban"];
+            this.suppilerNo = _data["suppilerNo"];
+            this.shiftNo = _data["shiftNo"];
+            this.workingDate = _data["workingDate"] ? moment(_data["workingDate"].toString()) : <any>undefined;
+            this.planDevaningDate = _data["planDevaningDate"] ? moment(_data["planDevaningDate"].toString()) : <any>undefined;
+            this.actDevaningDate = _data["actDevaningDate"] ? moment(_data["actDevaningDate"].toString()) : <any>undefined;
+            this.actDevaningDateFinish = _data["actDevaningDateFinish"] ? moment(_data["actDevaningDateFinish"].toString()) : <any>undefined;
+            this.devaningType = _data["devaningType"];
+            this.devaningStatus = _data["devaningStatus"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): DevaningContModuleDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new DevaningContModuleDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["devaningNo"] = this.devaningNo;
+        data["containerNo"] = this.containerNo;
+        data["renban"] = this.renban;
+        data["suppilerNo"] = this.suppilerNo;
+        data["shiftNo"] = this.shiftNo;
+        data["workingDate"] = this.workingDate ? this.workingDate.toISOString() : <any>undefined;
+        data["planDevaningDate"] = this.planDevaningDate ? this.planDevaningDate.toISOString() : <any>undefined;
+        data["actDevaningDate"] = this.actDevaningDate ? this.actDevaningDate.toISOString() : <any>undefined;
+        data["actDevaningDateFinish"] = this.actDevaningDateFinish ? this.actDevaningDateFinish.toISOString() : <any>undefined;
+        data["devaningType"] = this.devaningType;
+        data["devaningStatus"] = this.devaningStatus;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface IDevaningContModuleDto {
+    devaningNo: string | undefined;
+    containerNo: string | undefined;
+    renban: string | undefined;
+    suppilerNo: string | undefined;
+    shiftNo: string | undefined;
+    workingDate: moment.Moment;
+    planDevaningDate: moment.Moment;
+    actDevaningDate: moment.Moment;
+    actDevaningDateFinish: moment.Moment;
+    devaningType: string | undefined;
+    devaningStatus: string | undefined;
+    id: number | undefined;
+}
+
+export class PagedResultDtoOfDevaningContModuleDto implements IPagedResultDtoOfDevaningContModuleDto {
+    totalCount!: number;
+    items!: DevaningContModuleDto[] | undefined;
+
+    constructor(data?: IPagedResultDtoOfDevaningContModuleDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.totalCount = _data["totalCount"];
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(DevaningContModuleDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PagedResultDtoOfDevaningContModuleDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PagedResultDtoOfDevaningContModuleDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["totalCount"] = this.totalCount;
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IPagedResultDtoOfDevaningContModuleDto {
+    totalCount: number;
+    items: DevaningContModuleDto[] | undefined;
 }
 
 export class DynamicParameterDto implements IDynamicParameterDto {
