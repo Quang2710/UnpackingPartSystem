@@ -5,12 +5,12 @@ using System.Text;
 
 namespace tmss.Master.Module.Dto
 {
-    public class CreateOrEditModuleDto:Entity<long>
+    public class CreateOrEditModuleDto:Entity<long?>
     {
-        public virtual string ModuleNo { get; set; }
+        public  string ModuleNo { get; set; }
 
-        public virtual string DevaningNo { get; set; }        
+        public  string DevaningNo { get; set; }        
 
-        public virtual string ModuleStatus { get; set; }
+        public  string ModuleStatus { get; set; }
     }
 }

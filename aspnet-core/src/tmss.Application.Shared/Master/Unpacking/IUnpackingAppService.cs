@@ -14,6 +14,6 @@ namespace tmss.Master.Unpacking
 
         Task CreateOrEdit(CreateOrEditUnpackingDto input);
 
-        Task Delete(EntityDto input);
+        Task Delete(EntityDto<long> input);
     }
 }

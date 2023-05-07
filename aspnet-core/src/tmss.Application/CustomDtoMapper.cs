@@ -31,6 +31,10 @@ using tmss.Friendships;
 using tmss.Friendships.Cache;
 using tmss.Friendships.Dto;
 using tmss.Localization.Dto;
+using tmss.Master;
+using tmss.Master.DevaningContModule.Dto;
+using tmss.Master.Module.Dto;
+using tmss.Master.Unpacking.Dto;
 using tmss.MultiTenancy;
 using tmss.MultiTenancy.Dto;
 using tmss.MultiTenancy.HostDashboard.Dto;
@@ -158,7 +162,12 @@ namespace tmss
             configuration.CreateMap<EntityDynamicParameterValue, EntityDynamicParameterValueDto>().ReverseMap();
             //User Delegations
             configuration.CreateMap<CreateUserDelegationDto, UserDelegation>();
-
+            //Devaning
+            configuration.CreateMap<CreateOrEditDevaningContModuleDto, DvnContList>().ReverseMap();
+            //Unpacking
+            configuration.CreateMap<CreateOrEditUnpackingDto, UnPackingPart>().ReverseMap();
+            //module
+            configuration.CreateMap<CreateOrEditModuleDto, LupContModule>().ReverseMap();
 
             /* ADD YOUR OWN CUSTOM AUTOMAPPER MAPPINGS HERE */
         }

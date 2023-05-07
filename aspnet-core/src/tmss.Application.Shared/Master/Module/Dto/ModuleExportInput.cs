@@ -6,12 +6,12 @@ namespace tmss.Master.Module.Dto
 {
     public class ModuleExportInput
     {
-        public virtual string ModuleNo { get; set; }
+        public  string ModuleNo { get; set; }
 
-        public virtual string DevaningNo { get; set; }
+        public  string DevaningNo { get; set; }
 
-        public virtual string SuppilerNo { get; set; }
+        public  string SuppilerNo { get; set; }
 
-        public virtual string ModuleStatus { get; set; }
+        public  string ModuleStatus { get; set; }
     }
 }

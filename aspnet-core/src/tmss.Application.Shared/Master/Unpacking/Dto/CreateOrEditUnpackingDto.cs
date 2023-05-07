@@ -5,24 +5,24 @@ using System.Text;
 
 namespace tmss.Master.Unpacking.Dto
 {
-    public class CreateOrEditUnpackingDto:Entity<long>
+    public class CreateOrEditUnpackingDto:Entity<long?>
     {
-        public virtual string UnpackingNo { get; set; }
+        public  string UnpackingNo { get; set; }
 
-        public virtual string ModuleNo { get; set; }
+        public  string ModuleNo { get; set; }
 
-        public virtual string Renban { get; set; }
-        public virtual string SuppilerNo { get; set; }
-        public virtual string ShiftNo { get; set; }
+        public  string Renban { get; set; }
+        public  string SuppilerNo { get; set; }
+        public  string ShiftNo { get; set; }
 
-        public virtual DateTime WorkingDate { get; set; }
+        public  DateTime WorkingDate { get; set; }
 
-        public virtual DateTime PlanUnpackingDate { get; set; }
-        public virtual DateTime ActUnpackingDate { get; set; }
-        public virtual DateTime ActUnpackingDateFinish { get; set; }
+        public  DateTime PlanUnpackingDate { get; set; }
+        public  DateTime ActUnpackingDate { get; set; }
+        public  DateTime ActUnpackingDateFinish { get; set; }
 
-        public virtual string UnpackingType { get; set; }
+        public  string UnpackingType { get; set; }
 
-        public virtual string UnpackingStatus { get; set; }
+        public  string UnpackingStatus { get; set; }
     }
 }

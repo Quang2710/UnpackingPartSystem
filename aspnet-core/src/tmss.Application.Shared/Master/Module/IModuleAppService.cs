@@ -14,6 +14,6 @@ namespace tmss.Master.Module
 
         Task CreateOrEdit(CreateOrEditModuleDto input);
 
-        Task Delete(EntityDto input);
+        Task Delete(EntityDto<long> input);
     }
 }

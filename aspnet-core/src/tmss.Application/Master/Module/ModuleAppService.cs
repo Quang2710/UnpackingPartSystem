@@ -2,6 +2,7 @@
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
 using Microsoft.EntityFrameworkCore;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,21 +39,25 @@ namespace tmss.Master.Module
             {
                 await Update(input);
             }
+
         }
 
+        //Create
         protected virtual async Task Create(CreateOrEditModuleDto input)
         {
             var mainObj = ObjectMapper.Map<LupContModule>(input);
             await _module.InsertAsync(mainObj);
         }
-
+        //Update
         protected virtual async Task Update(CreateOrEditModuleDto input)
         {
+
             var mainObj = await _module.FirstOrDefaultAsync((long)input.Id);
             ObjectMapper.Map(input, mainObj);
         }
 
-        public async Task Delete(EntityDto input)
+
+        public async Task Delete(EntityDto<long> input)
         {
             var result = await _module.GetAll().FirstOrDefaultAsync(e => e.Id == input.Id);
             await _module.DeleteAsync((long)result.Id);
@@ -85,7 +90,7 @@ namespace tmss.Master.Module
                 );
         }
 
-        public async Task<FileDto> GetUnpackingToExcel(ModuleExportInput input)
+        public async Task<FileDto> GetModuleToExcel(ModuleExportInput input)
         {
             var query = from o in _module.GetAll()
                         select new ModuleDto

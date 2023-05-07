@@ -50,7 +50,7 @@ namespace tmss.Master.Unpacking
             ObjectMapper.Map(input, mainObj);
         }
         
-        public async Task Delete(EntityDto input)
+        public async Task Delete(EntityDto<long> input)
         {
             var result = await _unpacking.GetAll().FirstOrDefaultAsync(e => e.Id == input.Id);
             await _unpacking.DeleteAsync((long)result.Id);

@@ -58,14 +58,7 @@ namespace tmss.Master.DevaningContModule
         }
         //Update
         protected virtual async Task Update(CreateOrEditDevaningContModuleDto input)
-        {
-            //using (CurrentUnitOfWork.DisableFilter(AbpDataFilters.MayHaveTenant))
-            //{
-            //    var mainObj = await _repo.GetAll()
-            //    .FirstOrDefaultAsync(e => e.Id == input.Id);
-
-            //    var mainObjToUpdate = ObjectMapper.Map(input, mainObj);
-            //}
+        {           
 
             var mainObj = await _repo.FirstOrDefaultAsync((long)input.Id);
             ObjectMapper.Map(input, mainObj);
@@ -75,13 +68,11 @@ namespace tmss.Master.DevaningContModule
 
         //Delete
         
-        public async Task Delete(EntityDto input)
+        public async Task Delete(EntityDto<long> input)
         {
-            var mainObj = await _repo.FirstOrDefaultAsync(input.Id);
-            CurrentUnitOfWork.GetDbContext<DbContext>().Remove(mainObj);
-
-            //var result = await _repo.GetAll().FirstOrDefaultAsync(e => e.Id == input.Id);
-            //await _repo.DeleteAsync((long)result.Id);
+            
+            var result = await _repo.GetAll().FirstOrDefaultAsync(e => e.Id == input.Id);
+            await _repo.DeleteAsync((long)result.Id);
         }
         
 

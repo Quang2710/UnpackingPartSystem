@@ -14,6 +14,6 @@ namespace tmss.Master.DevaningModule
 
         Task CreateOrEdit(CreateOrEditDevaningContModuleDto input);
 
-        Task Delete(EntityDto input);
+        Task Delete(EntityDto<long> input);
     }
 }
