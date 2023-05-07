@@ -10,7 +10,7 @@ namespace tmss.Master.DevaningModule
 {
     public interface IDevaningModuleAppService : IApplicationService
     {
-        Task<PagedResultDto<DevaningContModuleDto>> GetAll(GetDevaningContModuleModuleInput input);
+        Task<PagedResultDto<DevaningContModuleDto>> GetAll(GetDevaningContModuleInput input);
 
         Task CreateOrEdit(CreateOrEditDevaningContModuleDto input);
 

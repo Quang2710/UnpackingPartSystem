@@ -2162,10 +2162,10 @@ after@0.8.2:
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
   integrity sha1-/ts5T58OAqqXaOcCvaI7UF+ufh8=
 
-ag-grid-community@^29.3.3:
-  version "29.3.3"
-  resolved "https://registry.yarnpkg.com/ag-grid-community/-/ag-grid-community-29.3.3.tgz#87a649d3c549e3e3b8316ac2e262dc566788ef1f"
-  integrity sha512-5XHG2NtXfUFroST/IvWyIYzM7GnbAM1mX7YsKvUHRWk0iMY1kAMJMk6AOoNKe1BBj7jg+Wgbig123T4X7bNZPw==
+ag-grid-community@^29.3.4:
+  version "29.3.4"
+  resolved "https://registry.yarnpkg.com/ag-grid-community/-/ag-grid-community-29.3.4.tgz#bd469299986d74102f71e61fe328fcf757f2be98"
+  integrity sha512-HQ/meI/4jBXitkpB7GIgmyQMEDm2MPLinZCGqGWnybZ5lnn77RIvBzNdcGlwqRxMjrbpIjRaQOcvWvki1KK4BA==
 
 agent-base@6:
   version "6.0.0"

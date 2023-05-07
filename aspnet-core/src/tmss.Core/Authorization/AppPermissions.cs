@@ -113,5 +113,7 @@
         public const string Pages_Master_DevaningContModule = "Pages.Master.DevaningContModule";
         public const string Pages_Master_DevaningContModule_CreateEdit = "Pages.Master.DevaningContModule.CreateEdit";
         public const string Pages_Master_DevaningContModule_Delete = "Pages.Master.DevaningContModule.Delete";
+
+        
     }
 }

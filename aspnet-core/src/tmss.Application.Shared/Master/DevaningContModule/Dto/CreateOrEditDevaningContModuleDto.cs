@@ -1,10 +1,11 @@
 ﻿using Abp.Application.Services.Dto;
 using System;
-
+using System.Collections.Generic;
+using System.Text;
 
 namespace tmss.Master.DevaningContModule.Dto
 {
-    public class DevaningContModuleDto : EntityDto<long?>
+    public class CreateOrEditDevaningContModuleDto : EntityDto<long?>
     {
         public virtual string DevaningNo { get; set; }
 
@@ -23,8 +24,5 @@ namespace tmss.Master.DevaningContModule.Dto
         public virtual string DevaningType { get; set; }
 
         public virtual string DevaningStatus { get; set; }
-
     }
-
-    
 }
