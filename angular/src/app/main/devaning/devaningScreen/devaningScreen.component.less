@@ -1,0 +1,66 @@
+.container-devaning {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    flex-direction: column;
+    box-sizing: border-box;
+    color: black;
+
+    // [content] {
+    //     width: 100%;
+    //     border: 1px solid;
+    // }
+    .header {
+        height: 20%;
+        font-size: 3rem;
+        font-weight: 900;
+    }
+
+    .body {
+        height: 65%;
+        justify-content: space-around;
+
+        .current-devan,
+        .next-devan {
+            width: 40%;
+            height: 90%;
+            border: 1px solid;
+            border-radius: 10px;
+            flex-direction: column;
+        }
+
+
+    }
+
+    .fotter {
+        height: 35%;
+        border-top: 1px solid;
+
+        .progress {
+            width: calc(100% / 5);
+            height: 100%;
+            border-right: 1px solid;
+        }
+    }
+}
+
+.header,
+.body,
+.fotter {
+    //border: 1px solid;
+}
+
+.container-devaning,
+.header,
+.body,
+.fotter,
+.current-devan,
+.next-devan {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-devaning>div {
+    width: 100%;
+}
