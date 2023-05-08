@@ -1,10 +1,12 @@
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { Component, Injector, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { PaginationParamsModel } from '@app/shared/common/models/base.model';
 import { GridTableService } from '@app/shared/common/services/grid-table.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { DevaningContModuleDto, DevaningContModuleServiceProxy } from '@shared/service-proxies/service-proxies';
 import { FileDownloadService } from '@shared/utils/file-download.service';
 import { Paginator } from 'primeng';
+import { CreateEditDvnContComponent } from './cre-devaningCont.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
     selector: 'app-devaningCont',
@@ -38,12 +40,14 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
     actDevaningDateFinish;
     devaningType: string = '';
     devaningStatus: string = '';
+    bsModalRef: BsModalRef;
 
     constructor(
         injector: Injector,
         private _service: DevaningContModuleServiceProxy,
         private gridTableService: GridTableService,
-        private _fileDownloadService: FileDownloadService
+        private _fileDownloadService: FileDownloadService,
+        private modalService: BsModalService
     ) {
         super(injector)
     }
@@ -94,5 +98,9 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
                 this._fileDownloadService.downloadTempFile(result);
                 //this.loaderHidden();
             });
+    }
+
+    openModal() {
+        this.bsModalRef = this.modalService.show(CreateEditDvnContComponent, {});
     }
 }
