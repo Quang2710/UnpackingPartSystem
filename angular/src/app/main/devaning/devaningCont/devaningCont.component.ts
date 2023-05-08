@@ -3,12 +3,13 @@ import { GridParams, PaginationParamsModel } from '@app/shared/common/models/bas
 import { GridTableService } from '@app/shared/common/services/grid-table.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { DevaningContModuleDto, DevaningContModuleServiceProxy } from '@shared/service-proxies/service-proxies';
+import { FileDownloadService } from '@shared/utils/file-download.service';
 import { Paginator } from 'primeng';
 
 @Component({
-  selector: 'app-devaningCont',
-  templateUrl: './devaningCont.component.html',
-  styleUrls: ['./devaningCont.component.less']
+    selector: 'app-devaningCont',
+    templateUrl: './devaningCont.component.html',
+    styleUrls: ['./devaningCont.component.less']
 })
 export class DevaningContComponent extends AppComponentBase implements OnInit {
     @ViewChild('paginator', { static: true }) paginator: Paginator;
@@ -29,20 +30,21 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
 
     devaningNo: string = '';
     containerNo: string = '';
-    renban:string = '';
-    suppilerNo:string = '';
-    shiftNo:string = '';
+    renban: string = '';
+    suppilerNo: string = '';
+    shiftNo: string = '';
     workingDate;
     planDevaningDate;
     actDevaningDate;
     actDevaningDateFinish;
-    devaningType:string = '';
-    devaningStatus:string = '';
+    devaningType: string = '';
+    devaningStatus: string = '';
 
     constructor(
         injector: Injector,
         private _service: DevaningContModuleServiceProxy,
         private gridTableService: GridTableService,
+        private _fileDownloadService: FileDownloadService
     ) {
         super(injector)
     }
@@ -71,5 +73,27 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
                 console.log(this.rowdata);
             });
 
+    }
+
+    exportToExcel(): void {
+        // this.loaderVisible();
+        this._service
+            .getDevaningContModuleToExcel(
+                this.devaningNo,
+                this.containerNo,
+                this.renban,
+                this.suppilerNo,
+                this.shiftNo,
+                this.workingDate,
+                this.planDevaningDate,
+                this.actDevaningDate,
+                this.actDevaningDateFinish,
+                this.devaningType,
+                this.devaningStatus,
+            )
+            .subscribe((result) => {
+                this._fileDownloadService.downloadTempFile(result);
+                //this.loaderHidden();
+            });
     }
 }
