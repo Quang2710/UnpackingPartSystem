@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { GridParams, PaginationParamsModel } from '@app/shared/common/models/base.model';
+import { PaginationParamsModel } from '@app/shared/common/models/base.model';
 import { GridTableService } from '@app/shared/common/services/grid-table.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { DevaningContModuleDto, DevaningContModuleServiceProxy } from '@shared/service-proxies/service-proxies';
@@ -26,7 +26,6 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
     isLoading;
     rowdata: any[] = [];
     data: DevaningContModuleDto = new DevaningContModuleDto();
-    dataParams: GridParams | undefined;
 
     devaningNo: string = '';
     containerNo: string = '';

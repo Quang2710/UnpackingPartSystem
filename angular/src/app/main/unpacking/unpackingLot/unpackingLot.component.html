@@ -1,3 +1,65 @@
-<p>
-  unpackingLot works!
-</p>
+<div class="container">
+    <div class="title">
+        <h1>UNPACKING MODULE</h1>
+    </div>
+    <div></div>
+    <div class="card">
+        <p-table [value]="rowdata" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="5"
+            [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of
+            {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]">
+            <ng-template pTemplate="header" class="header-p-table">
+                <tr>
+                    <th>Unpacking No</th>
+                    <th>Module No</th>
+                    <th>Renban</th>
+                    <th>Suppiler No</th>
+                    <th>Shift No</th>
+                    <th>Working Date</th>
+                    <th>Plan Unpacking Date</th>
+                    <th>Act Unpacking Date</th>
+                    <th>Act Unpacking Date Finish</th>
+                    <th>Unpacking Type</th>
+                    <th>Unpacking Status</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowdata class="body-p-table">
+                <tr>
+                    <td>{{ rowdata.unpackingNo }}</td>
+                    <td>{{ rowdata.moduleNo }}</td>
+                    <td>{{ rowdata.renban }}</td>
+                    <td>{{ rowdata.suppilerNo }}</td>
+                    <td>{{ rowdata.shiftNo }}</td>
+                    <td>{{ rowdata.workingDate }}</td>
+                    <td>{{ rowdata.planUnpackingDate }}</td>
+                    <td>{{ rowdata.actUnpackingDate }}</td>
+                    <td>{{ rowdata.actUnpackingDateFinish }}</td>
+                    <td>{{ rowdata.unpackingType }}</td>
+                    <td>{{ rowdata.unpackingStatus }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+            </ng-template>
+            <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="footer-button-action d-flex justify-content-center">
+        <button class="btn btn-success font-weight-bold" id="exportToExcel" (click)="exportToExcel()">
+            <i class="fas fa-file-excel mr-1"></i>{{ l('Export Excel') }}
+        </button>
+
+        <button class="btn btn-info font-weight-bold">
+            <i class="fa fa-plus mr-1"></i>{{ l('Add') }}
+        </button>
+
+        <button class="btn btn-warning font-weight-bold">
+            <i class="far fa-edit mr-1"></i>{{ 'Edit' }}
+        </button>
+
+        <button class="btn btn-danger font-weight-bold">
+            <i class="fas fa-trash-alt mr-1"></i>{{ 'Delete' }}
+        </button>
+    </div>
+</div>
