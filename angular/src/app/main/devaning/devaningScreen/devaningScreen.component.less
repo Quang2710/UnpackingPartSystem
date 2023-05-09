@@ -11,9 +11,42 @@
     //     border: 1px solid;
     // }
     .header {
-        height: 20%;
-        font-size: 3rem;
         font-weight: 900;
+        justify-content: space-between;
+
+        .header-content {
+            width: calc(100% / 3);
+            height: 100%;
+        }
+
+        .arrived {
+            p {
+                color: black;
+                font-size: 1rem;
+                margin: 0 !important;
+                padding-left: 10px;
+            }
+
+            .ping {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: rgb(69, 255, 69);
+            }
+        }
+
+
+
+        .header-content:not(.title-screen) {
+            font-size: 1.5rem;
+            color: rgb(51, 193, 51);
+        }
+
+        .title-screen {
+            height: 20%;
+            font-size: 3rem;
+            color: rgb(72, 9, 132);
+        }
     }
 
     .body {
@@ -47,6 +80,9 @@
                     border: 1px solid;
                     border-radius: 10px;
                     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+                    font-size: 3rem;
+                    font-weight: 700;
+                    color: rgb(72, 9, 132);
                 }
             }
         }
@@ -65,11 +101,31 @@
     .fotter {
         height: 35%;
         border-top: 1px solid;
+        flex-direction: column;
+
+        .plan_actual {
+            width: 100%;
+            height: 30%;
+            border-bottom: 1px solid;
+
+            .plan_actual_item {
+                height: 100%;
+                border-right: 1px solid;
+            }
+        }
 
         .progress {
-            width: calc(100% / 5);
-            height: 100%;
-            border-right: 1px solid;
+            //flex-direction: column;
+            width: 100%;
+            height: 70%;
+
+            .progress-item {
+                width: calc(100% / 5);
+                height: 100%;
+                border-right: 1px solid;
+
+            }
+
         }
     }
 }
@@ -84,9 +140,13 @@
 .header,
 .body,
 .fotter,
+.arrived,
+.header-content,
 .current-devan,
 .next-devan,
-.containerNo {
+.containerNo,
+.caseNo,
+.plan_actual {
     display: flex;
     justify-content: center;
     align-items: center;

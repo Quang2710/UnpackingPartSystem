@@ -27,6 +27,8 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
     filterText: string = '';
     isLoading;
     rowdata: any[] = [];
+    selectedRowdata: DevaningContModuleDto = new DevaningContModuleDto();
+    selectedRow: DevaningContModuleDto = new DevaningContModuleDto();
     data: DevaningContModuleDto = new DevaningContModuleDto();
 
     devaningNo: string = '';
@@ -102,5 +104,10 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
 
     openModal() {
         this.bsModalRef = this.modalService.show(CreateEditDvnContComponent, {});
+    }
+
+    onRowSelect(event) {
+        const devaningNo = event.data.devaningNo;
+        console.log('Selected Devaning No: ', this.selectedRowdata);
     }
 }

@@ -6,7 +6,9 @@
     <div class="card">
         <p-table [value]="rowdata" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="5"
             [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of
-            {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]">
+            {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]" selectionMode="single"
+            [(selection)]="selectedRowdata" dataKey="devaningNo" (onRowSelect)="onRowSelect($event)">
+
             <ng-template pTemplate="header" class="header-p-table">
                 <tr>
                     <th>Devaning No</th>
@@ -23,7 +25,7 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rowdata class="body-p-table">
-                <tr>
+                <tr [pSelectableRow]="rowdata">
                     <td>{{ rowdata.devaningNo }}</td>
                     <td>{{ rowdata.containerNo }}</td>
                     <td>{{ rowdata.renban }}</td>
