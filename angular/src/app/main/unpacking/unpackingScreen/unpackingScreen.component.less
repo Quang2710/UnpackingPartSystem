@@ -1,0 +1,201 @@
+.container-unpacking {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: white;
+    flex-direction: column;
+
+    >div {
+        width: 95%;
+        border-bottom: 1px solid;
+    }
+
+    .unpacking-header {
+        height: 20%;
+        border: 1px solid;
+        border-top: none;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+
+        >div {
+            height: 100%;
+        }
+
+        .upk-plan {
+            width: 30%;
+            border-right: 1px solid;
+
+            .total-actual {
+                width: 85%;
+                height: 95%;
+                font-size: 3rem;
+                font-weight: 800;
+                color: rgb(12, 0, 80);
+                //  background-color: rgba(58, 128, 131, 0.418);
+            }
+        }
+
+        .upk-current {
+            width: 70%;
+            height: 100%;
+
+            .current {
+                height: 100%;
+            }
+
+            .module-current {
+                width: 60%;
+                border-right: 1px solid;
+
+                .module-current-value {
+                    font-size: 3rem;
+                    font-weight: 800;
+                    color: rgb(12, 0, 80);
+                }
+            }
+
+            .module-finish {
+                width: 40%;
+
+                .button-finish {
+                    width: 95%;
+                    height: 95%;
+                    border-radius: 8px;
+                    background: linear-gradient(#ffffff, #ffffff);
+                    cursor: pointer;
+                    border: 1px solid;
+                    font-size: 3rem;
+                    font-weight: 800;
+                    color: rgb(12, 0, 80);
+                    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                }
+
+                .button-finish:hover {
+                    background: linear-gradient(hsl(140, 100%, 47%), #76ff81);
+                    color: rgb(255, 255, 255);
+                }
+            }
+        }
+    }
+
+    .unpacking-detail {
+        height: 50%;
+    }
+
+    .unpacking-footer {
+        border: 1px solid;
+        border-bottom: none;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        height: 30%;
+
+        .backno {
+            height: 100%;
+            border-right: 1px solid;
+        }
+
+        .backno-current {
+            width: 35%;
+            border-right: 1px solid;
+            flex-direction: column;
+
+            .backno-name {
+                font-size: 1rem;
+                font-weight: 800;
+                color: rgb(12, 0, 80);
+            }
+
+            .backno-value {
+                font-size: 2rem;
+                font-weight: 800;
+                color: rgb(12, 0, 80);
+            }
+
+            //----------
+            .abc {
+                font-size: 2rem;
+                font-weight: 800;
+                color: rgb(12, 0, 80);
+            }
+        }
+
+        .backno-status {
+            width: 30%;
+
+            .backno-status-value {
+                width: 100%;
+                height: 100%;
+                font-size: 3rem;
+                font-weight: 800;
+                color: rgb(12, 0, 80);
+                animation: changBlue 1s infinite;
+            }
+
+        }
+    }
+}
+
+.container-unpacking,
+.container-unpacking>div,
+.upk-plan,
+.upk-current,
+.total-actual,
+.module-current,
+.module-finish,
+.button-finish,
+.unpacking-footer,
+.backno,
+.backno-status-value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-unpacking {}
+
+@keyframes changRed {
+    0% {
+        background-color: white;
+    }
+
+    25% {
+        background-color: white;
+    }
+
+    50% {
+        background-color: red;
+    }
+
+    75% {
+        background-color: red;
+    }
+
+    100% {
+        background-color: white;
+    }
+}
+
+@keyframes changBlue {
+    0% {
+        background-color: white;
+    }
+
+    25% {
+        background-color: white;
+    }
+
+    50% {
+        background-color: #00B0F0;
+        color: white;
+    }
+
+    75% {
+        background-color: #00B0F0;
+        color: white;
+    }
+
+    100% {
+        background-color: white;
+    }
+}
