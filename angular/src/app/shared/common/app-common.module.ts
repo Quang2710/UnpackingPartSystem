@@ -106,6 +106,7 @@ import { AgFloatingFilterGridComponent } from './grid/ag-floating-filter-grid/ag
         MultipleSelectComboboxInputTypeComponent
     ],
     exports: [
+        FormsModule,
         AgFloatingFilterGridComponent,
         AgFilterGridComponent,
         AgCheckboxRendererComponent,

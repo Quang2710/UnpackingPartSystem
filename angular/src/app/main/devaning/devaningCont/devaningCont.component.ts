@@ -55,7 +55,7 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
     }
 
     ngOnInit() {
-        this.paginationParams = { pageNum: 1, pageSize: 20, totalCount: 0 };
+        this.paginationParams = { pageNum: 1, pageSize: 50, totalCount: 0 };
         this.getDatas();
 
     }
@@ -78,6 +78,23 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
                 console.log(this.rowdata);
             });
 
+    }
+    clearTextSearch(){
+        this.devaningNo = '';
+        this.devaningStatus = '';
+        this.getDatas();
+
+    }
+    deleteRow(system: DevaningContModuleDto): void {
+        this.message.confirm(this.l('AreYouSureToDelete'), 'Delete Row', (isConfirmed) => {
+            if (isConfirmed) {
+                this._service.delete(system.id).subscribe(() => {
+                    this.getDatas();
+                    this.notify.success(this.l('SuccessfullyDeleted'));
+                });
+            }
+
+        });
     }
 
     exportToExcel(): void {
