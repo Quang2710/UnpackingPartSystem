@@ -26,5 +26,30 @@ namespace tmss.Master.DevaningContModule.Dto
 
     }
 
-    
+    public class DevaningScreenDto : EntityDto<long?>
+    {
+        public string DevaningNoCurrent { get; set; }
+
+        public string ContainerNoCurrent { get; set; }
+
+        public string RenbanCurrent { get; set; }
+
+        public string ContainerNoNext { get; set; }
+
+        public string RenbanNext { get; set; }
+
+
+        public string DevaningNoNext { get; set; }
+
+        public DateTime TimeLine { get; set; }
+
+        public int? TimeLineHour { get; set; }
+
+        public int? TimeLineMinute { get; set; }
+
+        public int? TimeLineSecond { get; set; }
+
+    }
+
+
 }

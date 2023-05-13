@@ -1,6 +1,7 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Collections.Extensions;
+using Abp.Dapper.Repositories;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.EntityFrameworkCore.Uow;
@@ -17,7 +18,6 @@ using tmss.Dto;
 using tmss.Master.DevaningContModule.Dto;
 using tmss.Master.DevaningContModule.Exporting;
 using tmss.Master.DevaningModule;
-using static tmss.tmssDashboardCustomizationConsts;
 
 
 namespace tmss.Master.DevaningContModule
@@ -27,11 +27,15 @@ namespace tmss.Master.DevaningContModule
     {
         private readonly IRepository<DvnContList, long> _repo;
         private readonly IDevaningContModuleExcelExporter _calendarListExcelExporter;
+        //private readonly IRepository<DvnContList, long> _dvcscreen;
+        private readonly IDapperRepository<DvnContList, long> _dvcscreen;
 
         public DevaningContModuleAppService(IRepository<DvnContList, long> repo,
-                                        IDevaningContModuleExcelExporter calendarListExcelExporter
+                                        IDevaningContModuleExcelExporter calendarListExcelExporter,
+                                        IDapperRepository<DvnContList, long> dvcscreen
             )
         {
+            _dvcscreen = dvcscreen;
             _repo = repo;
             _calendarListExcelExporter = calendarListExcelExporter;
         }
@@ -104,6 +108,15 @@ namespace tmss.Master.DevaningContModule
                     totalCount,
                     await paged.ToListAsync()
                     );
+
+        }
+
+        public async Task<List<DevaningScreenDto>> GetDevaning()
+        {
+            string _sqlSearch = "Exec Devaning";
+
+            IEnumerable<DevaningScreenDto> _result = await _dvcscreen.QueryAsync<DevaningScreenDto>(_sqlSearch);
+            return _result.ToList();
 
         }
 

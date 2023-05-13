@@ -79,7 +79,7 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
             });
 
     }
-    clearTextSearch(){
+    clearTextSearch() {
         this.devaningNo = '';
         this.devaningStatus = '';
         this.getDatas();
