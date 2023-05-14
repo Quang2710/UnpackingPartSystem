@@ -30,7 +30,8 @@
         [style.width.%]="100 / fornumbersProcess().length"></div>
     </div>
     <div class="progress">
-      <div class="progress-item" *ngFor="let item of fornumbersRange()"></div>
+      <div class="progress-item" *ngFor="let item of fornumbersRange()" [ngClass]="spinnerClass"
+        [style.background]="spinnerBackground"></div>
     </div>
   </div>
 </div>

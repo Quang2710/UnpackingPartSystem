@@ -8,7 +8,6 @@
 
     >div {
         width: 95%;
-        border-bottom: 1px solid;
     }
 
     .unpacking-header {
@@ -83,6 +82,21 @@
         height: 50%;
     }
 
+    .card {
+        height: 100%;
+        overflow: auto;
+
+        p-table {
+
+            tr {
+                th {
+                    background-color: rgb(208, 225, 255);
+                }
+            }
+
+        }
+    }
+
     .unpacking-footer {
         border: 1px solid;
         border-bottom: none;
@@ -136,6 +150,7 @@
     }
 }
 
+
 .container-unpacking,
 .container-unpacking>div,
 .upk-plan,
@@ -152,7 +167,13 @@
     align-items: center;
 }
 
-.container-unpacking {}
+.UNPACKING {
+    background-color: #00B0F0 !important;
+}
+
+.FINISH {
+    background-color: #76ff81 !important;
+}
 
 @keyframes changRed {
     0% {

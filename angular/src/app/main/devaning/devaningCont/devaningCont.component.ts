@@ -7,6 +7,8 @@ import { FileDownloadService } from '@shared/utils/file-download.service';
 import { Paginator } from 'primeng';
 import { CreateEditDvnContComponent } from './cre-devaningCont.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { DatePipe } from '@angular/common';
+import { forEach } from 'lodash';
 
 @Component({
     selector: 'app-devaningCont',
@@ -23,6 +25,8 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
         sorting: '',
         totalPage: 1,
     };
+
+    statusBackground;
     indexShort: number = 0;
     filterText: string = '';
     isLoading;
@@ -49,7 +53,8 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
         private _service: DevaningContModuleServiceProxy,
         private gridTableService: GridTableService,
         private _fileDownloadService: FileDownloadService,
-        private modalService: BsModalService
+        private modalService: BsModalService,
+        private datePipe: DatePipe
     ) {
         super(injector)
     }
@@ -57,7 +62,6 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
     ngOnInit() {
         this.paginationParams = { pageNum: 1, pageSize: 50, totalCount: 0 };
         this.getDatas();
-
     }
 
     getDatas() {
@@ -75,7 +79,7 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
         )
             .subscribe((result) => {
                 this.rowdata = result.items;
-                console.log(this.rowdata);
+
             });
 
     }
@@ -86,11 +90,11 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
 
     }
     deleteRow(system: DevaningContModuleDto): void {
-        this.message.confirm(this.l('AreYouSureToDelete'), 'Delete Row', (isConfirmed) => {
+        this.message.confirm(this.l('Are You Sure To Delete'), 'Delete Row', (isConfirmed) => {
             if (isConfirmed) {
                 this._service.delete(system.id).subscribe(() => {
                     this.getDatas();
-                    this.notify.success(this.l('SuccessfullyDeleted'));
+                    this.notify.success(this.l('Success fully Deleted'));
                 });
             }
 
@@ -98,7 +102,6 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
     }
 
     exportToExcel(): void {
-        // this.loaderVisible();
         this._service
             .getDevaningContModuleToExcel(
                 this.devaningNo,
@@ -115,7 +118,6 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
             )
             .subscribe((result) => {
                 this._fileDownloadService.downloadTempFile(result);
-                //this.loaderHidden();
             });
     }
 
@@ -127,4 +129,15 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
         const devaningNo = event.data.devaningNo;
         console.log('Selected Devaning No: ', this.selectedRowdata);
     }
+
+    getStatusBackgroundClass(status: string): string {
+        if (status === 'DEVANED') {
+            return 'DEVANED';
+        } else if (status === 'DEVANING') {
+            return 'DEVANING';
+        } else if (status === 'READY') {
+            return 'READY';
+        }
+    }
+
 }

@@ -9,6 +9,9 @@ import { DevaningContModuleServiceProxy } from '@shared/service-proxies/service-
 })
 export class DevaningScreenComponent extends AppComponentBase implements OnInit {
 
+  spinnerClass = 'spinner';
+  //spinnerBackground = 'url(/assets/common/images/win.gif)no-repeat';
+
   rowdata;
   process: number = 5;
   caseNo1: String = "DVN001";
@@ -70,6 +73,10 @@ export class DevaningScreenComponent extends AppComponentBase implements OnInit 
 
   }
   loadFormData() {
+
+    // let progressitem = document.querySelector<HTMLElement>('.progress-item');
+    // progressitem.classList.add('spinner');
+
     // var widthScreen = window.innerWidth;
     // var widthProcessItem = widthScreen / (this.arrayTest.length)
     // console.log(this.arrayTest.length);
@@ -79,6 +86,7 @@ export class DevaningScreenComponent extends AppComponentBase implements OnInit 
     // for (let i = 0; processitem[i]; i++) {
     //   processitem[i].style.width = widthProcessItem + "px";
     // }
+
   }
 
 }

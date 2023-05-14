@@ -5,23 +5,13 @@
     <div class="header-search col-12">
         <div class="input-search col-4">
             <label for="devaningNo" class="form-control col-5">Devaning No</label>
-            <input
-                [(ngModel)]="devaningNo"
-                name="devaningNo"
-                class="form-control col-7"
-                type="text"
-                (keyup.enter)="getDatas()"
-            />
+            <input [(ngModel)]="devaningNo" name="devaningNo" class="form-control col-7" type="text"
+                (keyup.enter)="getDatas()" />
         </div>
         <div class="input-search col-4">
             <label for="status" class="form-control col-5">Status</label>
-            <input
-                [(ngModel)]="devaningStatus"
-                name="devaningStatus"
-                class="form-control col-7"
-                type="text"
-                (keyup.enter)="getDatas()"
-            />
+            <input [(ngModel)]="devaningStatus" name="devaningStatus" class="form-control col-7" type="text"
+                (keyup.enter)="getDatas()" />
         </div>
         <div class="btn-search ">
             <button (click)="getDatas()" class="btn
@@ -63,12 +53,12 @@
                     <td>{{ rowdata.renban }}</td>
                     <td>{{ rowdata.suppilerNo }}</td>
                     <td>{{ rowdata.shiftNo }}</td>
-                    <td>{{ rowdata.workingDate }}</td>
-                    <td>{{ rowdata.planDevaningDate }}</td>
-                    <td>{{ rowdata.actDevaningDate }}</td>
-                    <td>{{ rowdata.actDevaningDateFinish }}</td>
+                    <td>{{ rowdata.workingDate | date:'dd/MM/yy ' }}</td>
+                    <td>{{ rowdata.planDevaningDate | date:'dd/MM/yy' }}</td>
+                    <td>{{ rowdata.actDevaningDate | date:'dd/MM/yy HH:mm:ss' }}</td>
+                    <td>{{ rowdata.actDevaningDateFinish | date:'dd/MM/yy HH:mm:ss' }}</td>
                     <td>{{ rowdata.devaningType }}</td>
-                    <td>{{ rowdata.devaningStatus }}</td>
+                    <td [ngClass]="getStatusBackgroundClass(rowdata.devaningStatus)">{{ rowdata.devaningStatus }}</td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="paginatorleft">

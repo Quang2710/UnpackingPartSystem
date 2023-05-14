@@ -1,24 +1,35 @@
-// .modal-cre-devaning {
-//     // width: 70vw;
-//     // height: 60vh;
-// }
+:host ::ng-deep {
+    .modal-title {
+        font-weight: 900;
+    }
 
-// // :host ::ng-deep {
-// //     .modal-dialog {
-// //         margin: 0 !important;
-// //     }
+    .modal-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-// //     .modal .modal-content {
-// //         width: 70vw;
-// //     }
-// // }
-// .modal-content {
-//     background-color: #fefefe;
-//     margin: auto;
-//     padding: 20px;
-//     border: 1px solid #888;
-//     width: 80%;
-// }
+        .modal .modal-content .modal-header .modal-title {
+            font-size: 2rem;
+            font-weight: 900 !important;
+        }
+    }
 
+    .modal-content {
+        border: none !important;
+    }
 
-// .input-text {}
+    .form-group {
+        margin-bottom: 0 !important;
+    }
+
+    .title {
+        background-color: #7c8cf5;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .btn {
+        width: calc(100% / 2);
+        height: 100%;
+    }
+}
