@@ -51,5 +51,14 @@ namespace tmss.Master.DevaningContModule.Dto
 
     }
 
+    public class CoutPlanDvn : EntityDto<long?>
+    {
+
+        public int Id { get; set; }
+        public string COUNT_DEVANING { get; set; }
+
+        public string Status { get; set; }
+    }
+
 
 }

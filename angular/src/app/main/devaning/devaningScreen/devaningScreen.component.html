@@ -13,13 +13,13 @@
     <div class="next-devan">
       <h1>NEXT</h1>
       <div class="containerNo">
-        <div class="caseNo">{{caseNo2}}</div>
+        <div class="caseNo">{{containerNext}}</div>
       </div>
     </div>
     <div class="current-devan">
       <h1>CURRENT</h1>
       <div class="containerNo">
-        <div class="caseNo">{{caseNo1}}</div>
+        <div class="caseNo" (click)=" finishDevModule(currentId)">{{currentNo}}</div>
       </div>
     </div>
 
@@ -30,8 +30,12 @@
         [style.width.%]="100 / fornumbersProcess().length"></div>
     </div>
     <div class="progress">
-      <div class="progress-item" *ngFor="let item of fornumbersRange()" [ngClass]="spinnerClass"
-        [style.background]="spinnerBackground"></div>
+      <div class="progress-item" *ngFor="let item of devaningPlan">
+        <div class="progress-item-detail">{{item.counT_DEVANING}}</div>
+        <div class="icon-status">
+          <div class="icon-status-item" [ngClass]="checkStatusContainer(item.status)"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -15,11 +15,11 @@ namespace tmss.Master.Unpacking.Dto
         public  string SuppilerNo { get; set; }
         public  string ShiftNo { get; set; }
 
-        public  DateTime WorkingDate { get; set; }
+        public  DateTime? WorkingDate { get; set; }
 
-        public  DateTime PlanUnpackingDate { get; set; }
-        public  DateTime ActUnpackingDate { get; set; }
-        public  DateTime ActUnpackingDateFinish { get; set; }
+        public  DateTime? PlanUnpackingDate { get; set; }
+        public  DateTime? ActUnpackingDate { get; set; }
+        public  DateTime? ActUnpackingDateFinish { get; set; }
 
         public  string UnpackingType { get; set; }
 

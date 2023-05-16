@@ -1,21 +1,37 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { DevaningContModuleServiceProxy } from '@shared/service-proxies/service-proxies';
+import * as $ from 'jquery';
 
+// $(document).ready(function () {
+//   $('.caseNo').hover(
+//     function () {
+//       $(this).text('FINISH');
+//     },
+//     function () {
+//       var originalValue = $(this).data('case');
+//       $(this).text(originalValue);
+//     }
+//   );
+// });
 @Component({
   selector: 'app-devaningScreen',
   templateUrl: './devaningScreen.component.html',
   styleUrls: ['./devaningScreen.component.less']
 })
+
+
 export class DevaningScreenComponent extends AppComponentBase implements OnInit {
 
-  spinnerClass = 'spinner';
-  //spinnerBackground = 'url(/assets/common/images/win.gif)no-repeat';
 
+  counT_DEVANING;
+  id;
   rowdata;
-  process: number = 5;
-  caseNo1: String = "DVN001";
-  caseNo2: String = "DVN002";
+  devaningPlan;
+  containerCurren;
+  containerNext;
+  currentNo;
+  currentId;
   dateNow;
   arrayTest: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
@@ -28,10 +44,12 @@ export class DevaningScreenComponent extends AppComponentBase implements OnInit 
 
   ngOnInit() {
     this.fornumbersRange();
-    this.loadFormData();
+    //this.loadFormData();
+    // this.getDevaningPlan();
     this.getDataScreen();
   }
   ngAfterViewInit() {
+    this.getDevaningPlan();
     setInterval(() => {
       this.getTimeNow();
     }, 1000);
@@ -43,13 +61,6 @@ export class DevaningScreenComponent extends AppComponentBase implements OnInit 
   }
 
 
-  fornumbersRange() {
-    let numRange: number[] = [];
-    for (let i = 1; i <= 5; i++) {
-      numRange.push(i);
-    }
-    return numRange;
-  }
   fornumbersProcess() {
     let numRange: number[] = [];
     for (let i = 1; i <= 40; i++) {
@@ -64,29 +75,52 @@ export class DevaningScreenComponent extends AppComponentBase implements OnInit 
     this.dateNow = (((d.getHours() + "").length == 1) ? ("0" + d.getHours()) : d.getHours()) + " : " + (((d.getMinutes() + "").length == 1) ? ("0" + d.getMinutes()) : d.getMinutes()) + " : " + (((d.getSeconds() + "").length == 1) ? ("0" + d.getSeconds()) : d.getSeconds()) + " ( " + (((month[d.getMonth()] + "").length == 1) ? ("0" + month[d.getMonth()]) : month[d.getMonth()]) + " - " + (((d.getDay() + "").length == 1) ? ("0" + d.getDay()) : d.getDay()) + " ) "
   }
 
+  // Get Devaning Plan in Day
+
+  getDevaningPlan() {
+    this._service.getDevaningPlan()
+      .subscribe((result) => {
+        this.devaningPlan = result;
+        this.containerCurren = this.devaningPlan.filter(item => item.status === 'DEVANING')[0];
+        this.currentNo = this.containerCurren.counT_DEVANING;
+        this.currentId = this.containerCurren.id;
+
+        this.containerNext = this.devaningPlan.filter(item => item.status === 'READY')[0].counT_DEVANING;
+      });
+  }
+
+  fornumbersRange() {
+    let numRange: number[] = [];
+    for (let i = 1; i <= this.devaningPlan; i++) {
+      numRange.push(i);
+    }
+    return numRange;
+  }
+
   getDataScreen() {
     this._service.getDevaning()
       .subscribe((result) => {
         this.rowdata = result;
         console.log(this.rowdata);
       });
-
   }
-  loadFormData() {
-
-    // let progressitem = document.querySelector<HTMLElement>('.progress-item');
-    // progressitem.classList.add('spinner');
-
-    // var widthScreen = window.innerWidth;
-    // var widthProcessItem = widthScreen / (this.arrayTest.length)
-    // console.log(this.arrayTest.length);
-
-
-    // var processitem = document.querySelectorAll<HTMLElement>('.plan_actual_item')
-    // for (let i = 0; processitem[i]; i++) {
-    //   processitem[i].style.width = widthProcessItem + "px";
-    // }
-
+  finishDevModule(id: number) {
+    this.message.confirm(this.l(''), 'FINISH CONTAINER CURRENT', (isConfirmed) => {
+      this._service.finishDvnCont(id)
+        .subscribe(() => {
+          this.notify.success(this.l('FINISH Successfully '));
+          this.getDevaningPlan();
+          this.getDataScreen();
+        });
+    });
   }
-
+  checkStatusContainer(status: string): string {
+    if (status === 'DEVANED') {
+      return 'DEVANED';
+    } else if (status === 'DEVANING') {
+      return 'DEVANING';
+    } else if (status === 'READY') {
+      return 'READY';
+    }
+  }
 }

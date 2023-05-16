@@ -120,6 +120,20 @@ namespace tmss.Master.DevaningContModule
 
         }
 
+        public async Task FinishDvnCont(int dvn_id)
+        {
+            string _sql = "Exec DEVANT_MODULE @IdDevant";
+            await _dvcscreen.QueryAsync<DevaningContModuleDto>(_sql, new { IdDevant = dvn_id });
+        }
+        public async Task<List<CoutPlanDvn>> GetDevaningPlan()
+        {
+            string _sqlSearch = "Exec COUNT_DEVANING_WORKINGDATE";
+
+            IEnumerable<CoutPlanDvn> _result = await _dvcscreen.QueryAsync<CoutPlanDvn>(_sqlSearch, new { });
+            return _result.ToList();
+        }
+
+
         public async Task<FileDto> GetDevaningContModuleToExcel(DevaningContModuleExportInput input)
         {
             var query = from o in _repo.GetAll()
@@ -141,7 +155,7 @@ namespace tmss.Master.DevaningContModule
             var exportToExcel = await query.ToListAsync();
             return _calendarListExcelExporter.ExportToFile(exportToExcel);
         }
+       
 
-        
     }
 }
