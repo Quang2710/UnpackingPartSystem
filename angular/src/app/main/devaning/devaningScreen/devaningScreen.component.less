@@ -85,6 +85,19 @@
                     font-size: 3rem;
                     font-weight: 700;
                     color: rgb(72, 9, 132);
+                    flex-direction: column;
+
+                    .renban {
+                        font-size: 1.5rem;
+                        width: 60%;
+                        height: 30%;
+                        border-bottom: 1px solid rgb(72, 9, 132);
+                    }
+
+                    .containerName {
+                        width: 100%;
+                        height: 70%;
+                    }
 
                 }
 
@@ -196,7 +209,9 @@
 .containerNo,
 .caseNo,
 .plan_actual,
-.progress-item>div {
+.progress-item>div,
+.renban,
+.containerName {
     display: flex;
     justify-content: center;
     align-items: center;

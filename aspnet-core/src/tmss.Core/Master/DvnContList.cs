@@ -39,11 +39,11 @@ namespace tmss.Master
         [StringLength(MaxShiftNoLength)]
         public virtual string ShiftNo { get; set; }
 
-        public virtual DateTime WorkingDate { get; set; }
+        public virtual DateTime? WorkingDate { get; set; }
 
-        public virtual DateTime PlanDevaningDate { get; set; }
-        public virtual DateTime ActDevaningDate { get; set; }
-        public virtual DateTime ActDevaningDateFinish { get; set; }
+        public virtual DateTime? PlanDevaningDate { get; set; }
+        public virtual DateTime? ActDevaningDate { get; set; }
+        public virtual DateTime? ActDevaningDateFinish { get; set; }
 
         [StringLength(MaxDevaningTypeLength)]
         public virtual string DevaningType { get; set; }

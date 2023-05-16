@@ -2751,61 +2751,6 @@ export class DevaningContModuleServiceProxy {
     }
 
     /**
-     * @return Success
-     */
-    getDevaning(): Observable<DevaningScreenDto[]> {
-        let url_ = this.baseUrl + "/api/services/app/DevaningContModule/GetDevaning";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",			
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetDevaning(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetDevaning(<any>response_);
-                } catch (e) {
-                    return <Observable<DevaningScreenDto[]>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<DevaningScreenDto[]>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGetDevaning(response: HttpResponseBase): Observable<DevaningScreenDto[]> {
-        const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200!.push(DevaningScreenDto.fromJS(item));
-            }
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<DevaningScreenDto[]>(<any>null);
-    }
-
-    /**
      * @param dvn_id (optional) 
      * @return Success
      */
@@ -2926,7 +2871,7 @@ export class DevaningContModuleServiceProxy {
      * @param devaningStatus (optional) 
      * @return Success
      */
-    getDevaningContModuleToExcel(devaningNo: string | null | undefined, containerNo: string | null | undefined, renban: string | null | undefined, suppilerNo: string | null | undefined, shiftNo: string | null | undefined, workingDate: moment.Moment | undefined, planDevaningDate: moment.Moment | undefined, actDevaningDate: moment.Moment | undefined, actDevaningDateFinish: moment.Moment | undefined, devaningType: string | null | undefined, devaningStatus: string | null | undefined): Observable<FileDto> {
+    getDevaningContModuleToExcel(devaningNo: string | null | undefined, containerNo: string | null | undefined, renban: string | null | undefined, suppilerNo: string | null | undefined, shiftNo: string | null | undefined, workingDate: moment.Moment | null | undefined, planDevaningDate: moment.Moment | null | undefined, actDevaningDate: moment.Moment | null | undefined, actDevaningDateFinish: moment.Moment | null | undefined, devaningType: string | null | undefined, devaningStatus: string | null | undefined): Observable<FileDto> {
         let url_ = this.baseUrl + "/api/services/app/DevaningContModule/GetDevaningContModuleToExcel?";
         if (devaningNo !== undefined)
             url_ += "DevaningNo=" + encodeURIComponent("" + devaningNo) + "&"; 
@@ -2938,21 +2883,13 @@ export class DevaningContModuleServiceProxy {
             url_ += "SuppilerNo=" + encodeURIComponent("" + suppilerNo) + "&"; 
         if (shiftNo !== undefined)
             url_ += "ShiftNo=" + encodeURIComponent("" + shiftNo) + "&"; 
-        if (workingDate === null)
-            throw new Error("The parameter 'workingDate' cannot be null.");
-        else if (workingDate !== undefined)
+        if (workingDate !== undefined)
             url_ += "WorkingDate=" + encodeURIComponent(workingDate ? "" + workingDate.toJSON() : "") + "&"; 
-        if (planDevaningDate === null)
-            throw new Error("The parameter 'planDevaningDate' cannot be null.");
-        else if (planDevaningDate !== undefined)
+        if (planDevaningDate !== undefined)
             url_ += "PlanDevaningDate=" + encodeURIComponent(planDevaningDate ? "" + planDevaningDate.toJSON() : "") + "&"; 
-        if (actDevaningDate === null)
-            throw new Error("The parameter 'actDevaningDate' cannot be null.");
-        else if (actDevaningDate !== undefined)
+        if (actDevaningDate !== undefined)
             url_ += "ActDevaningDate=" + encodeURIComponent(actDevaningDate ? "" + actDevaningDate.toJSON() : "") + "&"; 
-        if (actDevaningDateFinish === null)
-            throw new Error("The parameter 'actDevaningDateFinish' cannot be null.");
-        else if (actDevaningDateFinish !== undefined)
+        if (actDevaningDateFinish !== undefined)
             url_ += "ActDevaningDateFinish=" + encodeURIComponent(actDevaningDateFinish ? "" + actDevaningDateFinish.toJSON() : "") + "&"; 
         if (devaningType !== undefined)
             url_ += "DevaningType=" + encodeURIComponent("" + devaningType) + "&"; 
@@ -17707,10 +17644,10 @@ export class DevaningContModuleDto implements IDevaningContModuleDto {
     renban!: string | undefined;
     suppilerNo!: string | undefined;
     shiftNo!: string | undefined;
-    workingDate!: moment.Moment;
-    planDevaningDate!: moment.Moment;
-    actDevaningDate!: moment.Moment;
-    actDevaningDateFinish!: moment.Moment;
+    workingDate!: moment.Moment | undefined;
+    planDevaningDate!: moment.Moment | undefined;
+    actDevaningDate!: moment.Moment | undefined;
+    actDevaningDateFinish!: moment.Moment | undefined;
     devaningType!: string | undefined;
     devaningStatus!: string | undefined;
     id!: number | undefined;
@@ -17772,10 +17709,10 @@ export interface IDevaningContModuleDto {
     renban: string | undefined;
     suppilerNo: string | undefined;
     shiftNo: string | undefined;
-    workingDate: moment.Moment;
-    planDevaningDate: moment.Moment;
-    actDevaningDate: moment.Moment;
-    actDevaningDateFinish: moment.Moment;
+    workingDate: moment.Moment | undefined;
+    planDevaningDate: moment.Moment | undefined;
+    actDevaningDate: moment.Moment | undefined;
+    actDevaningDateFinish: moment.Moment | undefined;
     devaningType: string | undefined;
     devaningStatus: string | undefined;
     id: number | undefined;
@@ -17829,85 +17766,11 @@ export interface IPagedResultDtoOfDevaningContModuleDto {
     items: DevaningContModuleDto[] | undefined;
 }
 
-export class DevaningScreenDto implements IDevaningScreenDto {
-    devaningNoCurrent!: string | undefined;
-    containerNoCurrent!: string | undefined;
-    renbanCurrent!: string | undefined;
-    containerNoNext!: string | undefined;
-    renbanNext!: string | undefined;
-    devaningNoNext!: string | undefined;
-    timeLine!: moment.Moment;
-    timeLineHour!: number | undefined;
-    timeLineMinute!: number | undefined;
-    timeLineSecond!: number | undefined;
-    id!: number | undefined;
-
-    constructor(data?: IDevaningScreenDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.devaningNoCurrent = _data["devaningNoCurrent"];
-            this.containerNoCurrent = _data["containerNoCurrent"];
-            this.renbanCurrent = _data["renbanCurrent"];
-            this.containerNoNext = _data["containerNoNext"];
-            this.renbanNext = _data["renbanNext"];
-            this.devaningNoNext = _data["devaningNoNext"];
-            this.timeLine = _data["timeLine"] ? moment(_data["timeLine"].toString()) : <any>undefined;
-            this.timeLineHour = _data["timeLineHour"];
-            this.timeLineMinute = _data["timeLineMinute"];
-            this.timeLineSecond = _data["timeLineSecond"];
-            this.id = _data["id"];
-        }
-    }
-
-    static fromJS(data: any): DevaningScreenDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new DevaningScreenDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["devaningNoCurrent"] = this.devaningNoCurrent;
-        data["containerNoCurrent"] = this.containerNoCurrent;
-        data["renbanCurrent"] = this.renbanCurrent;
-        data["containerNoNext"] = this.containerNoNext;
-        data["renbanNext"] = this.renbanNext;
-        data["devaningNoNext"] = this.devaningNoNext;
-        data["timeLine"] = this.timeLine ? this.timeLine.toISOString() : <any>undefined;
-        data["timeLineHour"] = this.timeLineHour;
-        data["timeLineMinute"] = this.timeLineMinute;
-        data["timeLineSecond"] = this.timeLineSecond;
-        data["id"] = this.id;
-        return data; 
-    }
-}
-
-export interface IDevaningScreenDto {
-    devaningNoCurrent: string | undefined;
-    containerNoCurrent: string | undefined;
-    renbanCurrent: string | undefined;
-    containerNoNext: string | undefined;
-    renbanNext: string | undefined;
-    devaningNoNext: string | undefined;
-    timeLine: moment.Moment;
-    timeLineHour: number | undefined;
-    timeLineMinute: number | undefined;
-    timeLineSecond: number | undefined;
-    id: number | undefined;
-}
-
 export class CoutPlanDvn implements ICoutPlanDvn {
     id!: number;
     counT_DEVANING!: string | undefined;
+    renban!: string | undefined;
+    container!: string | undefined;
     status!: string | undefined;
 
     constructor(data?: ICoutPlanDvn) {
@@ -17923,6 +17786,8 @@ export class CoutPlanDvn implements ICoutPlanDvn {
         if (_data) {
             this.id = _data["id"];
             this.counT_DEVANING = _data["counT_DEVANING"];
+            this.renban = _data["renban"];
+            this.container = _data["container"];
             this.status = _data["status"];
         }
     }
@@ -17938,6 +17803,8 @@ export class CoutPlanDvn implements ICoutPlanDvn {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["counT_DEVANING"] = this.counT_DEVANING;
+        data["renban"] = this.renban;
+        data["container"] = this.container;
         data["status"] = this.status;
         return data; 
     }
@@ -17946,6 +17813,8 @@ export class CoutPlanDvn implements ICoutPlanDvn {
 export interface ICoutPlanDvn {
     id: number;
     counT_DEVANING: string | undefined;
+    renban: string | undefined;
+    container: string | undefined;
     status: string | undefined;
 }
 

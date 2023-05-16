@@ -14,11 +14,11 @@ namespace tmss.Master.DevaningContModule.Dto
         public  string SuppilerNo { get; set; }
         public  string ShiftNo { get; set; }
 
-        public  DateTime WorkingDate { get; set; }
+        public  DateTime? WorkingDate { get; set; }
 
-        public  DateTime PlanDevaningDate { get; set; }
-        public  DateTime ActDevaningDate { get; set; }
-        public  DateTime ActDevaningDateFinish { get; set; }
+        public  DateTime? PlanDevaningDate { get; set; }
+        public  DateTime? ActDevaningDate { get; set; }
+        public  DateTime? ActDevaningDateFinish { get; set; }
 
         public  string DevaningType { get; set; }
 

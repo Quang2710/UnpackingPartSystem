@@ -84,6 +84,7 @@ namespace tmss.Master.DevaningContModule
         {
             var querry = from DvnContList in _repo.GetAll().AsNoTracking()
                          .Where(e => string.IsNullOrWhiteSpace(input.DevaningNo) || e.DevaningNo.Contains(input.DevaningNo))
+                          .Where(e => string.IsNullOrWhiteSpace(input.DevaningStatus) || e.DevaningStatus.Contains(input.DevaningStatus))
                          select new DevaningContModuleDto
                          {
                              Id = DvnContList.Id,
@@ -109,16 +110,7 @@ namespace tmss.Master.DevaningContModule
                     await paged.ToListAsync()
                     );
 
-        }
-
-        public async Task<List<DevaningScreenDto>> GetDevaning()
-        {
-            string _sqlSearch = "Exec Devaning";
-
-            IEnumerable<DevaningScreenDto> _result = await _dvcscreen.QueryAsync<DevaningScreenDto>(_sqlSearch);
-            return _result.ToList();
-
-        }
+        }   
 
         public async Task FinishDvnCont(int dvn_id)
         {

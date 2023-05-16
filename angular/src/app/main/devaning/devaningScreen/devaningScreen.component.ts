@@ -30,7 +30,10 @@ export class DevaningScreenComponent extends AppComponentBase implements OnInit 
   devaningPlan;
   containerCurren;
   containerNext;
-  currentNo;
+  containerNameCurrent;
+  containerNameNext;
+  renbanCurent;
+  renbanNext;
   currentId;
   dateNow;
   arrayTest: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
@@ -46,7 +49,7 @@ export class DevaningScreenComponent extends AppComponentBase implements OnInit 
     this.fornumbersRange();
     //this.loadFormData();
     // this.getDevaningPlan();
-    this.getDataScreen();
+    // this.getDataScreen();
   }
   ngAfterViewInit() {
     this.getDevaningPlan();
@@ -73,7 +76,7 @@ export class DevaningScreenComponent extends AppComponentBase implements OnInit 
     const d = new Date();
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     this.dateNow = (((d.getHours() + "").length == 1) ? ("0" + d.getHours()) : d.getHours()) + " : " + (((d.getMinutes() + "").length == 1) ? ("0" + d.getMinutes()) : d.getMinutes()) + " : " + (((d.getSeconds() + "").length == 1) ? ("0" + d.getSeconds()) : d.getSeconds()) + " ( " + (((month[d.getMonth()] + "").length == 1) ? ("0" + month[d.getMonth()]) : month[d.getMonth()]) + " - " + (((d.getDay() + "").length == 1) ? ("0" + d.getDay()) : d.getDay()) + " ) "
-  }
+  } containerNo
 
   // Get Devaning Plan in Day
 
@@ -82,10 +85,14 @@ export class DevaningScreenComponent extends AppComponentBase implements OnInit 
       .subscribe((result) => {
         this.devaningPlan = result;
         this.containerCurren = this.devaningPlan.filter(item => item.status === 'DEVANING')[0];
-        this.currentNo = this.containerCurren.counT_DEVANING;
+        this.containerNameCurrent = this.containerCurren.container;
+        this.renbanCurent = this.containerCurren.renban;
         this.currentId = this.containerCurren.id;
 
-        this.containerNext = this.devaningPlan.filter(item => item.status === 'READY')[0].counT_DEVANING;
+        this.containerNext = this.devaningPlan.filter(item => item.status === 'READY')[0];
+        this.containerNameNext = this.containerNext.container;
+        this.renbanNext = this.containerNext.renban;
+
       });
   }
 
@@ -97,21 +104,17 @@ export class DevaningScreenComponent extends AppComponentBase implements OnInit 
     return numRange;
   }
 
-  getDataScreen() {
-    this._service.getDevaning()
-      .subscribe((result) => {
-        this.rowdata = result;
-        console.log(this.rowdata);
-      });
-  }
+
   finishDevModule(id: number) {
     this.message.confirm(this.l(''), 'FINISH CONTAINER CURRENT', (isConfirmed) => {
-      this._service.finishDvnCont(id)
-        .subscribe(() => {
-          this.notify.success(this.l('FINISH Successfully '));
-          this.getDevaningPlan();
-          this.getDataScreen();
-        });
+      if (isConfirmed) {
+        this._service.finishDvnCont(id)
+          .subscribe(() => {
+            this.notify.success(this.l('FINISH Successfully '));
+            this.getDevaningPlan();
+            // this.getDataScreen();
+          });
+      }
     });
   }
   checkStatusContainer(status: string): string {
