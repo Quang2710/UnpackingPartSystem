@@ -13199,6 +13199,64 @@ export class UnpackingServiceProxy {
     }
 
     /**
+     * @param module_no (optional) 
+     * @return Success
+     */
+    getPartInModule(module_no: string | null | undefined): Observable<PartInModuleDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/Unpacking/GetPartInModule?";
+        if (module_no !== undefined)
+            url_ += "module_no=" + encodeURIComponent("" + module_no) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetPartInModule(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetPartInModule(<any>response_);
+                } catch (e) {
+                    return <Observable<PartInModuleDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<PartInModuleDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetPartInModule(response: HttpResponseBase): Observable<PartInModuleDto[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(PartInModuleDto.fromJS(item));
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<PartInModuleDto[]>(<any>null);
+    }
+
+    /**
      * @param unpackingNo (optional) 
      * @param moduleNo (optional) 
      * @param renban (optional) 
@@ -27280,6 +27338,62 @@ export class PagedResultDtoOfUnpackingDto implements IPagedResultDtoOfUnpackingD
 export interface IPagedResultDtoOfUnpackingDto {
     totalCount: number;
     items: UnpackingDto[] | undefined;
+}
+
+export class PartInModuleDto implements IPartInModuleDto {
+    partNo!: string | undefined;
+    partName!: string | undefined;
+    renban!: string | undefined;
+    supplier!: string | undefined;
+    status!: string | undefined;
+    id!: number | undefined;
+
+    constructor(data?: IPartInModuleDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.partNo = _data["partNo"];
+            this.partName = _data["partName"];
+            this.renban = _data["renban"];
+            this.supplier = _data["supplier"];
+            this.status = _data["status"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): PartInModuleDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new PartInModuleDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["partNo"] = this.partNo;
+        data["partName"] = this.partName;
+        data["renban"] = this.renban;
+        data["supplier"] = this.supplier;
+        data["status"] = this.status;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface IPartInModuleDto {
+    partNo: string | undefined;
+    partName: string | undefined;
+    renban: string | undefined;
+    supplier: string | undefined;
+    status: string | undefined;
+    id: number | undefined;
 }
 
 export class UserListRoleDto implements IUserListRoleDto {

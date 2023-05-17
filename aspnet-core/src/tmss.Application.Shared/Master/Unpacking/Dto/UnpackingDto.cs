@@ -25,4 +25,17 @@ namespace tmss.Master.Unpacking.Dto
 
         public  string UnpackingStatus { get; set; }
     }
+    public class PartInModuleDto : Entity<long?>
+    {
+        public string ModuleNo { get; set; }
+        public string PartNo { get; set; }
+
+        public string PartName { get; set; }
+
+        public string Renban { get; set; }
+
+        public string Supplier { get; set; }
+
+        public string Status { get; set; }        
+    }
 }

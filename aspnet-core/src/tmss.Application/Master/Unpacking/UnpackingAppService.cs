@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Services.Dto;
+using Abp.Dapper.Repositories;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -18,10 +19,16 @@ namespace tmss.Master.Unpacking
     {
         private readonly IRepository<UnPackingPart, long> _unpacking;
         private readonly IUnpackingExcelExporter _calendarListExcelExporter;
-        
+        private readonly IDapperRepository<Part, long> _upkscreen;
+
         public UnpackingAppService(IRepository<UnPackingPart, long> unpacking,
-            IUnpackingExcelExporter calendarListExcelExporter)
+
+                                    IUnpackingExcelExporter calendarListExcelExporter,
+                                     IDapperRepository<Part, long> upkscreen
+            )
+
         {
+            _upkscreen = upkscreen;
             _unpacking = unpacking;
             _calendarListExcelExporter = calendarListExcelExporter;
         }
@@ -84,6 +91,14 @@ namespace tmss.Master.Unpacking
                 totalCount,
                 await paged.ToListAsync()
                 );
+        }
+
+        public async Task<List<PartInModuleDto>> GetPartInModule(string module_no)
+        {
+            string _sql = "Exec GET_PART_IN_MODULE @ModuleNo";
+            IEnumerable<PartInModuleDto> _result = await _upkscreen.QueryAsync<PartInModuleDto>(_sql, new { ModuleNo = module_no });
+            return _result.ToList();
+
         }
 
         public async Task<FileDto> GetUnpackingToExcel(UnpackingExportInput input)

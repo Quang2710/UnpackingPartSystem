@@ -8,21 +8,29 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace tmss.Master
 {
     [Table("LupContModule")]
-    public class LupContModule : FullAuditedEntity<long>, IEntity<long>
-    {
-        public const int MaxModuleNoLength = 50;
+    public class LupContModule : FullAuditedEntity<long>, IEntity<long>    {
+  
 
-        public const int MaxDevaningNoLength = 50;
-
-        public const int MaxModuleStatusLength = 20;
-
-        [StringLength(MaxModuleNoLength)]
+        [StringLength(50)]
         public virtual string ModuleNo { get; set; }
 
-        [StringLength(MaxDevaningNoLength)]
+        [StringLength(50)]
         public virtual string DevaningNo { get; set; }
 
-        [StringLength(MaxModuleStatusLength)]
+        [StringLength(50)]
+        public virtual string Supplier { get; set; }
+
+
+        [StringLength(50)]
+        public virtual string Renban { get; set; }
+
+        public virtual DateTime? PlanUnpackingDate { get; set; }
+
+        public virtual DateTime? ActUnpackingDate { get; set; }
+
+        public virtual DateTime? ActUnpackingDateFinish { get; set; }
+
+        [StringLength(50)]
         public virtual string ModuleStatus { get; set; }
 
     }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tmss.EntityFrameworkCore;
 
 namespace tmss.Migrations
 {
     [DbContext(typeof(tmssDbContext))]
-    partial class tmssDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230517101052_Create_Table_PcHome")]
+    partial class Create_Table_PcHome
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1847,12 +1849,6 @@ namespace tmss.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("ActUnpackingDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ActUnpackingDateFinish")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
 
@@ -1883,19 +1879,8 @@ namespace tmss.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("ModuleStatus")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime?>("PlanUnpackingDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Renban")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Supplier")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.HasKey("Id");
 
@@ -1930,27 +1915,11 @@ namespace tmss.Migrations
                     b.Property<long?>("LastModifierUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("ModuleNo")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("PartName")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
                     b.Property<string>("PartNo")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Renban")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Supplier")
+                    b.Property<string>("UnpackingNo")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
