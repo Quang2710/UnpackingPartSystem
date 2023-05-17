@@ -17,24 +17,32 @@ import { DashboardComponent } from './dashboard/dashboard.component';
                     {
                         path: 'master/workingpattern/workingtime',
                         loadChildren: () => import('./master/workingpattern/workingtime/workingtime.module').then(m => m.WorkingTimeModule),
-                     },
+                    },
                     {
                         path: 'devaning/devaningCont',
                         loadChildren: () => import('./devaning/devaningCont/devaningCont.module').then(m => m.DevaningContModule),
-                     },
+                    },
                     {
                         path: 'devaning/devaningScreen',
                         loadChildren: () => import('./devaning/devaningScreen/devaningScreen.module').then(m => m.DevaningScreenModule),
-                     },
+                    },
                     {
                         path: 'unpacking/unpackingLot',
                         loadChildren: () => import('./unpacking/unpackingLot/unpackingLot.module').then(m => m.UnpackingLotModule),
-                     },
+                    },
 
                     {
                         path: 'unpacking/unpackingLot',
                         loadChildren: () => import('./unpacking/unpackingScreen/unpackingScreen.module').then(m => m.UnpackingScreenModule),
-                     },
+                    },
+                    {
+                        path: 'pc/pcstore',
+                        loadChildren: () => import('./pc/pcstore/pcstore.module').then(m => m.PcStoreModule),
+                    },
+                    {
+                        path: 'pc/home',
+                        loadChildren: () => import('./pc/pchome/pchome.module').then(m => m.PcHomeModule),
+                    },
 
                     // {
                     //     path: 'master/workingpattern',

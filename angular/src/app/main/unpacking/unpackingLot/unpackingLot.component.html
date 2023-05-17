@@ -29,10 +29,10 @@
                     <td>{{ rowdata.renban }}</td>
                     <td>{{ rowdata.suppilerNo }}</td>
                     <td>{{ rowdata.shiftNo }}</td>
-                    <td>{{ rowdata.workingDate }}</td>
-                    <td>{{ rowdata.planUnpackingDate }}</td>
-                    <td>{{ rowdata.actUnpackingDate }}</td>
-                    <td>{{ rowdata.actUnpackingDateFinish }}</td>
+                    <td>{{ rowdata.workingDate | date:'dd/MM/yy '}}</td>
+                    <td>{{ rowdata.planUnpackingDate | date:'dd/MM/yy '}}</td>
+                    <td>{{ rowdata.actUnpackingDate | date:'dd/MM/yy HH:mm:ss' }}</td>
+                    <td>{{ rowdata.actUnpackingDateFinish | date:'dd/MM/yy HH:mm:ss'}}</td>
                     <td>{{ rowdata.unpackingType }}</td>
                     <td>{{ rowdata.unpackingStatus }}</td>
                 </tr>

@@ -37,6 +37,11 @@ export class AppNavigationService {
                 new AppMenuItem('UpkScreen', '', 'flaticon-line-graph', '/screens/unpackingScreen')
 
             ]),
+            new AppMenuItem('Pc', '', 'flaticon-interface-8', '', [], [
+                new AppMenuItem('Pc Store', '', 'flaticon-line-graph', '/screens/pcstore'),
+                new AppMenuItem('Pc Home', '', 'flaticon-line-graph', '/screens/pchome')
+
+            ]),
 
             // new AppMenuItem('Tenants', 'Pages.Tenants', 'flaticon-list-3', '/app/admin/tenants'),
             // new AppMenuItem('Editions', 'Pages.Editions', 'flaticon-app', '/app/admin/editions'),

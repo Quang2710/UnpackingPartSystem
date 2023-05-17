@@ -22,6 +22,16 @@ const routes: Routes = [
                 loadChildren: () => import('app/main/unpacking/unpackingScreen/unpackingScreen.module').then(m => m.UnpackingScreenModule), //Lazy load main module
                 data: { preload: true }
             },
+            {
+                path: 'pcstore',
+                loadChildren: () => import('app/main/pc/pcstore/pcstore.module').then(m => m.PcStoreModule), //Lazy load main module
+                data: { preload: true }
+            },
+            {
+                path: 'pchome',
+                loadChildren: () => import('app/main/pc/pchome/pchome.module').then(m => m.PcHomeModule), //Lazy load main module
+                data: { preload: true }
+            },
         ]
     },
     { path: '**', redirectTo: '/app/main/dashboard' }
