@@ -1,3 +1,57 @@
-<p>
-  pcstore works!
-</p>
+<div class="pcstore-container">
+  <div class="pcstore-header">
+    <div class="header-name">
+      <div class="name-screen">
+        PC-STORE
+      </div>
+    </div>
+    <div class="header-data">
+      <div class="data-total part">
+        <div class="icon-data">
+          <img src="/assets/common/images/part.png" class="icon" />
+        </div>
+        <h3>2710</h3>
+        <p>Total Part</p>
+      </div>
+      <div class="data-total lot">
+        <div class="icon-data">
+          <img src="/assets/common/images/lot.png" class="icon" />
+        </div>
+        <h3>271</h3>
+        <p>LOT</p>
+      </div>
+    </div>
+  </div>
+  <div class="pcstore-body">
+    <div class="img-warehouse">
+      <img src="/assets/common/images/pcstore.jpg" class="logo-warehouse" />
+    </div>
+    <div class="pcstore-table-data">
+      <div class="card">
+        <p-table [value]="rowdata" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="5"
+          [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of
+            {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]" selectionMode="single">
+
+          <ng-template pTemplate="header" class="header-p-table">
+            <tr>
+              <th>Part No</th>
+              <th>Part Name</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowdata class="body-p-table">
+            <tr>
+              <td>{{ rowdata.partNo }}</td>
+              <td>{{ rowdata.partName }}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="paginatorleft">
+            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+          </ng-template>
+          <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

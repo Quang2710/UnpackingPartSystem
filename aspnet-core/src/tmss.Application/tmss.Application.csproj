@@ -21,4 +21,7 @@
     <ProjectReference Include="..\tmss.Core\tmss.Core.csproj" />
     <ProjectReference Include="..\tmss.EntityFrameworkCore\tmss.EntityFrameworkCore.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Master\Pc\PcStore\" />
+  </ItemGroup>
 </Project>

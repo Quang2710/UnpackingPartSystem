@@ -11,4 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\tmss.Core.Shared\tmss.Core.Shared.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Master\Pc\PcHome\Dto\" />
+  </ItemGroup>
 </Project>
