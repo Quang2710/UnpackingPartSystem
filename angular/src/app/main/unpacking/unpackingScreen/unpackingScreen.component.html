@@ -5,7 +5,7 @@
     </div>
     <div class="upk-current">
       <div class="current module-current">
-        <div class="module-current-value">TMT-V1234</div>
+        <div class="module-current-value">{{moduleNo}}</div>
       </div>
       <div class="current module-finish">
         <div class="button-finish">FINISH</div>
@@ -19,32 +19,32 @@
           {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]">
         <ng-template pTemplate="header" class="header-p-table">
           <tr>
-            <th>Unpacking No</th>
-            <th>Module No</th>
+            <th>Part No</th>
+            <th>Part Name</th>
             <th>Renban</th>
-            <th>Suppiler No</th>
-            <th>Shift No</th>
-            <th>Working Date</th>
+            <th>Suppiler</th>
+            <th>Status</th>
+            <!-- <th>Working Date</th>
             <th>Plan Unpacking Date</th>
             <th>Act Unpacking Date</th>
             <th>Act Unpacking Date Finish</th>
             <th>Unpacking Type</th>
-            <th>Unpacking Status</th>
+            <th>Unpacking Status</th> -->
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowdata class="body-p-table">
-          <tr [ngClass]="getStatusBackgroundClass(rowdata.unpackingStatus)">
-            <td>{{ rowdata.unpackingNo }}</td>
-            <td>{{ rowdata.moduleNo }}</td>
+          <tr [ngClass]="getStatusBackgroundClass(rowdata.status)">
+            <td>{{ rowdata.partNo }}</td>
+            <td>{{ rowdata.partName }}</td>
             <td>{{ rowdata.renban }}</td>
-            <td>{{ rowdata.suppilerNo }}</td>
-            <td>{{ rowdata.shiftNo }}</td>
-            <td>{{ rowdata.workingDate | date:'dd/MM/yy '}}</td>
+            <td>{{ rowdata.supplier }}</td>
+            <td>{{ rowdata.status }}</td>
+            <!-- <td>{{ rowdata.workingDate | date:'dd/MM/yy '}}</td>
             <td>{{ rowdata.planUnpackingDate | date:'dd/MM/yy '}}</td>
             <td>{{ rowdata.actUnpackingDate | date:'dd/MM/yy HH:mm:ss'}}</td>
             <td>{{ rowdata.actUnpackingDateFinish | date:'dd/MM/yy HH:mm:ss'}}</td>
             <td>{{ rowdata.unpackingType }}</td>
-            <td>{{ rowdata.unpackingStatus }}</td>
+            <td>{{ rowdata.unpackingStatus }}</td> -->
           </tr>
         </ng-template>
         <ng-template pTemplate="paginatorleft">
@@ -58,8 +58,8 @@
   </div>
   <div class="unpacking-footer">
     <div class="backno backno-current">
-      <div class="backno-name">Back No</div>
-      <div class="backno-value">V567</div>
+      <div class="backno-name">Part No</div>
+      <div class="backno-value">{{partNoCurrent}}</div>
     </div>
     <div class="backno backno-status">
       <div class="backno-status-value">UPK</div>

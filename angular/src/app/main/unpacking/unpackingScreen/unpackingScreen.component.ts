@@ -13,7 +13,7 @@ import { FileDownloadService } from '@shared/utils/file-download.service';
 })
 export class UnpackingScreenComponent extends AppComponentBase implements OnInit {
 
-  rowdata: any[] = [];
+  rowdata;
   paginationParams: PaginationParamsModel = {
     pageNum: 1,
     pageSize: 20,
@@ -22,17 +22,14 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
     sorting: '',
     totalPage: 1,
   };
-  unpackingNo;
-  moduleNo;
+  moduleNoCurrent;
+  moduleNo = 'DVN1033TMT1';
+  partNo;
+  partName;
+  status;
   renban;
-  suppilerNo;
-  shiftNo;
-  workingDate;
-  planUnpackingDate;
-  actUnpackingDate;
-  actUnpackingDateFinish;
-  unpackingType;
-  unpackingStatus;
+  supplier;
+  partNoCurrent;
 
   constructor(
     injector: Injector,
@@ -48,27 +45,17 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
     this.getDatas();
   }
   getDatas() {
-    this._service.getAll(
-      this.unpackingNo,
-      this.moduleNo,
-      this.renban,
-      this.suppilerNo,
-      this.shiftNo,
-      this.unpackingType,
-      this.unpackingStatus,
-      '',
-      this.paginationParams.skipCount,
-      this.paginationParams.pageSize
-    )
+    this._service.getPartInModule(this.moduleNo)
       .subscribe((result) => {
-        this.rowdata = result.items;
+        this.rowdata = result;
+        this.partNoCurrent = this.rowdata.filter(item => item.status === 'START')[0].partNo;
         console.log(this.rowdata);
       });
 
   }
   getStatusBackgroundClass(status: string): string {
-    if (status === 'UNPACKING') {
-      return 'UNPACKING';
+    if (status === 'START') {
+      return 'START';
     } else if (status === 'FINISH') {
       return 'FINISH';
     }
