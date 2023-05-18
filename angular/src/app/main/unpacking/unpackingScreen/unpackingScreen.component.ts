@@ -47,7 +47,6 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
 
   ngOnInit() {
     this.getModulePlan();
-    //this.getDatas();
   }
   getModulePlan() {
     this._service.getModulePlan()
@@ -61,7 +60,6 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
         }
         console.log('current', this.moduleNoCurrent);
         this.getDatas();
-
       });
   }
   getDatas() {
@@ -80,7 +78,6 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
         this._service.finishUpkModule(id)
           .subscribe(() => {
             this.notify.success(this.l('FINISH Successfully '));
-            this.getDatas();
             this.getModulePlan();
           });
       }

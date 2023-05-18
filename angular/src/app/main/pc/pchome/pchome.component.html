@@ -10,14 +10,14 @@
         <div class="icon-data">
           <img src="/assets/common/images/part.png" class="icon" />
         </div>
-        <h3>2710</h3>
+        <h3>{{totalPart}}</h3>
         <p>Total Part</p>
       </div>
       <div class="data-total lot">
         <div class="icon-data">
           <img src="/assets/common/images/lot.png" class="icon" />
         </div>
-        <h3>271</h3>
+        <h3>{{totalLot}}</h3>
         <p>LOT</p>
       </div>
     </div>
@@ -28,7 +28,7 @@
     </div>
     <div class="pcstore-table-data">
       <div class="card">
-        <p-table [value]="rowdata" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="5"
+        <p-table [value]="rowdata" [tableStyle]="{ 'width': '100%' }" [paginator]="false" [rows]="5"
           [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of
             {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]" selectionMode="single">
 

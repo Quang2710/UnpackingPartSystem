@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace tmss.Master.Pc
 {
-    public interface IPcStoreAppService : IApplicationService
+    public interface IPcHomeAppService : IApplicationService
     {
-        Task<PagedResultDto<PcStoreDto>> GetAll(PcStoreInputDto input);
+        Task<PagedResultDto<PcHomeDto>> GetAll(PcHomeInputDto input);
 
 
     }
