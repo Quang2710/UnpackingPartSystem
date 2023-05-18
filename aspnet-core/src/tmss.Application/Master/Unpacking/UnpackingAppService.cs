@@ -20,14 +20,17 @@ namespace tmss.Master.Unpacking
         private readonly IRepository<UnPackingPart, long> _unpacking;
         private readonly IUnpackingExcelExporter _calendarListExcelExporter;
         private readonly IDapperRepository<Part, long> _upkscreen;
+        private readonly IDapperRepository<LupContModule, long> _getModulePlan;
 
         public UnpackingAppService(IRepository<UnPackingPart, long> unpacking,
 
                                     IUnpackingExcelExporter calendarListExcelExporter,
-                                     IDapperRepository<Part, long> upkscreen
+                                     IDapperRepository<Part, long> upkscreen,
+                                       IDapperRepository<LupContModule, long> getModulePlan
             )
 
         {
+            _getModulePlan = getModulePlan;
             _upkscreen = upkscreen;
             _unpacking = unpacking;
             _calendarListExcelExporter = calendarListExcelExporter;
@@ -100,7 +103,18 @@ namespace tmss.Master.Unpacking
             return _result.ToList();
 
         }
+        public async Task<List<ModuleUpkPlanDto>> GetModulePlan()
+        {
+            string _sql = "Exec GET_MODULE_NO_PLAN ";
+            IEnumerable<ModuleUpkPlanDto> _result = await _getModulePlan.QueryAsync<ModuleUpkPlanDto>(_sql, new {  });
+            return _result.ToList();
 
+        }
+        public async Task FinishUpkModule(string module_no)
+        {
+            string _sql = "Exec FINISH_MODULE @ModuleNo";
+            await _getModulePlan.QueryAsync<LupContModule>(_sql, new { ModuleNo = module_no });
+        }
         public async Task<FileDto> GetUnpackingToExcel(UnpackingExportInput input)
         {
             var query = from o in _unpacking.GetAll()

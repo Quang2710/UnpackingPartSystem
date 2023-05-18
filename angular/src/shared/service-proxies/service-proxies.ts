@@ -13257,6 +13257,111 @@ export class UnpackingServiceProxy {
     }
 
     /**
+     * @return Success
+     */
+    getModulePlan(): Observable<ModuleUpkPlanDto[]> {
+        let url_ = this.baseUrl + "/api/services/app/Unpacking/GetModulePlan";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetModulePlan(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetModulePlan(<any>response_);
+                } catch (e) {
+                    return <Observable<ModuleUpkPlanDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ModuleUpkPlanDto[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetModulePlan(response: HttpResponseBase): Observable<ModuleUpkPlanDto[]> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(ModuleUpkPlanDto.fromJS(item));
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ModuleUpkPlanDto[]>(<any>null);
+    }
+
+    /**
+     * @param module_no (optional) 
+     * @return Success
+     */
+    finishUpkModule(module_no: string | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Unpacking/FinishUpkModule?";
+        if (module_no !== undefined)
+            url_ += "module_no=" + encodeURIComponent("" + module_no) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFinishUpkModule(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFinishUpkModule(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processFinishUpkModule(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
      * @param unpackingNo (optional) 
      * @param moduleNo (optional) 
      * @param renban (optional) 
@@ -27341,6 +27446,7 @@ export interface IPagedResultDtoOfUnpackingDto {
 }
 
 export class PartInModuleDto implements IPartInModuleDto {
+    moduleNo!: string | undefined;
     partNo!: string | undefined;
     partName!: string | undefined;
     renban!: string | undefined;
@@ -27359,6 +27465,7 @@ export class PartInModuleDto implements IPartInModuleDto {
 
     init(_data?: any) {
         if (_data) {
+            this.moduleNo = _data["moduleNo"];
             this.partNo = _data["partNo"];
             this.partName = _data["partName"];
             this.renban = _data["renban"];
@@ -27377,6 +27484,7 @@ export class PartInModuleDto implements IPartInModuleDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["moduleNo"] = this.moduleNo;
         data["partNo"] = this.partNo;
         data["partName"] = this.partName;
         data["renban"] = this.renban;
@@ -27388,11 +27496,56 @@ export class PartInModuleDto implements IPartInModuleDto {
 }
 
 export interface IPartInModuleDto {
+    moduleNo: string | undefined;
     partNo: string | undefined;
     partName: string | undefined;
     renban: string | undefined;
     supplier: string | undefined;
     status: string | undefined;
+    id: number | undefined;
+}
+
+export class ModuleUpkPlanDto implements IModuleUpkPlanDto {
+    moduleNo!: string | undefined;
+    moduleStatus!: string | undefined;
+    id!: number | undefined;
+
+    constructor(data?: IModuleUpkPlanDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.moduleNo = _data["moduleNo"];
+            this.moduleStatus = _data["moduleStatus"];
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): ModuleUpkPlanDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ModuleUpkPlanDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["moduleNo"] = this.moduleNo;
+        data["moduleStatus"] = this.moduleStatus;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface IModuleUpkPlanDto {
+    moduleNo: string | undefined;
+    moduleStatus: string | undefined;
     id: number | undefined;
 }
 

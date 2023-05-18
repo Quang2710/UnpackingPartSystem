@@ -1,14 +1,14 @@
 <div class="container-unpacking">
   <div class="unpacking-header">
     <div class="upk-plan">
-      <div class="plan total-actual">123/150</div>
+      <div class="plan total-actual">{{moduleFinish}} / {{moduleActual}}</div>
     </div>
     <div class="upk-current">
       <div class="current module-current">
-        <div class="module-current-value">{{moduleNo}}</div>
+        <div class="module-current-value">{{moduleNoCurrent}}</div>
       </div>
       <div class="current module-finish">
-        <div class="button-finish">FINISH</div>
+        <div class="button-finish" (click)=" finishUpkModule(moduleNoCurrent)">FINISH</div>
       </div>
     </div>
   </div>
@@ -24,12 +24,6 @@
             <th>Renban</th>
             <th>Suppiler</th>
             <th>Status</th>
-            <!-- <th>Working Date</th>
-            <th>Plan Unpacking Date</th>
-            <th>Act Unpacking Date</th>
-            <th>Act Unpacking Date Finish</th>
-            <th>Unpacking Type</th>
-            <th>Unpacking Status</th> -->
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowdata class="body-p-table">
@@ -39,12 +33,6 @@
             <td>{{ rowdata.renban }}</td>
             <td>{{ rowdata.supplier }}</td>
             <td>{{ rowdata.status }}</td>
-            <!-- <td>{{ rowdata.workingDate | date:'dd/MM/yy '}}</td>
-            <td>{{ rowdata.planUnpackingDate | date:'dd/MM/yy '}}</td>
-            <td>{{ rowdata.actUnpackingDate | date:'dd/MM/yy HH:mm:ss'}}</td>
-            <td>{{ rowdata.actUnpackingDateFinish | date:'dd/MM/yy HH:mm:ss'}}</td>
-            <td>{{ rowdata.unpackingType }}</td>
-            <td>{{ rowdata.unpackingStatus }}</td> -->
           </tr>
         </ng-template>
         <ng-template pTemplate="paginatorleft">

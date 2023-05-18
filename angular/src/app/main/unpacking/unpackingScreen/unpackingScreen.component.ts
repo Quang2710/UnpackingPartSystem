@@ -22,14 +22,18 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
     sorting: '',
     totalPage: 1,
   };
+  modulePlan;
+  moduleActual;
+  moduleFinish;
   moduleNoCurrent;
-  moduleNo = 'DVN1033TMT1';
+  moduleNo;
   partNo;
   partName;
   status;
   renban;
   supplier;
   partNoCurrent;
+  moduleStatus;
 
   constructor(
     injector: Injector,
@@ -42,16 +46,45 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
   }
 
   ngOnInit() {
-    this.getDatas();
+    this.getModulePlan();
+    //this.getDatas();
+  }
+  getModulePlan() {
+    this._service.getModulePlan()
+      .subscribe((result) => {
+        this.modulePlan = result;
+        this.moduleNoCurrent = this.modulePlan.filter(item => item.moduleStatus === 'UPK')[0].moduleNo;
+        this.moduleActual = this.modulePlan.length;
+        this.moduleFinish = this.modulePlan.filter(item => item.moduleStatus === 'FINISH').length;
+        if (this.moduleFinish == 0) {
+          this.moduleFinish = 0
+        }
+        console.log('current', this.moduleNoCurrent);
+        this.getDatas();
+
+      });
   }
   getDatas() {
-    this._service.getPartInModule(this.moduleNo)
+    this._service.getPartInModule(this.moduleNoCurrent)
       .subscribe((result) => {
         this.rowdata = result;
         this.partNoCurrent = this.rowdata.filter(item => item.status === 'START')[0].partNo;
         console.log(this.rowdata);
       });
 
+  }
+
+  finishUpkModule(id: string) {
+    this.message.confirm(this.l(''), 'FINISH UNPACKING MODULE', (isConfirmed) => {
+      if (isConfirmed) {
+        this._service.finishUpkModule(id)
+          .subscribe(() => {
+            this.notify.success(this.l('FINISH Successfully '));
+            this.getDatas();
+            this.getModulePlan();
+          });
+      }
+    });
   }
   getStatusBackgroundClass(status: string): string {
     if (status === 'START') {

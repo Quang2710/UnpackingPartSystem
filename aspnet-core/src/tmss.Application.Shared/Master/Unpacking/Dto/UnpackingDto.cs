@@ -38,4 +38,11 @@ namespace tmss.Master.Unpacking.Dto
 
         public string Status { get; set; }        
     }
+    public class ModuleUpkPlanDto : Entity<long?>
+    {
+        public string ModuleNo { get; set; }
+        public string ModuleStatus { get; set; }
+
+  
+    }
 }
