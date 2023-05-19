@@ -165,9 +165,9 @@ namespace tmss
             //Devaning
             configuration.CreateMap<CreateOrEditDevaningContModuleDto, DvnContList>().ReverseMap();
             //Unpacking
-            configuration.CreateMap<CreateOrEditUnpackingDto, UnPackingPart>().ReverseMap();
+            configuration.CreateMap<CreateOrEditUnpackingDto, LupContModule>().ReverseMap();
             //module
-            configuration.CreateMap<CreateOrEditModuleDto, LupContModule>().ReverseMap();
+            //configuration.CreateMap<CreateOrEditModuleDto, LupContModule>().ReverseMap();
 
             /* ADD YOUR OWN CUSTOM AUTOMAPPER MAPPINGS HERE */
         }

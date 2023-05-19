@@ -17,12 +17,12 @@ namespace tmss.Master.Unpacking
 {
     public class UnpackingAppService : tmssAppServiceBase, IUnpackingAppService
     {
-        private readonly IRepository<UnPackingPart, long> _unpacking;
+        private readonly IRepository<LupContModule, long> _unpacking;
         private readonly IUnpackingExcelExporter _calendarListExcelExporter;
         private readonly IDapperRepository<Part, long> _upkscreen;
         private readonly IDapperRepository<LupContModule, long> _getModulePlan;
 
-        public UnpackingAppService(IRepository<UnPackingPart, long> unpacking,
+        public UnpackingAppService(IRepository<LupContModule, long> unpacking,
 
                                     IUnpackingExcelExporter calendarListExcelExporter,
                                      IDapperRepository<Part, long> upkscreen,
@@ -50,7 +50,7 @@ namespace tmss.Master.Unpacking
 
         protected virtual async Task Create(CreateOrEditUnpackingDto input)
         {
-            var mainObj = ObjectMapper.Map<UnPackingPart>(input);
+            var mainObj = ObjectMapper.Map<LupContModule>(input);
             await _unpacking.InsertAsync(mainObj);
         }
 
@@ -68,22 +68,19 @@ namespace tmss.Master.Unpacking
 
         public async Task<PagedResultDto<UnpackingDto>> GetAll(GetUnpackingInput input)
         {
-            var querry = from UnPackingPart in _unpacking.GetAll().AsNoTracking()
-                         .Where(e => string.IsNullOrWhiteSpace(input.UnpackingNo) || e.UnpackingNo.Contains(input.UnpackingNo))
+            var querry = from LupContModule in _unpacking.GetAll().AsNoTracking()
+                         .Where(e => string.IsNullOrWhiteSpace(input.ModuleNo) || e.ModuleNo.Contains(input.ModuleNo))
                          select new UnpackingDto
                          {
-                             Id = UnPackingPart.Id,
-                             UnpackingNo = UnPackingPart.UnpackingNo,
-                             ModuleNo = UnPackingPart.ModuleNo,
-                             Renban = UnPackingPart.Renban,
-                             SuppilerNo = UnPackingPart.SuppilerNo,
-                             ShiftNo = UnPackingPart.ShiftNo,
-                             WorkingDate = UnPackingPart.WorkingDate,
-                             PlanUnpackingDate = UnPackingPart.PlanUnpackingDate,
-                             ActUnpackingDate = UnPackingPart.ActUnpackingDate,
-                             ActUnpackingDateFinish = UnPackingPart.ActUnpackingDateFinish,
-                             UnpackingType = UnPackingPart.UnpackingType,
-                             UnpackingStatus = UnPackingPart.UnpackingStatus,
+                             Id = LupContModule.Id,
+                             ModuleNo = LupContModule.ModuleNo,
+                             DevaningNo = LupContModule.DevaningNo,
+                             Renban = LupContModule.Renban,
+                             Supplier = LupContModule.Supplier,
+                             ActUnpackingDate = LupContModule.ActUnpackingDate,
+                             ActUnpackingDateFinish = LupContModule.ActUnpackingDateFinish,
+                             PlanUnpackingDate = LupContModule.PlanUnpackingDate,
+                             ModuleStatus = LupContModule.ModuleStatus,                             
                          };
 
             var totalCount = await querry.CountAsync();
@@ -121,17 +118,15 @@ namespace tmss.Master.Unpacking
                         select new UnpackingDto
                         {
                             Id = o.Id,
-                            UnpackingNo = o.UnpackingNo,
                             ModuleNo = o.ModuleNo,
+                            DevaningNo = o.DevaningNo,
                             Renban = o.Renban,
-                            SuppilerNo = o.SuppilerNo,
-                            ShiftNo = o.ShiftNo,
-                            WorkingDate = o.WorkingDate,
-                            PlanUnpackingDate = o.PlanUnpackingDate,
+                            Supplier = o.Supplier,
                             ActUnpackingDate = o.ActUnpackingDate,
                             ActUnpackingDateFinish = o.ActUnpackingDateFinish,
-                            UnpackingType = o.UnpackingType,
-                            UnpackingStatus = o.UnpackingStatus,
+                            PlanUnpackingDate = o.PlanUnpackingDate,
+                            ModuleStatus = o.ModuleStatus,
+                            
                         };
             var exportToExcel = await query.ToListAsync();
             return _calendarListExcelExporter.ExportToFile(exportToExcel);

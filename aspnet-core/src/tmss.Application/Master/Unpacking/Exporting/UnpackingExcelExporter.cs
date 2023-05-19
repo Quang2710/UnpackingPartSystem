@@ -21,32 +21,26 @@ namespace tmss.Master.Unpacking.Exporting
                     var sheet = excelPackage.CreateSheet("Unpacking");
                     AddHeader(
                                 sheet,
-                                ("UnpackingNo"),
-                                    ("ModuleNo"),
+                                ("ModuleNo"),
+                                    ("DevaningNo"),
                                     ("Renban"),
-                                    ("SuppilerNo"),
-                                    ("ShiftNo"),
-                                    ("WorkingDate"),
-                                    ("PlanUnpackingDate"),
+                                    ("Supplier"),
                                     ("ActUnpackingDate"),
                                     ("ActUnpackingDateFinish"),
-                                    ("UnpackingType"),
-                                    ("UnpackingStatus")
+                                    ("PlanUnpackingDate"),
+                                    ("ModuleStatus")                                    
                                    );
                     AddObjects(
                          sheet, 1, unpacking,
-                                _ => _.UnpackingNo,
                                 _ => _.ModuleNo,
+                                _ => _.DevaningNo,
                                 _ => _.Renban,
-                                _ => _.SuppilerNo,
-                                _ => _.ShiftNo,
-                                _ => _.WorkingDate,
-                                _ => _.PlanUnpackingDate,
+                                _ => _.Supplier,
                                 _ => _.ActUnpackingDate,
                                 _ => _.ActUnpackingDateFinish,
-                                _ => _.UnpackingType,
-                                _ => _.UnpackingStatus
-
+                                _ => _.PlanUnpackingDate,
+                                _ => _.ModuleStatus
+                                
                                 );
 
                     for (var i = 0; i < 8; i++)
