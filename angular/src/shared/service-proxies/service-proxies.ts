@@ -13526,51 +13526,34 @@ export class UnpackingServiceProxy {
     }
 
     /**
-     * @param unpackingNo (optional) 
      * @param moduleNo (optional) 
+     * @param devaningNo (optional) 
      * @param renban (optional) 
-     * @param suppilerNo (optional) 
-     * @param shiftNo (optional) 
-     * @param workingDate (optional) 
+     * @param supplier (optional) 
      * @param planUnpackingDate (optional) 
      * @param actUnpackingDate (optional) 
      * @param actUnpackingDateFinish (optional) 
-     * @param unpackingType (optional) 
-     * @param unpackingStatus (optional) 
+     * @param moduleStatus (optional) 
      * @return Success
      */
-    getUnpackingToExcel(unpackingNo: string | null | undefined, moduleNo: string | null | undefined, renban: string | null | undefined, suppilerNo: string | null | undefined, shiftNo: string | null | undefined, workingDate: moment.Moment | undefined, planUnpackingDate: moment.Moment | undefined, actUnpackingDate: moment.Moment | undefined, actUnpackingDateFinish: moment.Moment | undefined, unpackingType: string | null | undefined, unpackingStatus: string | null | undefined): Observable<FileDto> {
+    getUnpackingToExcel(moduleNo: string | null | undefined, devaningNo: string | null | undefined, renban: string | null | undefined, supplier: string | null | undefined, planUnpackingDate: moment.Moment | null | undefined, actUnpackingDate: moment.Moment | null | undefined, actUnpackingDateFinish: moment.Moment | null | undefined, moduleStatus: string | null | undefined): Observable<FileDto> {
         let url_ = this.baseUrl + "/api/services/app/Unpacking/GetUnpackingToExcel?";
-        if (unpackingNo !== undefined)
-            url_ += "UnpackingNo=" + encodeURIComponent("" + unpackingNo) + "&"; 
         if (moduleNo !== undefined)
             url_ += "ModuleNo=" + encodeURIComponent("" + moduleNo) + "&"; 
+        if (devaningNo !== undefined)
+            url_ += "DevaningNo=" + encodeURIComponent("" + devaningNo) + "&"; 
         if (renban !== undefined)
             url_ += "Renban=" + encodeURIComponent("" + renban) + "&"; 
-        if (suppilerNo !== undefined)
-            url_ += "SuppilerNo=" + encodeURIComponent("" + suppilerNo) + "&"; 
-        if (shiftNo !== undefined)
-            url_ += "ShiftNo=" + encodeURIComponent("" + shiftNo) + "&"; 
-        if (workingDate === null)
-            throw new Error("The parameter 'workingDate' cannot be null.");
-        else if (workingDate !== undefined)
-            url_ += "WorkingDate=" + encodeURIComponent(workingDate ? "" + workingDate.toJSON() : "") + "&"; 
-        if (planUnpackingDate === null)
-            throw new Error("The parameter 'planUnpackingDate' cannot be null.");
-        else if (planUnpackingDate !== undefined)
+        if (supplier !== undefined)
+            url_ += "Supplier=" + encodeURIComponent("" + supplier) + "&"; 
+        if (planUnpackingDate !== undefined)
             url_ += "PlanUnpackingDate=" + encodeURIComponent(planUnpackingDate ? "" + planUnpackingDate.toJSON() : "") + "&"; 
-        if (actUnpackingDate === null)
-            throw new Error("The parameter 'actUnpackingDate' cannot be null.");
-        else if (actUnpackingDate !== undefined)
+        if (actUnpackingDate !== undefined)
             url_ += "ActUnpackingDate=" + encodeURIComponent(actUnpackingDate ? "" + actUnpackingDate.toJSON() : "") + "&"; 
-        if (actUnpackingDateFinish === null)
-            throw new Error("The parameter 'actUnpackingDateFinish' cannot be null.");
-        else if (actUnpackingDateFinish !== undefined)
+        if (actUnpackingDateFinish !== undefined)
             url_ += "ActUnpackingDateFinish=" + encodeURIComponent(actUnpackingDateFinish ? "" + actUnpackingDateFinish.toJSON() : "") + "&"; 
-        if (unpackingType !== undefined)
-            url_ += "UnpackingType=" + encodeURIComponent("" + unpackingType) + "&"; 
-        if (unpackingStatus !== undefined)
-            url_ += "UnpackingStatus=" + encodeURIComponent("" + unpackingStatus) + "&"; 
+        if (moduleStatus !== undefined)
+            url_ += "ModuleStatus=" + encodeURIComponent("" + moduleStatus) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -27586,17 +27569,14 @@ export interface IExternalAuthenticateResultModel {
 }
 
 export class CreateOrEditUnpackingDto implements ICreateOrEditUnpackingDto {
-    unpackingNo!: string | undefined;
     moduleNo!: string | undefined;
+    devaningNo!: string | undefined;
     renban!: string | undefined;
-    suppilerNo!: string | undefined;
-    shiftNo!: string | undefined;
-    workingDate!: moment.Moment;
-    planUnpackingDate!: moment.Moment;
-    actUnpackingDate!: moment.Moment;
-    actUnpackingDateFinish!: moment.Moment;
-    unpackingType!: string | undefined;
-    unpackingStatus!: string | undefined;
+    supplier!: string | undefined;
+    planUnpackingDate!: moment.Moment | undefined;
+    actUnpackingDate!: moment.Moment | undefined;
+    actUnpackingDateFinish!: moment.Moment | undefined;
+    moduleStatus!: string | undefined;
     id!: number | undefined;
 
     constructor(data?: ICreateOrEditUnpackingDto) {
@@ -27610,17 +27590,14 @@ export class CreateOrEditUnpackingDto implements ICreateOrEditUnpackingDto {
 
     init(_data?: any) {
         if (_data) {
-            this.unpackingNo = _data["unpackingNo"];
             this.moduleNo = _data["moduleNo"];
+            this.devaningNo = _data["devaningNo"];
             this.renban = _data["renban"];
-            this.suppilerNo = _data["suppilerNo"];
-            this.shiftNo = _data["shiftNo"];
-            this.workingDate = _data["workingDate"] ? moment(_data["workingDate"].toString()) : <any>undefined;
+            this.supplier = _data["supplier"];
             this.planUnpackingDate = _data["planUnpackingDate"] ? moment(_data["planUnpackingDate"].toString()) : <any>undefined;
             this.actUnpackingDate = _data["actUnpackingDate"] ? moment(_data["actUnpackingDate"].toString()) : <any>undefined;
             this.actUnpackingDateFinish = _data["actUnpackingDateFinish"] ? moment(_data["actUnpackingDateFinish"].toString()) : <any>undefined;
-            this.unpackingType = _data["unpackingType"];
-            this.unpackingStatus = _data["unpackingStatus"];
+            this.moduleStatus = _data["moduleStatus"];
             this.id = _data["id"];
         }
     }
@@ -27634,49 +27611,40 @@ export class CreateOrEditUnpackingDto implements ICreateOrEditUnpackingDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["unpackingNo"] = this.unpackingNo;
         data["moduleNo"] = this.moduleNo;
+        data["devaningNo"] = this.devaningNo;
         data["renban"] = this.renban;
-        data["suppilerNo"] = this.suppilerNo;
-        data["shiftNo"] = this.shiftNo;
-        data["workingDate"] = this.workingDate ? this.workingDate.toISOString() : <any>undefined;
+        data["supplier"] = this.supplier;
         data["planUnpackingDate"] = this.planUnpackingDate ? this.planUnpackingDate.toISOString() : <any>undefined;
         data["actUnpackingDate"] = this.actUnpackingDate ? this.actUnpackingDate.toISOString() : <any>undefined;
         data["actUnpackingDateFinish"] = this.actUnpackingDateFinish ? this.actUnpackingDateFinish.toISOString() : <any>undefined;
-        data["unpackingType"] = this.unpackingType;
-        data["unpackingStatus"] = this.unpackingStatus;
+        data["moduleStatus"] = this.moduleStatus;
         data["id"] = this.id;
         return data; 
     }
 }
 
 export interface ICreateOrEditUnpackingDto {
-    unpackingNo: string | undefined;
     moduleNo: string | undefined;
+    devaningNo: string | undefined;
     renban: string | undefined;
-    suppilerNo: string | undefined;
-    shiftNo: string | undefined;
-    workingDate: moment.Moment;
-    planUnpackingDate: moment.Moment;
-    actUnpackingDate: moment.Moment;
-    actUnpackingDateFinish: moment.Moment;
-    unpackingType: string | undefined;
-    unpackingStatus: string | undefined;
+    supplier: string | undefined;
+    planUnpackingDate: moment.Moment | undefined;
+    actUnpackingDate: moment.Moment | undefined;
+    actUnpackingDateFinish: moment.Moment | undefined;
+    moduleStatus: string | undefined;
     id: number | undefined;
 }
 
 export class UnpackingDto implements IUnpackingDto {
-    unpackingNo!: string | undefined;
     moduleNo!: string | undefined;
+    devaningNo!: string | undefined;
     renban!: string | undefined;
-    suppilerNo!: string | undefined;
-    shiftNo!: string | undefined;
-    workingDate!: moment.Moment | undefined;
+    supplier!: string | undefined;
     planUnpackingDate!: moment.Moment | undefined;
     actUnpackingDate!: moment.Moment | undefined;
     actUnpackingDateFinish!: moment.Moment | undefined;
-    unpackingType!: string | undefined;
-    unpackingStatus!: string | undefined;
+    moduleStatus!: string | undefined;
     id!: number | undefined;
 
     constructor(data?: IUnpackingDto) {
@@ -27690,17 +27658,14 @@ export class UnpackingDto implements IUnpackingDto {
 
     init(_data?: any) {
         if (_data) {
-            this.unpackingNo = _data["unpackingNo"];
             this.moduleNo = _data["moduleNo"];
+            this.devaningNo = _data["devaningNo"];
             this.renban = _data["renban"];
-            this.suppilerNo = _data["suppilerNo"];
-            this.shiftNo = _data["shiftNo"];
-            this.workingDate = _data["workingDate"] ? moment(_data["workingDate"].toString()) : <any>undefined;
+            this.supplier = _data["supplier"];
             this.planUnpackingDate = _data["planUnpackingDate"] ? moment(_data["planUnpackingDate"].toString()) : <any>undefined;
             this.actUnpackingDate = _data["actUnpackingDate"] ? moment(_data["actUnpackingDate"].toString()) : <any>undefined;
             this.actUnpackingDateFinish = _data["actUnpackingDateFinish"] ? moment(_data["actUnpackingDateFinish"].toString()) : <any>undefined;
-            this.unpackingType = _data["unpackingType"];
-            this.unpackingStatus = _data["unpackingStatus"];
+            this.moduleStatus = _data["moduleStatus"];
             this.id = _data["id"];
         }
     }
@@ -27714,34 +27679,28 @@ export class UnpackingDto implements IUnpackingDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["unpackingNo"] = this.unpackingNo;
         data["moduleNo"] = this.moduleNo;
+        data["devaningNo"] = this.devaningNo;
         data["renban"] = this.renban;
-        data["suppilerNo"] = this.suppilerNo;
-        data["shiftNo"] = this.shiftNo;
-        data["workingDate"] = this.workingDate ? this.workingDate.toISOString() : <any>undefined;
+        data["supplier"] = this.supplier;
         data["planUnpackingDate"] = this.planUnpackingDate ? this.planUnpackingDate.toISOString() : <any>undefined;
         data["actUnpackingDate"] = this.actUnpackingDate ? this.actUnpackingDate.toISOString() : <any>undefined;
         data["actUnpackingDateFinish"] = this.actUnpackingDateFinish ? this.actUnpackingDateFinish.toISOString() : <any>undefined;
-        data["unpackingType"] = this.unpackingType;
-        data["unpackingStatus"] = this.unpackingStatus;
+        data["moduleStatus"] = this.moduleStatus;
         data["id"] = this.id;
         return data; 
     }
 }
 
 export interface IUnpackingDto {
-    unpackingNo: string | undefined;
     moduleNo: string | undefined;
+    devaningNo: string | undefined;
     renban: string | undefined;
-    suppilerNo: string | undefined;
-    shiftNo: string | undefined;
-    workingDate: moment.Moment | undefined;
+    supplier: string | undefined;
     planUnpackingDate: moment.Moment | undefined;
     actUnpackingDate: moment.Moment | undefined;
     actUnpackingDateFinish: moment.Moment | undefined;
-    unpackingType: string | undefined;
-    unpackingStatus: string | undefined;
+    moduleStatus: string | undefined;
     id: number | undefined;
 }
 

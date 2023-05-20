@@ -29,6 +29,7 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
   moduleNo;
   partNo;
   partName;
+  moduleNoStatus;
   status;
   renban;
   supplier;
@@ -58,7 +59,9 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
         if (this.moduleFinish == 0) {
           this.moduleFinish = 0
         }
-        console.log('current', this.moduleNoCurrent);
+        this.moduleNoStatus = this.modulePlan[0].moduleStatus;
+        console.log('status', this.moduleNoStatus);
+
         this.getDatas();
       });
   }
@@ -88,6 +91,13 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
       return 'START';
     } else if (status === 'FINISH') {
       return 'FINISH';
+    }
+  }
+  checkStatusModule(moduleStatus: string): string {
+    if (moduleStatus === 'UPK') {
+      return 'UPK';
+    } else if (moduleStatus === 'DELAY') {
+      return 'DELAY';
     }
   }
 
