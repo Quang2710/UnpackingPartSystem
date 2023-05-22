@@ -50,7 +50,8 @@
       <div class="backno-value">{{partNoCurrent}}</div>
     </div>
     <div class="backno backno-status">
-      <div class="backno-status-value">UPK</div>
+      <div class="backno-status-value" [ngClass]="checkStatusModule(moduleNoStatus.moduleStatus)">{{moduleNoStatus}}
+      </div>
     </div>
     <div class="backno backno-current">
       <div class="abc">L1-ABC123</div>
