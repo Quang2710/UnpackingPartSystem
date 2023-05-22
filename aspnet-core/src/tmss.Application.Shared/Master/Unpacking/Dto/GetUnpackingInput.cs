@@ -8,16 +8,14 @@ namespace tmss.Master.Unpacking.Dto
 {
     public class GetUnpackingInput: PagedAndSortedResultRequestDto
     {
-        public  string UnpackingNo { get; set; }
-
         public  string ModuleNo { get; set; }
 
-        public  string Renban { get; set; }
-        public  string SuppilerNo { get; set; }
-        public  string ShiftNo { get; set; }
-                
-        public  string UnpackingType { get; set; }
+        public  string DevaningNo { get; set; }
 
-        public  string UnpackingStatus { get; set; }
+        public  string Renban { get; set; }
+        public  string Supplier { get; set; }        
+                
+        public  string ModuleStatus { get; set; }
+        
     }
 }
