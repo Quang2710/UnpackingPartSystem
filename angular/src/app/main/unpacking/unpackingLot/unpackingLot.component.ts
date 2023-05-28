@@ -22,17 +22,17 @@ export class UnpackingLotComponent extends AppComponentBase implements OnInit {
         sorting: '',
         totalPage: 1,
     };
-    unpackingNo;
+    devaningNo;
     moduleNo;
     renban;
-    suppilerNo;
+    supplier;
     shiftNo;
     workingDate;
     planUnpackingDate;
     actUnpackingDate;
     actUnpackingDateFinish;
     unpackingType;
-    unpackingStatus;
+    moduleStatus;
 
     constructor(
         injector: Injector,
@@ -50,13 +50,11 @@ export class UnpackingLotComponent extends AppComponentBase implements OnInit {
     }
     getDatas() {
         this._service.getAll(
-            this.unpackingNo,
             this.moduleNo,
+            this.devaningNo,
             this.renban,
-            this.suppilerNo,
-            this.shiftNo,
-            this.unpackingType,
-            this.unpackingStatus,
+            this.supplier,
+            this.moduleStatus,
             '',
             this.paginationParams.skipCount,
             this.paginationParams.pageSize
@@ -72,17 +70,14 @@ export class UnpackingLotComponent extends AppComponentBase implements OnInit {
         // this.loaderVisible();
         this._service
             .getUnpackingToExcel(
-                this.unpackingNo,
                 this.moduleNo,
+                this.devaningNo,
                 this.renban,
-                this.suppilerNo,
-                this.shiftNo,
-                this.workingDate,
-                this.planUnpackingDate,
+                this.supplier,
                 this.actUnpackingDate,
                 this.actUnpackingDateFinish,
-                this.unpackingType,
-                this.unpackingStatus,
+                this.planUnpackingDate,
+                this.moduleStatus,
             )
             .subscribe((result) => {
                 this._fileDownloadService.downloadTempFile(result);

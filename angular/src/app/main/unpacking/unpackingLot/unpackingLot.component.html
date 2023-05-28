@@ -9,32 +9,26 @@
             {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]">
             <ng-template pTemplate="header" class="header-p-table">
                 <tr>
-                    <th>Unpacking No</th>
                     <th>Module No</th>
+                    <th>Devaning No</th>
                     <th>Renban</th>
                     <th>Suppiler No</th>
-                    <th>Shift No</th>
-                    <th>Working Date</th>
                     <th>Plan Unpacking Date</th>
                     <th>Act Unpacking Date</th>
                     <th>Act Unpacking Date Finish</th>
-                    <th>Unpacking Type</th>
-                    <th>Unpacking Status</th>
+                    <th>Module Status</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rowdata class="body-p-table">
                 <tr>
-                    <td>{{ rowdata.unpackingNo }}</td>
                     <td>{{ rowdata.moduleNo }}</td>
+                    <td>{{ rowdata.devaningNo }}</td>
                     <td>{{ rowdata.renban }}</td>
-                    <td>{{ rowdata.suppilerNo }}</td>
-                    <td>{{ rowdata.shiftNo }}</td>
-                    <td>{{ rowdata.workingDate | date:'dd/MM/yy '}}</td>
+                    <td>{{ rowdata.supplier }}</td>
                     <td>{{ rowdata.planUnpackingDate | date:'dd/MM/yy '}}</td>
                     <td>{{ rowdata.actUnpackingDate | date:'dd/MM/yy HH:mm:ss' }}</td>
                     <td>{{ rowdata.actUnpackingDateFinish | date:'dd/MM/yy HH:mm:ss'}}</td>
-                    <td>{{ rowdata.unpackingType }}</td>
-                    <td>{{ rowdata.unpackingStatus }}</td>
+                    <td>{{ rowdata.moduleStatus }}</td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="paginatorleft">

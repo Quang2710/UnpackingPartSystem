@@ -13278,34 +13278,28 @@ export class UnpackingServiceProxy {
     }
 
     /**
-     * @param unpackingNo (optional) 
      * @param moduleNo (optional) 
+     * @param devaningNo (optional) 
      * @param renban (optional) 
-     * @param suppilerNo (optional) 
-     * @param shiftNo (optional) 
-     * @param unpackingType (optional) 
-     * @param unpackingStatus (optional) 
+     * @param supplier (optional) 
+     * @param moduleStatus (optional) 
      * @param sorting (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
      * @return Success
      */
-    getAll(unpackingNo: string | null | undefined, moduleNo: string | null | undefined, renban: string | null | undefined, suppilerNo: string | null | undefined, shiftNo: string | null | undefined, unpackingType: string | null | undefined, unpackingStatus: string | null | undefined, sorting: string | null | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PagedResultDtoOfUnpackingDto> {
+    getAll(moduleNo: string | null | undefined, devaningNo: string | null | undefined, renban: string | null | undefined, supplier: string | null | undefined, moduleStatus: string | null | undefined, sorting: string | null | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PagedResultDtoOfUnpackingDto> {
         let url_ = this.baseUrl + "/api/services/app/Unpacking/GetAll?";
-        if (unpackingNo !== undefined)
-            url_ += "UnpackingNo=" + encodeURIComponent("" + unpackingNo) + "&"; 
         if (moduleNo !== undefined)
             url_ += "ModuleNo=" + encodeURIComponent("" + moduleNo) + "&"; 
+        if (devaningNo !== undefined)
+            url_ += "DevaningNo=" + encodeURIComponent("" + devaningNo) + "&"; 
         if (renban !== undefined)
             url_ += "Renban=" + encodeURIComponent("" + renban) + "&"; 
-        if (suppilerNo !== undefined)
-            url_ += "SuppilerNo=" + encodeURIComponent("" + suppilerNo) + "&"; 
-        if (shiftNo !== undefined)
-            url_ += "ShiftNo=" + encodeURIComponent("" + shiftNo) + "&"; 
-        if (unpackingType !== undefined)
-            url_ += "UnpackingType=" + encodeURIComponent("" + unpackingType) + "&"; 
-        if (unpackingStatus !== undefined)
-            url_ += "UnpackingStatus=" + encodeURIComponent("" + unpackingStatus) + "&"; 
+        if (supplier !== undefined)
+            url_ += "Supplier=" + encodeURIComponent("" + supplier) + "&"; 
+        if (moduleStatus !== undefined)
+            url_ += "ModuleStatus=" + encodeURIComponent("" + moduleStatus) + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         if (skipCount === null)
