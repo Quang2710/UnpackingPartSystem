@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { DevaningContModuleServiceProxy } from '@shared/service-proxies/service-proxies';
-import * as $ from 'jquery';
+
 
 // $(document).ready(function () {
 //   $('.caseNo').hover(
