@@ -1,6 +1,5 @@
 .container {
     width: 100%;
-    height: 100vh;
     background-color: aliceblue;
 
     .title {
@@ -40,24 +39,19 @@
     }
 }
 
+
 .card {
+    position: relative;
     padding: 10px;
-}
-
-:host ::ng-deep {
-
-    .ui-paginator-bottom {
-        width: 100%;
-
-    }
-
-
-}
-
-.card {
 
     p-table {
-
+        ::ng-deep{
+            thead{
+                position: sticky;
+                top: 0;
+                z-index: 111;
+            }
+        }
         body .ui-widget {
             height: 50vw;
         }

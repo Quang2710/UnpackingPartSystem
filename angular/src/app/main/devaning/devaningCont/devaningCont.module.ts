@@ -19,7 +19,6 @@ import { DatePipe } from '@angular/common';
         AppCommonModule,
         TableModule,
         DevaningContRoutingModule,
-        //AppSharedModule,
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA

@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
     imports: [
         CommonModule,
         DevaningScreenRoutingModule,
-        //AppSharedModule,
     ]
 })
 export class DevaningScreenModule { }

@@ -15,7 +15,6 @@ import { TableModule } from 'primeng';
         TableModule,
         CommonModule,
         PcStoreRoutingModule,
-        //AppSharedModule,
     ]
 })
 export class PcStoreModule { }

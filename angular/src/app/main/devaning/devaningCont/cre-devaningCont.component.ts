@@ -35,7 +35,6 @@ export class CreateEditDvnContComponent extends AppComponentBase {
     }
     save(): void {
         this.saving = true;
-        //this.rowdata.isActive = (this._isActive == true) ? 'Y' : 'N'
         this._service.createOrEdit(this.rowdata)
             .pipe(finalize(() => this.saving = false))
             .subscribe(() => {

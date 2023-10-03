@@ -17,8 +17,8 @@ export class AppNavigationService {
 
     getMenu(): AppMenu {
         return new AppMenu('MainMenu', 'MainMenu', [
-            new AppMenuItem('Dashboard', 'Pages.Administration.Host.Dashboard', 'flaticon-line-graph', '/app/admin/hostDashboard'),
-            new AppMenuItem('Dashboard', 'Pages.Tenant.Dashboard', 'flaticon-line-graph', '/app/main/dashboard'),
+            new AppMenuItem('Dashboard', 'Pages.Administration.Host.Dashboard', 'flaticon-dashboard', '/app/admin/hostDashboard'),
+            new AppMenuItem('Dashboard', 'Pages.Tenant.Dashboard', 'flaticon-dashboard', '/app/main/dashboard'),
 
 
             new AppMenuItem('Master', '', 'flaticon-interface-8', '', [], [
@@ -27,19 +27,19 @@ export class AppNavigationService {
                 ]),
 
             ]),
-            new AppMenuItem('Devaning', '', 'flaticon-interface-8', '', [], [
-                new AppMenuItem('DvnContainer', '', 'flaticon-line-graph', '/app/main/devaning/devaningCont'),
-                new AppMenuItem('DvnScreen', '', 'flaticon-line-graph', '/screens/devaningScreen')
+            new AppMenuItem('Devaning', '', 'flaticon-truck', '', [], [
+                new AppMenuItem('DvnContainer', '', 'flaticon-squares', '/app/main/devaning/devaningCont'),
+                new AppMenuItem('DvnScreen', '', 'flaticon-pie-chart-1', '/screens/devaningScreen')
 
             ]),
-            new AppMenuItem('Unpacking', '', 'flaticon-interface-8', '', [], [
-                new AppMenuItem('UpkLot', '', 'flaticon-line-graph', '/app/main/unpacking/unpackingLot'),
-                new AppMenuItem('UpkScreen', '', 'flaticon-line-graph', '/screens/unpackingScreen')
+            new AppMenuItem('Unpacking', '', 'flaticon-cogwheel', '', [], [
+                new AppMenuItem('UpkLot', '', 'flaticon-grid-menu-v2', '/app/main/unpacking/unpackingLot'),
+                new AppMenuItem('UpkScreen', '', 'flaticon-list-3', '/screens/unpackingScreen')
 
             ]),
-            new AppMenuItem('Pc', '', 'flaticon-interface-8', '', [], [
-                new AppMenuItem('Pc Store', '', 'flaticon-line-graph', '/screens/pcstore'),
-                new AppMenuItem('Pc Home', '', 'flaticon-line-graph', '/screens/pchome')
+            new AppMenuItem('Pc', '', 'flaticon-home', '', [], [
+                new AppMenuItem('Pc Store', '', 'flaticon-home-1', '/screens/pcstore'),
+                new AppMenuItem('Pc Home', '', 'flaticon-home-2', '/screens/pchome')
 
             ]),
 

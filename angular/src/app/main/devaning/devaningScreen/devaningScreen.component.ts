@@ -1,19 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { DevaningContModuleServiceProxy } from '@shared/service-proxies/service-proxies';
-
-
-// $(document).ready(function () {
-//   $('.caseNo').hover(
-//     function () {
-//       $(this).text('FINISH');
-//     },
-//     function () {
-//       var originalValue = $(this).data('case');
-//       $(this).text(originalValue);
-//     }
-//   );
-// });
 @Component({
   selector: 'app-devaningScreen',
   templateUrl: './devaningScreen.component.html',
@@ -112,7 +99,6 @@ export class DevaningScreenComponent extends AppComponentBase implements OnInit 
           .subscribe(() => {
             this.notify.success(this.l('FINISH Successfully '));
             this.getDevaningPlan();
-            // this.getDataScreen();
           });
       }
     });
