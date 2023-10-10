@@ -19,6 +19,7 @@ export class AppNavigationService {
         return new AppMenu('MainMenu', 'MainMenu', [
             new AppMenuItem('Dashboard', 'Pages.Administration.Host.Dashboard', 'flaticon-dashboard', '/app/admin/hostDashboard'),
             new AppMenuItem('Dashboard', 'Pages.Tenant.Dashboard', 'flaticon-dashboard', '/app/main/dashboard'),
+            new AppMenuItem('Statistics', '', 'flaticon-graphic-2', '/app/main/statistics'),
 
 
             new AppMenuItem('Master', '', 'flaticon-interface-8', '', [], [
@@ -35,6 +36,11 @@ export class AppNavigationService {
             new AppMenuItem('Unpacking', '', 'flaticon-cogwheel', '', [], [
                 new AppMenuItem('UpkLot', '', 'flaticon-grid-menu-v2', '/app/main/unpacking/unpackingLot'),
                 new AppMenuItem('UpkScreen', '', 'flaticon-list-3', '/screens/unpackingScreen')
+
+            ]),
+            new AppMenuItem('Robing', '', 'flaticon-alert-1', '', [], [
+                // new AppMenuItem('UpkLot', '', 'flaticon-grid-menu-v2', '/app/main/unpacking/unpackingLot'),
+                // new AppMenuItem('UpkScreen', '', 'flaticon-list-3', '/screens/unpackingScreen')
 
             ]),
             new AppMenuItem('Pc', '', 'flaticon-home', '', [], [

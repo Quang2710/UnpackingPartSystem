@@ -13,7 +13,7 @@ import { forEach } from 'lodash';
 @Component({
     selector: 'app-devaningCont',
     templateUrl: './devaningCont.component.html',
-    styleUrls: ['./devaningCont.component.less']
+    styleUrls: ['./devaningCont.component.less'],
 })
 export class DevaningContComponent extends AppComponentBase implements OnInit {
     @ViewChild('paginator', { static: true }) paginator: Paginator;

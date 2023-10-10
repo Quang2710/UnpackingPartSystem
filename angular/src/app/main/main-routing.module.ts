@@ -15,6 +15,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
                     //     loadChildren: () => import('./master/workingpattern/dashborad-custome.module').then(m => m.DashBoradCustomeModule),
                     //  },
                     {
+                        path: 'statistics',
+                        loadChildren: () => import('./statistics/statistics.module').then(m => m.StatisticsModule),
+                    },
+                    {
                         path: 'master/workingpattern/workingtime',
                         loadChildren: () => import('./master/workingpattern/workingtime/workingtime.module').then(m => m.WorkingTimeModule),
                     },
