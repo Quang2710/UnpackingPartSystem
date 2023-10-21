@@ -1,3 +1,44 @@
-.container {
+@radius: 5px;
 
+.statistics-container {
+    width: 100%;
+    height: 93vh;
+    overflow: hidden;
+    background-color: white;
+    .statistics-pc {
+        padding: 5px 0 0 0 ;
+        height: 20%;
+        .statistics-pc-all{
+            padding: 0 20px 0 20px;
+            .pc{
+                width: calc((100% / 3) - 10px);
+                background-color: white;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                border-radius: @radius;
+            }
+        }
+    }
+    .statistics-chart-dvn-upk{
+        margin-top: 1%;
+        height: 50%;
+        .statistics-chart-all{
+            padding: 0 20px 0 20px;
+            .statistics-chart-content{
+                border-radius: @radius;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            }
+        }
+    }
+    .statistics-dvn-upk{
+        margin-top: 1%;
+        height: 15%;
+        .statistics-dvn-all{
+            padding: 0 20px 0 20px;
+            .group-statistics{
+                width: calc((100% / 4) - 5px);
+                border-radius: @radius;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            }
+        }
+    }
 }

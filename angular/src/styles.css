@@ -189,5 +189,10 @@ ngx-spinner .loading-text{
         width: 100%;
 
     }
+#kt_wrapper{
+    padding-top: 64px;
+}
 
-
+.kt-grid__item{
+    /* margin-top: -65px; */
+}

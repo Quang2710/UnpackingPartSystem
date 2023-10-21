@@ -71,7 +71,7 @@ import { AgFloatingFilterGridComponent } from './grid/ag-floating-filter-grid/ag
         PerfectScrollbarModule,
         CountoModule,
         AppBsModalModule,
-        AutoCompleteModule
+        AutoCompleteModule,
     ],
     declarations: [
         AgFloatingFilterGridComponent,
@@ -119,7 +119,7 @@ import { AgFloatingFilterGridComponent } from './grid/ag-floating-filter-grid/ag
         DateRangePickerInitialValueSetterDirective,
         DatePickerInitialValueSetterDirective,
         CustomizableDashboardComponent,
-        NgxChartsModule
+        NgxChartsModule,
     ],
     providers: [
         DateTimeService,
