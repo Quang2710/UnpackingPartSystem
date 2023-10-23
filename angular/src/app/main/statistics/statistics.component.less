@@ -11,10 +11,25 @@
         .statistics-pc-all{
             padding: 0 20px 0 20px;
             .pc{
+                transition: transform 0.3s;
                 width: calc((100% / 3) - 10px);
                 background-color: white;
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
                 border-radius: @radius;
+                .icon{
+                    width: 40%;
+                }
+                .total{
+                    width: 60%;
+                    div{
+                        h6,h3,p{
+                            color: black;
+                        }
+                    }
+                    .total-header{
+
+                    }
+                }
             }
         }
     }
@@ -40,5 +55,22 @@
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
             }
         }
+    }
+}
+
+.pc:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.total-value{
+    h3{
+        color: black;
+        font-weight: 700;
     }
 }

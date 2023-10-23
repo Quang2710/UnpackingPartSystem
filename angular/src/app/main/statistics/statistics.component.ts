@@ -13,24 +13,95 @@ import { Paginator } from 'primeng';
 export class StatisticsComponent extends AppComponentBase implements OnInit {
     @ViewChild('paginator', { static: true }) paginator: Paginator;
 
-    barChartData = [
+    // barChartData = [
+    //     {
+    //       name: 'Devaning',
+    //       value: 25,
+    //     },
+    //     {
+    //       name: 'Unpacking',
+    //       value: 50,
+    //     },
+    //     {
+    //       name: 'Pc Store',
+    //       value: 75,
+    //     },
+    //     {
+    //       name: 'Pc Home',
+    //       value: 55,
+    //     },
+    //     {
+    //       name: 'Robing',
+    //       value: 75,
+    //     },
+    //     {
+    //       name: 'Robing1',
+    //       value: 55,
+    //     },
+    //   ];
+
+    multi =  [
         {
-          name: 'Devaning',
-          value: 25,
+          "name": "Devaning",
+          "series": [
+            {
+              "name": "Plan",
+              "value": 30
+            },
+            {
+              "name": "Actual",
+              "value": 25
+            }
+          ]
         },
+
         {
-          name: 'Unpacking',
-          value: 50,
+          "name": "Unpacking",
+          "series": [
+            {
+              "name": "Plan",
+              "value": 50
+            },
+            {
+              "name": "Actual",
+              "value": 25
+            }
+          ]
         },
+
         {
-          name: 'Pc Store',
-          value: 75,
-        },
-        {
-          name: 'Pc Home',
-          value: 55,
-        },
+          "name": "Pc",
+          "series": [
+            {
+              "name": "Plan",
+              "value": 100
+            },
+            {
+              "name": "Actual",
+              "value": 10
+            }
+          ]
+        }
       ];
+
+
+      view: any[] = [,];
+
+      // options
+      showXAxis: boolean = true;
+      showYAxis: boolean = true;
+      gradient: boolean = true;
+      showLegend: boolean = true;
+      showXAxisLabel: boolean = true;
+      xAxisLabel: string = 'Actual';
+      showYAxisLabel: boolean = true;
+      yAxisLabel: string = 'Plan';
+      legendTitle: string = 'Time';
+
+      colorScheme = {
+        domain: ['#5AA454', '#C7B42C', '#AAAAAA'],
+      };
+
 
     constructor(
         injector: Injector,
