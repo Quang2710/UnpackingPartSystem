@@ -73,6 +73,7 @@ namespace tmss.Master.DevaningContModule
         //Delete
         
         public async Task Delete(EntityDto<long> input)
+
         {
             
             var result = await _repo.GetAll().FirstOrDefaultAsync(e => e.Id == input.Id);

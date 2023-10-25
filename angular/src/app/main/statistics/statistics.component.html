@@ -3,7 +3,7 @@
     <div class="statistics-pc ">
         <div
             class="statistics-pc-all w-100 h-100 d-flex justify-content-between align-items-center">
-            <div class="statistics-pc-store pc h-100 d-flex justify-content-between align-items-center">
+            <div class="statistics-pc-store pc h-100 d-flex justify-content-between align-items-center" (click)="openDvnContainer()">
                 <div class="statistics-content icon h-50">
                     <img src="/assets/common/images/container.png" class="icon" />
                 </div>
@@ -16,6 +16,9 @@
                     </div>
                     <div class="total-content">
                         <p>Total Part</p>
+                    </div>
+                    <div class="total-view">
+                        <u>View detail</u>
                     </div>
                 </div>
             </div>
@@ -49,6 +52,9 @@
                     <div class="total-content">
                         <p>Total Part</p>
                     </div>
+                    <div class="total-view">
+                        <u>View detail</u>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,7 +62,7 @@
     <div class="statistics-chart-dvn-upk">
         <div class="statistics-chart-all w-100 h-100">
             <div class="statistics-chart-content h-100">
-                <div class="statistics-chart">
+                <div class="statistics-chart mt-2">
                     <!-- <ngx-charts-bar-vertical
                     [view]="[700, 400]"
                     [results]="barChartData"

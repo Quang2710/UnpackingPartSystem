@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { GridParams, PaginationParamsModel } from '@app/shared/common/models/base.model';
 import { GridTableService } from '@app/shared/common/services/grid-table.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
@@ -107,6 +108,7 @@ export class StatisticsComponent extends AppComponentBase implements OnInit {
         injector: Injector,
         private _service: MstWptWorkingTimeServiceProxy,
         private gridTableService: GridTableService,
+        private router: Router
     ) {
         super(injector)
     }
@@ -114,6 +116,9 @@ export class StatisticsComponent extends AppComponentBase implements OnInit {
     ngOnInit() {
 
 
+    }
+    openDvnContainer(){
+        this.router.navigate(['/app/main/devaning/devaningCont']);
     }
 
 
