@@ -167,6 +167,31 @@
         }
     }
 }
+.upk-action{
+    .add-robing{
+        transition: transform 0.2s;
+        border-right: 1px solid gray;
+        background-color: rgb(242, 69, 69);
+        color: white;
+        cursor: pointer;
+    }
+    .upk-finish{
+        transition: transform 0.2s;
+        background-color: #4dca57;
+        color: white;
+        cursor: pointer;
+    }
+    .add-robing:hover{
+        background-color: rgb(249, 60, 60);
+        transform: scale(1.1);
+        color: white;
+    }
+    .upk-finish:hover{
+        background-color: #2a9532;
+        transform: scale(1.1);
+        color: white;
+    }
+}
 
 
 .container-unpacking,
@@ -191,6 +216,9 @@
 
 .FINISH {
     background-color: #76ff81 !important;
+}
+.ROBING {
+    background-color: #fe7d52 !important;
 }
 
 @keyframes changRed {

@@ -112,6 +112,15 @@ namespace tmss.Master.Unpacking
             string _sql = "Exec FINISH_MODULE @ModuleNo";
             await _getModulePlan.QueryAsync<LupContModule>(_sql, new { ModuleNo = module_no });
         }
+        public async Task FinishPart(long? id)
+        {
+            string sql = "UPDATE Part SET Status = 'FINISH' WHERE id = @Id";
+            await _upkscreen.ExecuteAsync(sql, new
+            {
+                Id = id
+            }); ;            
+
+        }
         public async Task<FileDto> GetUnpackingToExcel(UnpackingExportInput input)
         {
             var query = from o in _unpacking.GetAll()

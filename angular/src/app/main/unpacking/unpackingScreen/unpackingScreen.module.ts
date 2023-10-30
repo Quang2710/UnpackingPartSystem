@@ -5,9 +5,11 @@ import { UnpackingScreenComponent } from './unpackingScreen.component';
 import { UnpackingScreenRoutingModule } from './unpackingScreen-routing.module';
 import { AppCommonModule } from '@app/shared/common/app-common.module';
 import { DatePipe } from '@angular/common';
+import { AddRobingComponent } from './add-robing.component';
 
 @NgModule({
     declarations: [
+        AddRobingComponent,
         UnpackingScreenComponent,
     ],
     imports: [

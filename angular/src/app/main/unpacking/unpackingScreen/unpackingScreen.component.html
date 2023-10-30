@@ -24,6 +24,7 @@
             <th>Renban</th>
             <th>Suppiler</th>
             <th>Status</th>
+            <th>Action</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rowdata class="body-p-table">
@@ -33,6 +34,10 @@
             <td>{{ rowdata.renban }}</td>
             <td>{{ rowdata.supplier }}</td>
             <td>{{ rowdata.status }}</td>
+            <td class="d-flex upk-action justify-content-center">
+                <div class="add-robing w-50 h-100 d-flex justify-content-center align-items-center" (click)="addrobing(rowdata.id)">Robing</div>
+                <div class="upk-finish w-50 h-100 d-flex justify-content-center align-items-center" (click)="finishPart(rowdata.id)">Finish</div>
+            </td>
           </tr>
         </ng-template>
         <ng-template pTemplate="paginatorleft">
@@ -50,7 +55,7 @@
       <div class="backno-value">{{partNoCurrent}}</div>
     </div>
     <div class="backno backno-status">
-      <div class="backno-status-value" [ngClass]="checkStatusModule(moduleNoStatus.moduleStatus)">{{moduleNoStatus}}
+      <div class="backno-status-value" [ngClass]="checkStatusModule(moduleNoStatus)">{{moduleNoStatus}}
       </div>
     </div>
     <div class="backno backno-current">

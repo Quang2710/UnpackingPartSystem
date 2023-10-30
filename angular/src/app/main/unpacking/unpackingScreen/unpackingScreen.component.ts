@@ -5,6 +5,9 @@ import { GridTableService } from '@app/shared/common/services/grid-table.service
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { UnpackingServiceProxy } from '@shared/service-proxies/service-proxies';
 import { FileDownloadService } from '@shared/utils/file-download.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AddRobingComponent } from './add-robing.component';
+import { error } from 'console';
 
 @Component({
   selector: 'app-unpackingScreen',
@@ -36,12 +39,14 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
   partNoCurrent;
   moduleStatus;
 
+  bsModalRef: BsModalRef;
+
   constructor(
     injector: Injector,
     private _service: UnpackingServiceProxy,
     private gridTableService: GridTableService,
     private _fileDownloadService: FileDownloadService,
-    private datePipe: DatePipe
+    private modalService: BsModalService
   ) {
     super(injector)
   }
@@ -49,6 +54,8 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
   ngOnInit() {
     this.getModulePlan();
   }
+
+  // GetModule Unpacking
   getModulePlan() {
     this._service.getModulePlan()
       .subscribe((result) => {
@@ -60,17 +67,18 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
           this.moduleFinish = 0
         }
         this.moduleNoStatus = this.modulePlan[0].moduleStatus;
-        console.log('status', this.moduleNoStatus);
-
         this.getDatas();
       });
   }
+
+  // Get Part in Module Unpacking Current
   getDatas() {
     this._service.getPartInModule(this.moduleNoCurrent)
       .subscribe((result) => {
         this.rowdata = result;
-        this.partNoCurrent = this.rowdata.filter(item => item.status === 'START')[0].partNo;
-        console.log(this.rowdata);
+       //this.partNoCurrent = this.rowdata.filter(item => item.status === 'START')[0].partNo;
+        console.log('module current',this.moduleNoCurrent);
+        console.log('part',this.rowdata);
       });
 
   }
@@ -86,11 +94,15 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
       }
     });
   }
+
   getStatusBackgroundClass(status: string): string {
     if (status === 'START') {
       return 'START';
     } else if (status === 'FINISH') {
       return 'FINISH';
+    }
+    else if (status === 'ROBING'){
+        return 'ROBING';
     }
   }
   checkStatusModule(moduleStatus: string): string {
@@ -99,6 +111,28 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
     } else if (moduleStatus === 'DELAY') {
       return 'DELAY';
     }
+  }
+  addrobing(id){
+    this.bsModalRef = this.modalService.show(AddRobingComponent,{
+        initialState:{
+            id: id
+        }
+    });
+  }
+  finishPart(id){
+
+    this.message.confirm(this.l('Are You Sure To Finish Part'), 'FINISH PART', (isConfirmed) => {
+        if (isConfirmed) {
+            this._service.finishPart(id).subscribe(_=>{
+                this.notify.success(this.l('Finish success'));
+                this.getModulePlan();
+                console.log('finish part',id);
+            },(error)=>{
+                this.notify.error('Finish Error',error)
+            })
+        }
+
+    });
   }
 
 }

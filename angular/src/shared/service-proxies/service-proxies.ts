@@ -13520,6 +13520,56 @@ export class UnpackingServiceProxy {
     }
 
     /**
+     * @param id (optional) 
+     * @return Success
+     */
+    finishPart(id: number | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Unpacking/FinishPart?";
+        if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processFinishPart(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processFinishPart(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processFinishPart(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
      * @param moduleNo (optional) 
      * @param devaningNo (optional) 
      * @param renban (optional) 
@@ -27747,13 +27797,13 @@ export interface IPagedResultDtoOfUnpackingDto {
 }
 
 export class PartInModuleDto implements IPartInModuleDto {
+    id!: number;
     moduleNo!: string | undefined;
     partNo!: string | undefined;
     partName!: string | undefined;
     renban!: string | undefined;
     supplier!: string | undefined;
     status!: string | undefined;
-    id!: number | undefined;
 
     constructor(data?: IPartInModuleDto) {
         if (data) {
@@ -27766,13 +27816,13 @@ export class PartInModuleDto implements IPartInModuleDto {
 
     init(_data?: any) {
         if (_data) {
+            this.id = _data["id"];
             this.moduleNo = _data["moduleNo"];
             this.partNo = _data["partNo"];
             this.partName = _data["partName"];
             this.renban = _data["renban"];
             this.supplier = _data["supplier"];
             this.status = _data["status"];
-            this.id = _data["id"];
         }
     }
 
@@ -27785,25 +27835,25 @@ export class PartInModuleDto implements IPartInModuleDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
         data["moduleNo"] = this.moduleNo;
         data["partNo"] = this.partNo;
         data["partName"] = this.partName;
         data["renban"] = this.renban;
         data["supplier"] = this.supplier;
         data["status"] = this.status;
-        data["id"] = this.id;
         return data; 
     }
 }
 
 export interface IPartInModuleDto {
+    id: number;
     moduleNo: string | undefined;
     partNo: string | undefined;
     partName: string | undefined;
     renban: string | undefined;
     supplier: string | undefined;
     status: string | undefined;
-    id: number | undefined;
 }
 
 export class ModuleUpkPlanDto implements IModuleUpkPlanDto {

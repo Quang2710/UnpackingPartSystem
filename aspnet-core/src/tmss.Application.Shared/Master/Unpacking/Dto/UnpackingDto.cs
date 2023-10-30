@@ -23,6 +23,7 @@ namespace tmss.Master.Unpacking.Dto
     }
     public class PartInModuleDto : Entity<long?>
     {
+        public long Id {get; set;}
         public string ModuleNo { get; set; }
         public string PartNo { get; set; }
 
