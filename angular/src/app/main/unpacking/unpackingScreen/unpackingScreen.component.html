@@ -35,8 +35,8 @@
             <td>{{ rowdata.supplier }}</td>
             <td>{{ rowdata.status }}</td>
             <td class="d-flex upk-action justify-content-center">
-                <div class="add-robing w-50 h-100 d-flex justify-content-center align-items-center" (click)="addrobing(rowdata.id)">Robing</div>
-                <div class="upk-finish w-50 h-100 d-flex justify-content-center align-items-center" (click)="finishPart(rowdata.id)">Finish</div>
+                <div class="add-robing w-50 h-100 d-flex justify-content-center align-items-center" (click)="addrobing(rowdata)">Robing</div>
+                <div class="upk-finish w-50 h-100 d-flex justify-content-center align-items-center" (click)="finishPart(rowdata)">Finish</div>
             </td>
           </tr>
         </ng-template>

@@ -26,10 +26,14 @@ export class AddRobingComponent extends AppComponentBase {
     ) {
         super(injector);
     }
-    id: number;
+    partDetail;
+    partName: string;
+    supplier: string;
 
     ngOnInit() {
-        console.log('id',this.id)
+        console.log('partDetail',this.partDetail)
+        this.partName = this.partDetail.partName
+        this.supplier = this.partDetail.supplier
      }
 
 
@@ -47,6 +51,13 @@ export class AddRobingComponent extends AppComponentBase {
     closeModal(): void {
         this.bsModalRef.hide();
     }
-
+    setTypeRobing(type){
+        var typeRobing = document.querySelectorAll('.rb-type')
+        var selectionElement = document.querySelector('.' + type)
+        typeRobing.forEach(function(element) {
+            element.classList.remove('active')
+        });
+        selectionElement.classList.add('active')
+    }
 
 }

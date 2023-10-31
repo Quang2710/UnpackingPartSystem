@@ -39,3 +39,25 @@
 label{
     font-weight: 700;
 }
+.robing-type{
+    height: 100px;
+    .rb-type{
+        width: calc(99% / 2);
+        flex-direction: column;
+        //border: 1px solid gray;
+        cursor: pointer;
+        .fail-title{
+            color: gray;
+            p{
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+.active{
+    border: 1px solid rgb(160, 160, 160);
+    border-radius: 5px;
+    .fail-title{
+        color: rgb(25, 112, 224) !important;
+    }
+}

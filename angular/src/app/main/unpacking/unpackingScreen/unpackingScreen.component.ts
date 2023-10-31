@@ -112,10 +112,10 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
       return 'DELAY';
     }
   }
-  addrobing(id){
+  addrobing(data){
     this.bsModalRef = this.modalService.show(AddRobingComponent,{
         initialState:{
-            id: id
+            partDetail: data
         }
     });
   }
