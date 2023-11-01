@@ -39,6 +39,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
                         path: 'unpacking/unpackingLot',
                         loadChildren: () => import('./unpacking/unpackingScreen/unpackingScreen.module').then(m => m.UnpackingScreenModule),
                     },
+
+                    {
+                        path: 'robing',
+                        loadChildren: () => import('./robing/robing.module').then(m => m.RobingModule),
+                    },
                     {
                         path: 'pc/pcstore',
                         loadChildren: () => import('./pc/pcstore/pcstore.module').then(m => m.PcStoreModule),

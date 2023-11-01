@@ -38,11 +38,7 @@ export class AppNavigationService {
                 new AppMenuItem('UpkScreen', '', 'flaticon-list-3', '/screens/unpackingScreen')
 
             ]),
-            new AppMenuItem('Robing', '', 'flaticon-alert-1', '', [], [
-                // new AppMenuItem('UpkLot', '', 'flaticon-grid-menu-v2', '/app/main/unpacking/unpackingLot'),
-                // new AppMenuItem('UpkScreen', '', 'flaticon-list-3', '/screens/unpackingScreen')
-
-            ]),
+            new AppMenuItem('Robing', '', 'flaticon-dashboard', '/app/main/robing'),
             new AppMenuItem('Pc', '', 'flaticon-home', '', [], [
                 new AppMenuItem('Pc Store', '', 'flaticon-home-1', '/screens/pcstore'),
                 new AppMenuItem('Pc Home', '', 'flaticon-home-2', '/screens/pchome')

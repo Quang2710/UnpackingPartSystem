@@ -119,14 +119,13 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
         }
     });
   }
-  finishPart(id){
-
+  finishPart(record){
     this.message.confirm(this.l('Are You Sure To Finish Part'), 'FINISH PART', (isConfirmed) => {
         if (isConfirmed) {
-            this._service.finishPart(id).subscribe(_=>{
+            this._service.finishPart(record.id).subscribe(_=>{
                 this.notify.success(this.l('Finish success'));
                 this.getModulePlan();
-                console.log('finish part',id);
+                console.log('finish part',record.id);
             },(error)=>{
                 this.notify.error('Finish Error',error)
             })

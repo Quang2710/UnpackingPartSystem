@@ -117,8 +117,13 @@ export class StatisticsComponent extends AppComponentBase implements OnInit {
 
 
     }
-    openDvnContainer(){
-        this.router.navigate(['/app/main/devaning/devaningCont']);
+    openRoute(route){
+        if(route == 'dvnContainer'){
+            this.router.navigate(['/app/main/devaning/devaningCont']);
+        }
+        else if(route == 'robing'){
+            this.router.navigate(['/app/main/robing']);
+        }
     }
 
 

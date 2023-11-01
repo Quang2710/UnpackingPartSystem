@@ -37,7 +37,7 @@ export class AddRobingComponent extends AppComponentBase {
      }
 
 
-    save(): void {
+     commit(): void {
         // this.saving = true;
         // this._service.createOrEdit(this.rowdata)
         //     .pipe(finalize(() => this.saving = false))

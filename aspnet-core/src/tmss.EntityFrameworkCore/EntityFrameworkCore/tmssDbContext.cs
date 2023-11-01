@@ -48,6 +48,8 @@ namespace tmss.EntityFrameworkCore
         public virtual DbSet<UnPackingPart> UnPackingParts { get; set; }
         public virtual DbSet<Part> Parts { get; set; }
 
+        public virtual DbSet<Robings> Robingss { get; set; }
+
         public virtual DbSet<PcStore> PcStores { get; set; }
 
         public virtual DbSet<PcHome> PcHomes { get; set; }
