@@ -57,6 +57,7 @@ import { ZeroTemplateHttpConfigurationService } from './zero-template-http-confi
         ApiServiceProxies.MstWptWorkingTimeServiceProxy,
         ApiServiceProxies.DevaningContModuleServiceProxy,
         ApiServiceProxies.UnpackingServiceProxy,
+        ApiServiceProxies.RobingServiceProxy,
         ApiServiceProxies.PcStoreServiceProxy,
         ApiServiceProxies.PcHomeServiceProxy,
 

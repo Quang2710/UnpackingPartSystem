@@ -38,20 +38,28 @@
                         border: 1px solid #55b1e2;
                         outline: rgb(161, 161, 161);
                     }
-
-                    .btn-search {
+                    .input-search-btn{
                         position: absolute;
                         border: 0;
                         border-radius: 5px;
                         background-color: #646c9a;
                         width: 30px;
                         height: 30px;
-                        right: 15px;
                         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-
+                        transition: transform 0.1s;
                         i {
                             color: white;
                         }
+                    }
+                    .btn-search {
+                        right: 55px;
+
+                    }
+                    .btn-clear {
+                        right: 15px;
+                    }
+                    .input-search-btn:hover{
+                        transform: scale(1.1);
                     }
                 }
 
@@ -140,6 +148,7 @@
                     height: 40px;
                     border-radius: @radius;
                     box-shadow: @shadow;
+                    background-color: rgba(208, 208, 208, 0.75);
 
                     .header-title {
                         width: calc(100%/4);
@@ -308,3 +317,21 @@
 .selected-background {
     background-color: #2e9cd8;
 }
+.icon-slide{
+    animation: slideUpDown 1s;
+}
+
+@keyframes slideUpDown {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+    50% {
+        transform: translateY(10px);
+      }
+    100% {
+      transform: translateY(0);
+    }
+  }

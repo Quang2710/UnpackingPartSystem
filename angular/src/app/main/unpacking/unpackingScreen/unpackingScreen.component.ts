@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injectable, Injector, OnInit } from '@angular/core';
 import { PaginationParamsModel } from '@app/shared/common/models/base.model';
 import { GridTableService } from '@app/shared/common/services/grid-table.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
@@ -14,6 +14,9 @@ import { error } from 'console';
   templateUrl: './unpackingScreen.component.html',
   styleUrls: ['./unpackingScreen.component.less']
 })
+@Injectable({
+    providedIn: 'root'
+  })
 export class UnpackingScreenComponent extends AppComponentBase implements OnInit {
 
   rowdata;
@@ -101,8 +104,8 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
     } else if (status === 'FINISH') {
       return 'FINISH';
     }
-    else if (status === 'ROBING'){
-        return 'ROBING';
+    else if (status === 'ROBBING'){
+        return 'ROBBING';
     }
   }
   checkStatusModule(moduleStatus: string): string {

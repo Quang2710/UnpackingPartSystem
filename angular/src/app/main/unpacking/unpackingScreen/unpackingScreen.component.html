@@ -37,7 +37,7 @@
             <td class="d-flex upk-action justify-content-center">
                 <div class="add-robing w-50 h-100 d-flex justify-content-center align-items-center" (click)="addrobing(rowdata)"  *ngIf="rowdata.status === 'READY' || rowdata.status === 'START'">Robing</div>
                 <div class="upk-finish w-50 h-100 d-flex justify-content-center align-items-center" (click)="finishPart(rowdata)" *ngIf="rowdata.status === 'READY' || rowdata.status === 'START'">Finish</div>
-                <div class="upk-finish w-100 h-100 d-flex justify-content-center align-items-center" *ngIf="rowdata.status === 'FINISH'">DONE</div>
+                <div class="upk-done w-100 h-100 d-flex justify-content-center align-items-center" *ngIf="rowdata.status === 'FINISH'|| rowdata.status === 'ROBBING'">DONE</div>
             </td>
           </tr>
         </ng-template>

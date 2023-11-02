@@ -23,15 +23,16 @@ namespace tmss.Master.Robing
 
             _robing = robing;
             _robingScreen = robingScreen;
-        }     
-     
+        }
 
-        public async Task<List<RobingDto>> GetPartInModule(string module_no)
+
+        public async Task<List<RobingDto>> GetAllRobing(string partNo)
         {
-            string _sql = "Exec GET_PART_IN_MODULE @ModuleNo";
-            IEnumerable<RobingDto> _result = await _robingScreen.QueryAsync<RobingDto>(_sql, new { ModuleNo = module_no });
-            return _result.ToList();
-
+            var a = await _robingScreen.QueryAsync<RobingDto>(@"select * from Robing where (ISNULL(@partNo, '') = '' OR PartNo LIKE CONCAT('%', @partNo, '%'))", new
+            {
+                partNo = partNo
+            });
+            return a.ToList();
         }
     }
     }

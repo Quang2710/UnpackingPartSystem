@@ -20,4 +20,18 @@ namespace tmss.Master.Unpacking.Dto
 
         public string ModuleStatus { get; set; }
     }
+    public class AddRoobingInput
+    {
+        public long Id { get; set; }
+        public string PartNo { get; set; }
+
+        public string PartName { get; set; }
+
+        public string Supplier { get; set; }
+
+        public string Type { get; set; }
+
+        public string Description { get; set; }
+
+    }
 }

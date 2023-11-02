@@ -7,16 +7,16 @@
             <div class="col-md-12 d-flex justify-content-between">
                 <div class="col-md-6 form-group pl-0 pr-1">
                     <label class="title">Part Name</label>
-                    <input type="text" class="form-control input-text" name="devaningNo" [(ngModel)]="partName" readonly/>
+                    <input type="text" class="form-control input-text" name="partName" [(ngModel)]="partName" readonly/>
                 </div>
                 <div class="col-md-6 form-group pr-0 pl-1">
                     <label class="title">Supplier</label>
-                    <input type="text" class="form-control input-text" name="devaningNo"  [(ngModel)]="supplier" readonly/>
+                    <input type="text" class="form-control input-text" name="supplier"  [(ngModel)]="supplier" readonly/>
                 </div>
             </div>
             <div class="col-md-12 form-group mt-2">
                 <label class="title">Description</label>
-                 <input type="text" class="form-control input-text" name="devaningNo" placeholder="Type your robing part" />
+                 <input type="text" class="form-control input-text" name="description" placeholder="Type your robing part" [(ngModel)]="description"/>
             </div>
             <div class="col-md-12 form-group mt-2">
                 <label class="title">Choose type Robing</label>
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="modal-footer-action">
-            <button type="button" class="btn btn-success" (click)=" commit()">Commit</button>
+            <button type="button" class="btn btn-success" [disabled]="disabled" (click)=" commit()">Commit</button>
             <button type="button" class="btn btn-primary" (click)=" closeModal()">Cancel</button>
         </div>
     </div>

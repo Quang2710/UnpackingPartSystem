@@ -121,6 +121,20 @@ namespace tmss.Master.Unpacking
             }); ;            
 
         }
+        public async Task AddPartToRobbing(long Id, string PartNo,string PartName, string Supplier , string Type , string Description)
+        {
+            string _sql = "Exec ADD_PART_TO_ROBBING @p_id ,@p_partNo ,@p_partName,@p_supplier ,@p_type ,@p_description";
+            await _getModulePlan.QueryAsync<LupContModule>(_sql, new 
+            {
+                p_id = Id,
+                p_partNo = PartNo,
+                p_partName = PartName,
+                p_supplier = Supplier,
+                p_type = Type,
+                p_description = Description,
+            });
+        }
+
         public async Task<FileDto> GetUnpackingToExcel(UnpackingExportInput input)
         {
             var query = from o in _unpacking.GetAll()

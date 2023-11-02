@@ -38,7 +38,7 @@ export class AppNavigationService {
                 new AppMenuItem('UpkScreen', '', 'flaticon-list-3', '/screens/unpackingScreen')
 
             ]),
-            new AppMenuItem('Robing', '', 'flaticon-dashboard', '/app/main/robing'),
+            new AppMenuItem('Robbing', '', 'flaticon-dashboard', '/app/main/robing'),
             new AppMenuItem('Pc', '', 'flaticon-home', '', [], [
                 new AppMenuItem('Pc Store', '', 'flaticon-home-1', '/screens/pcstore'),
                 new AppMenuItem('Pc Home', '', 'flaticon-home-2', '/screens/pchome')

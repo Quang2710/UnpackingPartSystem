@@ -22,5 +22,7 @@ namespace tmss.Master.Robing.Dto
 
         public virtual string Description { get; set; }
 
+        public virtual DateTime CreationTime { get; set; }
+
     }
 }

@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Inject, Injector, OnInit, Output, ViewChild } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
-import { CreateOrEditDevaningContModuleDto, DevaningContModuleServiceProxy } from '@shared/service-proxies/service-proxies';
+import { CreateOrEditDevaningContModuleDto, DevaningContModuleServiceProxy, UnpackingServiceProxy } from '@shared/service-proxies/service-proxies';
+import { error } from 'console';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { finalize } from 'rxjs/operators';
+import { UnpackingScreenComponent } from './unpackingScreen.component';
 
 
 @Component({
@@ -11,6 +13,7 @@ import { finalize } from 'rxjs/operators';
     styleUrls: ['./add-robing.component.less']
 })
 export class AddRobingComponent extends AppComponentBase {
+
     @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
     @Output() modalClose: EventEmitter<any> = new EventEmitter<any>();
 
@@ -22,13 +25,18 @@ export class AddRobingComponent extends AppComponentBase {
     constructor(
         public bsModalRef: BsModalRef,
         private injector: Injector,
-        private _service: DevaningContModuleServiceProxy,
+        private _service: UnpackingServiceProxy,
+        private unpackingScreen: UnpackingScreenComponent
     ) {
         super(injector);
     }
     partDetail;
     partName: string;
     supplier: string;
+    type: string;
+    description: string;
+
+    disabled: boolean = true;
 
     ngOnInit() {
         console.log('partDetail',this.partDetail)
@@ -38,15 +46,21 @@ export class AddRobingComponent extends AppComponentBase {
 
 
      commit(): void {
-        // this.saving = true;
-        // this._service.createOrEdit(this.rowdata)
-        //     .pipe(finalize(() => this.saving = false))
-        //     .subscribe(() => {
-        //         this.notify.info(this.l('Saved Successfully'));
-        //         this.bsModalRef.hide();
-        //         this.modalSave.emit(this.rowdata);
-        //     });
-        // this.saving = false;
+        this._service.addPartToRobbing(
+            this.partDetail.id,
+            this.partDetail.partNo,
+            this.partDetail.partName,
+            this.partDetail.supplier,
+            this.type,
+            this.description
+            )
+        .subscribe(()=>{
+            this.notify.success('Add Robbing success')
+            this.closeModal()
+            this.unpackingScreen.getModulePlan();
+        },(error)=>{
+            this.notify.error('Add Robbing Error',error)
+        })
     }
     closeModal(): void {
         this.bsModalRef.hide();
@@ -58,6 +72,8 @@ export class AddRobingComponent extends AppComponentBase {
             element.classList.remove('active')
         });
         selectionElement.classList.add('active')
+        this.type = type
+        this.disabled = false;
     }
 
 }
