@@ -36,7 +36,7 @@
                     <div class="statistic statistic-today h-100 d-flex justify-content-center align-items-center">
                         <p>Total robbing</p>
                         <h3>{{totalRobing || 0}}</h3>
-                        <span> <i class="fas fa-vr-cardboard"></i> +8.51%</span>
+                        <span> <i class="fas fa-vr-cardboard"></i> +{{totalRobing - robingToday}}</span>
                     </div>
                 </div>
                 <div class="header-help h-100 d-flex justify-content-center">
@@ -59,7 +59,7 @@
                         [ngClass]="{'selected-background': selectedDiv === item}">
                         <div class="body-content">{{item.partNo}}</div>
                         <div class="body-content">{{item.partName}}</div>
-                        <div class="body-content">{{item.suppiler}}</div>
+                        <div class="body-content">{{item.supplier}}</div>
                         <div class="body-content">{{item.type}}</div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="detail-content detail-action d-flex justify-content-center align-items-center">
-                <button class="request-give-back">Request Give Back</button>
+                <button class="request-give-back" (click)="requestGiveBack()">Request Give Back</button>
             </div>
         </div>
     </div>

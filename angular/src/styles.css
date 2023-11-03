@@ -160,8 +160,9 @@ ngx-spinner .loading-text{
 }
 .ui-table-wrapper {
     max-height: 500px;
-    height: 500px;
+    height: 455px;
     overflow-y: auto;
+
 }
 
 .ui-table-wrapper::-webkit-scrollbar-track {
@@ -187,7 +188,7 @@ ngx-spinner .loading-text{
 
     .ui-paginator-bottom {
         width: 100%;
-
+        border-radius: 10px;
     }
 #kt_wrapper{
     padding-top: 64px;

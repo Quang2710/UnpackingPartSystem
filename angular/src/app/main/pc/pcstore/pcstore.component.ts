@@ -19,7 +19,6 @@ export class PcStoreComponent extends AppComponentBase implements OnInit {
     sorting: '',
     totalPage: 1,
   };
-
   rowdata;
   partNo;
   partName;

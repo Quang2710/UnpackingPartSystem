@@ -1,19 +1,19 @@
 <div class="container-unpacking">
-  <div class="unpacking-header">
-    <div class="upk-plan">
-      <div class="plan total-actual">{{moduleFinish}} / {{moduleActual}}</div>
+    <div class="unpacking-header">
+        <div class="upk-plan">
+            <div class="plan total-actual">{{moduleFinish}} / {{moduleActual}}</div>
+        </div>
+        <div class="upk-current">
+            <div class="current module-current">
+                <div class="module-current-value">{{moduleNoCurrent}}</div>
+            </div>
+            <div class="current module-finish">
+                <div class="button-finish" (click)=" finishUpkModule(moduleNoCurrent)">FINISH</div>
+            </div>
+        </div>
     </div>
-    <div class="upk-current">
-      <div class="current module-current">
-        <div class="module-current-value">{{moduleNoCurrent}}</div>
-      </div>
-      <div class="current module-finish">
-        <div class="button-finish" (click)=" finishUpkModule(moduleNoCurrent)">FINISH</div>
-      </div>
-    </div>
-  </div>
-  <div class="unpacking-detail">
-    <div class="card">
+    <div class="unpacking-detail">
+        <!-- <div class="card">
       <p-table [value]="rowdata" [tableStyle]="{ 'min-width': '100%' }" [paginator]="false" [rows]="5"
         [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of
           {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]">
@@ -48,19 +48,50 @@
           <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
         </ng-template>
       </p-table>
+    </div> -->
+        <div class="unpacking-table w-100 h-100">
+            <div class="table-header w-100 d-flex">
+                <div class="header-title">Part No</div>
+                <div class="header-title">Part Name</div>
+                <div class="header-title">Renban</div>
+                <div class="header-title">Suppiler</div>
+                <div class="header-title">Status</div>
+                <div class="header-title">Action</div>
+            </div>
+            <div class="table-body w-100 mt-2">
+                <div class="list-item w-100 d-flex" *ngFor="let item of rowdata;let i = index"
+                    (click)="onchangeSelection(item,i)" [ngClass]="{'selected-background': selectedDiv === item}"
+                    [ngClass]="getStatusBackgroundClass(item.status)">
+                    <div class="body-content">{{item.partNo}}</div>
+                    <div class="body-content">{{item.partName}}</div>
+                    <div class="body-content">{{item.renban}}</div>
+                    <div class="body-content">{{item.supplier}}</div>
+                    <div class="body-content">{{item.status}}</div>
+                    <div class="body-content d-flex upk-action justify-content-center">
+                        <div class="add-robing w-50 h-100 d-flex justify-content-center align-items-center"
+                            (click)="addrobing(item)" *ngIf="item.status === 'READY' || item.status === 'START'">Robing
+                        </div>
+                        <div class="upk-finish w-50 h-100 d-flex justify-content-center align-items-center"
+                            (click)="finishPart(item)" *ngIf="item.status === 'READY' || item.status === 'START'">Finish
+                        </div>
+                        <div class="upk-done w-100 h-100 d-flex justify-content-center align-items-center"
+                            *ngIf="item.status === 'FINISH'|| item.status === 'ROBBING'">DONE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="unpacking-footer">
-    <div class="backno backno-current">
-      <div class="backno-name">Part No</div>
-      <div class="backno-value">{{partNoCurrent}}</div>
+    <div class="unpacking-footer">
+        <div class="backno backno-current">
+            <div class="backno-name">Part No</div>
+            <div class="backno-value">{{partNoCurrent}}</div>
+        </div>
+        <div class="backno backno-status">
+            <div class="backno-status-value" [ngClass]="checkStatusModule(moduleNoStatus)">{{moduleNoStatus}}
+            </div>
+        </div>
+        <div class="backno backno-current">
+            <div class="abc">L1-ABC123</div>
+        </div>
     </div>
-    <div class="backno backno-status">
-      <div class="backno-status-value" [ngClass]="checkStatusModule(moduleNoStatus)">{{moduleNoStatus}}
-      </div>
-    </div>
-    <div class="backno backno-current">
-      <div class="abc">L1-ABC123</div>
-    </div>
-  </div>
 </div>

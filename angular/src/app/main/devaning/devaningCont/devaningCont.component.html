@@ -3,14 +3,12 @@
         <h1>DEVANING CONTAINER</h1>
     </div>
     <div class="header-search col-12">
-        <div class="input-search col-4">
-            <label for="devaningNo" class="form-control col-5">Devaning No</label>
-            <input [(ngModel)]="devaningNo" name="devaningNo" class="form-control col-7" type="text"
+        <div class="input-search col-3">
+            <input [(ngModel)]="devaningNo" name="devaningNo" class="form-control col-12" type="text" placeholder="Devaning No"
                 (keyup.enter)="getDatas()" />
         </div>
-        <div class="input-search col-4">
-            <label for="status" class="form-control col-5">Status</label>
-            <input [(ngModel)]="devaningStatus" name="devaningStatus" class="form-control col-7" type="text"
+        <div class="input-search col-3">
+            <input [(ngModel)]="devaningStatus" name="devaningStatus" class="form-control col-12" type="text" placeholder="Status"
                 (keyup.enter)="getDatas()" />
         </div>
         <div class="btn-search ">

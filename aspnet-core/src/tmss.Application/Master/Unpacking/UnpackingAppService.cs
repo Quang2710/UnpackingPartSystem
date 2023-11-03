@@ -70,6 +70,7 @@ namespace tmss.Master.Unpacking
         {
             var querry = from LupContModule in _unpacking.GetAll().AsNoTracking()
                          .Where(e => string.IsNullOrWhiteSpace(input.ModuleNo) || e.ModuleNo.Contains(input.ModuleNo))
+                          .Where(e => string.IsNullOrWhiteSpace(input.ModuleStatus) || e.ModuleStatus.Contains(input.ModuleStatus))
                          select new UnpackingDto
                          {
                              Id = LupContModule.Id,

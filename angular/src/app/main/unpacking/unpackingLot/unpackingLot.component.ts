@@ -3,7 +3,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { PaginationParamsModel } from '@app/shared/common/models/base.model';
 import { GridTableService } from '@app/shared/common/services/grid-table.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
-import { UnpackingServiceProxy } from '@shared/service-proxies/service-proxies';
+import { UnpackingDto, UnpackingServiceProxy } from '@shared/service-proxies/service-proxies';
 import { FileDownloadService } from '@shared/utils/file-download.service';
 
 @Component({
@@ -13,6 +13,7 @@ import { FileDownloadService } from '@shared/utils/file-download.service';
 })
 export class UnpackingLotComponent extends AppComponentBase implements OnInit {
 
+    selectedRowdata: UnpackingDto = new UnpackingDto();
     rowdata: any[] = [];
     paginationParams: PaginationParamsModel = {
         pageNum: 1,
@@ -66,6 +67,12 @@ export class UnpackingLotComponent extends AppComponentBase implements OnInit {
 
     }
 
+    clearTextSearch() {
+        this.moduleNo = '';
+        this.moduleStatus = '';
+        this.getDatas();
+
+    }
     exportToExcel(): void {
         // this.loaderVisible();
         this._service
@@ -84,4 +91,16 @@ export class UnpackingLotComponent extends AppComponentBase implements OnInit {
                 //this.loaderHidden();
             });
     }
+    onRowSelect(event) {
+        const devaningNo = event.data.devaningNo;
+        console.log('Selected Unpacking No: ', this.selectedRowdata);
+    }
+    getStatusBackgroundClass(status: string): string {
+        if (status === 'UPK') {
+            return 'UPK';
+        } else if (status === 'FINISH') {
+            return 'FINISH';
+        }
+    }
+
 }

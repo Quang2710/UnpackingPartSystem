@@ -29,6 +29,7 @@ export class CreateEditDvnContComponent extends AppComponentBase {
 
     ngOnInit() { }
 
+
     ngAfterViewInit() {
         const modalElement = document.querySelector('.modal-dialog');
         modalElement.classList.add('.modal-lg')

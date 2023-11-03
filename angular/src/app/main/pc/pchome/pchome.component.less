@@ -1,3 +1,6 @@
+@radius: 5px;
+@shadow : rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
 .pcstore-container {
     width: 100%;
     height: 100vh;
@@ -98,57 +101,59 @@
     align-items: center;
 }
 
-.card {
-    height: 100%;
-    overflow-y: auto;
-    position: relative;
+.pcstore-table {
+    .table-header {
+        height: 40px;
+        border-radius: @radius;
+        box-shadow: @shadow;
+        background-color: rgba(208, 208, 208, 0.75);
 
-    p-table {
-        ::ng-deep{
-            thead{
-                position: sticky;
-                top: 0;
-                z-index: 1;
-            }
+        .header-title {
+            width: calc(100%/2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #646c9a;
+            font-weight: 900;
+            border-right: 1px solid #efefef;
         }
-        .header-p-table {
-            margin-bottom: 10px;
-        }
 
-        tr {
-
-            th {
-                background-color: rgb(68, 143, 255);
-            }
-
-            td {
-                font-weight: 500;
-            }
+        .header-title:last-child {
+            border-right: 0;
         }
     }
 
-}
+    .table-body {
+        background-color: white;
+        height: 90%;
+        border-radius: @radius;
+        box-shadow: @shadow;
+        overflow-y: auto;
 
-.card::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-	border-radius: 10px;
-}
 
-.card::-webkit-scrollbar
-{
-	width: 6px;
-	background-color: #F5F5F5;
-}
 
-.card::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	background-image: -webkit-gradient(linear,
-									   left bottom,
-									   left top,
-									   color-stop(0.44, rgb(122,153,217)),
-									   color-stop(0.72, rgb(73,125,189)),
-									   color-stop(0.86, rgb(28,58,148)));
+        .list-item {
+            height: 40px;
+            border-bottom: 1px solid #efefef;
+
+            .body-content {
+                width: calc(100%/2);
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: black;
+                border-right: 1px solid #efefef;
+            }
+        }
+
+        .list-item:hover {
+            background-color: #55b1e2;
+            color: white;
+            cursor: pointer;
+        }
+    }
+    .table-body::-webkit-scrollbar {
+        display: none;
+    }
 }

@@ -16,6 +16,24 @@
         }
     }
 
+    .header-search {
+        display: flex;
+        margin-bottom: 10px;
+
+        >div {
+            display: flex;
+            margin-right: 5px;
+        }
+
+        .input-search {
+            label {
+                color: white;
+                font-weight: 800;
+                background-color: #384AD7;
+            }
+        }
+    }
+
     .footer-button-action {
         margin-top: 20px;
     }
@@ -23,15 +41,36 @@
 .card {
     position: relative;
     padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     p-table {
-        ::ng-deep{
-            thead{
+        ::ng-deep {
+            thead {
                 position: sticky;
                 top: 0;
                 z-index: 111;
             }
+
+            .ui-table-thead {
+                tr {
+                    th {
+                        width: 150px;
+                        background-color: #c8deff;
+                    }
+
+                    td {
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            .ui-table-wrapper::-webkit-scrollbar {
+                height: 7px;
+            }
+
         }
+
         body .ui-widget {
             height: 50vw;
         }
@@ -40,16 +79,14 @@
             margin-bottom: 10px;
         }
 
-        tr {
-            th {
-                background-color: rgb(68, 143, 255);
-            }
-
-            td {
-                font-weight: 500;
-            }
-        }
-
     }
 
+}
+.UPK {
+    background-color: rgb(36, 108, 196) !important;
+
+}
+
+.FINISH {
+    background-color: rgb(36, 196, 36) !important;
 }

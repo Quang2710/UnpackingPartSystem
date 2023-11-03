@@ -29,6 +29,11 @@ export class RobingComponent extends AppComponentBase implements OnInit {
     robingTime: any;
     description: string;
 
+    increaseToday;
+    increaseFail;
+    increaseLoan;
+    increaseTotal;
+
     constructor(
         injector: Injector,
         private _service: RobingServiceProxy,
@@ -58,6 +63,8 @@ export class RobingComponent extends AppComponentBase implements OnInit {
                         }
                         return false;
                     }).length;
+
+                    this.increaseFail
                 }
 
             }, (error) => {
@@ -93,6 +100,14 @@ export class RobingComponent extends AppComponentBase implements OnInit {
         //     iconRecommed.classList.remove('icon-slide')
         // },1000)
 
+    }
+
+    requestGiveBack(){
+        this.message.confirm(this.l(''), 'REQUEST GIVE BACK TO '+this.supplier, (isConfirmed) => {
+            if (isConfirmed) {
+                return;
+            }
+          });
     }
 
 
