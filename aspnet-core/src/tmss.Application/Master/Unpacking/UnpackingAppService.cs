@@ -66,33 +66,27 @@ namespace tmss.Master.Unpacking
             await _unpacking.DeleteAsync((long)result.Id);
         }
 
-        public async Task<PagedResultDto<UnpackingDto>> GetAll(GetUnpackingInput input)
+        public async Task<List<UnpackingDto>> GetAll(GetUnpackingInput input)
         {
-            var querry = from LupContModule in _unpacking.GetAll().AsNoTracking()
-                         .Where(e => string.IsNullOrWhiteSpace(input.ModuleNo) || e.ModuleNo.Contains(input.ModuleNo))
-                          .Where(e => string.IsNullOrWhiteSpace(input.ModuleStatus) || e.ModuleStatus.Contains(input.ModuleStatus))
-                         select new UnpackingDto
-                         {
-                             Id = LupContModule.Id,
-                             ModuleNo = LupContModule.ModuleNo,
-                             DevaningNo = LupContModule.DevaningNo,
-                             Renban = LupContModule.Renban,
-                             Supplier = LupContModule.Supplier,
-                             ActUnpackingDate = LupContModule.ActUnpackingDate,
-                             ActUnpackingDateFinish = LupContModule.ActUnpackingDateFinish,
-                             PlanUnpackingDate = LupContModule.PlanUnpackingDate,
-                             ModuleStatus = LupContModule.ModuleStatus,                             
-                         };
+            var query = _unpacking.GetAll().AsNoTracking()
+                .Where(e => string.IsNullOrWhiteSpace(input.ModuleNo) || e.ModuleNo.Contains(input.ModuleNo))
+                .Where(e => string.IsNullOrWhiteSpace(input.ModuleStatus) || e.ModuleStatus.Contains(input.ModuleStatus))
+                .Select(LupContModule => new UnpackingDto
+                {
+                    Id = LupContModule.Id,
+                    ModuleNo = LupContModule.ModuleNo,
+                    DevaningNo = LupContModule.DevaningNo,
+                    Renban = LupContModule.Renban,
+                    Supplier = LupContModule.Supplier,
+                    ActUnpackingDate = LupContModule.ActUnpackingDate,
+                    ActUnpackingDateFinish = LupContModule.ActUnpackingDateFinish,
+                    PlanUnpackingDate = LupContModule.PlanUnpackingDate,
+                    ModuleStatus = LupContModule.ModuleStatus,
+                });
 
-            var totalCount = await querry.CountAsync();
-            var paged = querry.PageBy(input);
-
-
-            return new PagedResultDto<UnpackingDto>(
-                totalCount,
-                await paged.ToListAsync()
-                );
+            return await query.ToListAsync();
         }
+
 
         public async Task<List<PartInModuleDto>> GetPartInModule(string module_no)
         {
@@ -122,15 +116,16 @@ namespace tmss.Master.Unpacking
             }); ;            
 
         }
-        public async Task AddPartToRobbing(long Id, string PartNo,string PartName, string Supplier , string Type , string Description)
+        public async Task AddPartToRobbing(long Id, string PartNo,string PartName, string Supplier , string ModuleNo ,string Type , string Description)
         {
-            string _sql = "Exec ADD_PART_TO_ROBBING @p_id ,@p_partNo ,@p_partName,@p_supplier ,@p_type ,@p_description";
+            string _sql = "Exec ADD_PART_TO_ROBBING @p_id ,@p_partNo ,@p_partName,@p_supplier ,@p_moduleNo,@p_type ,@p_description";
             await _getModulePlan.QueryAsync<LupContModule>(_sql, new 
             {
                 p_id = Id,
                 p_partNo = PartNo,
                 p_partName = PartName,
                 p_supplier = Supplier,
+                p_moduleNo = ModuleNo,
                 p_type = Type,
                 p_description = Description,
             });

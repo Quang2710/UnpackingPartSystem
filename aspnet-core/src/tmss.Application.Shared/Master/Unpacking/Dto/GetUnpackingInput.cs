@@ -6,7 +6,7 @@ using tmss.Dto;
 
 namespace tmss.Master.Unpacking.Dto
 {
-    public class GetUnpackingInput: PagedAndSortedResultRequestDto
+    public class GetUnpackingInput
     {
         public  string ModuleNo { get; set; }
 

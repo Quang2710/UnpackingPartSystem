@@ -51,6 +51,7 @@ export class AddRobingComponent extends AppComponentBase {
             this.partDetail.partNo,
             this.partDetail.partName,
             this.partDetail.supplier,
+            this.partDetail.moduleNo,
             this.type,
             this.description
             )

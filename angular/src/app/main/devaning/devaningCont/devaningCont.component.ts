@@ -16,15 +16,6 @@ import { forEach } from 'lodash';
     styleUrls: ['./devaningCont.component.less'],
 })
 export class DevaningContComponent extends AppComponentBase implements OnInit {
-    @ViewChild('paginator', { static: true }) paginator: Paginator;
-    paginationParams: PaginationParamsModel = {
-        pageNum: 1,
-        pageSize: 20,
-        totalCount: 0,
-        skipCount: 0,
-        sorting: '',
-        totalPage: 1,
-    };
 
     statusBackground;
     indexShort: number = 0;
@@ -51,16 +42,13 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
     constructor(
         injector: Injector,
         private _service: DevaningContModuleServiceProxy,
-        private gridTableService: GridTableService,
         private _fileDownloadService: FileDownloadService,
         private modalService: BsModalService,
-        private datePipe: DatePipe
     ) {
         super(injector)
     }
 
     ngOnInit() {
-        this.paginationParams = { pageNum: 1, pageSize: 50, totalCount: 0 };
         this.getDatas();
     }
 
@@ -72,13 +60,10 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
             this.suppilerNo,
             this.shiftNo,
             this.devaningType,
-            this.devaningStatus,
-            '',
-            this.paginationParams.skipCount,
-            this.paginationParams.pageSize
+            this.devaningStatus
         )
             .subscribe((result) => {
-                this.rowdata = result.items;
+                this.rowdata = result;
 
             });
 

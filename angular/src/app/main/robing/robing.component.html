@@ -12,7 +12,7 @@
                     </button>
                 </div>
                 <div class="input-timenow h-100">
-                    <input type="text" class="w-100 h-75 timenow-robing" placeholder="09:30AM Friday, 7 Aug 2020"
+                    <input type="text" class="w-100 h-75 timenow-robing" [placeholder]="dateNow"
                         readonly>
                 </div>
             </div>
@@ -68,7 +68,20 @@
     </div>
     <div class="robing-detail h-100">
         <div class="robing-detail-content w-100 h-100">
-            <div class="detail-content detail-list-item"></div>
+            <div class="detail-content detail-list-item">
+                <div class="list-item-title w-100 mt-2 h-25">
+                    <p>List Part In {{moduleNo}}</p>
+                </div>
+                <div class="list-item-module w-100 h-75 d-flex ">
+                    <div class="part-item h-100" *ngFor="let item of listPartInModule">
+                        <div class="list-item-content-icon d-flex justify-content-end align-items-center ">
+                            <img src="/assets/common/images/partInModule.png" class="icon h-50" />
+                            <p>Square Large Box</p>
+                            <span>{{item.partNo}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="detail-content detail-item">
                 <div class="detail-part">
                     <div class="title">RenBan</div>

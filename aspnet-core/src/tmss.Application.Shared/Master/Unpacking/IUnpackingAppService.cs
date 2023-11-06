@@ -10,7 +10,7 @@ namespace tmss.Master.Unpacking
 {
     public interface IUnpackingAppService: IApplicationService
     {
-        Task<PagedResultDto<UnpackingDto>> GetAll(GetUnpackingInput input);
+        Task<List<UnpackingDto>> GetAll(GetUnpackingInput input);
 
         Task CreateOrEdit(CreateOrEditUnpackingDto input);
 

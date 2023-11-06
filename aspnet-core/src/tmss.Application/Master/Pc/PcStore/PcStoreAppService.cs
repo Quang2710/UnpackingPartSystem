@@ -28,28 +28,18 @@ namespace tmss.Master.Pc
         {
             _pcstore = pcstore;
         }
-
-
-
-
-        public async Task<PagedResultDto<PcStoreDto>> GetAll(PcStoreInputDto input)
+          
+        public async Task<List<PcStoreDto>> GetAll(PcStoreInputDto input)
         {
-            var querry = from PcStore in _pcstore.GetAll().AsNoTracking()                       
-                         select new PcStoreDto
-                         {
-                             Id = PcStore.Id,
-                             PartNo = PcStore.PartNo,
-                             PartName = PcStore.PartName,                         
-                         };
+            var query = _pcstore.GetAll().AsNoTracking()
+                .Select(PcStore => new PcStoreDto
+                {
+                    Id = PcStore.Id,
+                    PartNo = PcStore.PartNo,
+                    PartName = PcStore.PartName,
+                });
 
-            var totalCount = await querry.CountAsync();
-            var paged = querry.PageBy(input);
-
-
-            return new PagedResultDto<PcStoreDto>(
-                totalCount,
-                await paged.ToListAsync()
-                );
+            return await query.ToListAsync();
         }
 
     }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace tmss.Master.DevaningContModule.Dto
 {
-    public class GetDevaningContModuleInput: PagedAndSortedResultRequestDto
+    public class GetDevaningContModuleInput
     {
         public virtual string DevaningNo { get; set; }
 

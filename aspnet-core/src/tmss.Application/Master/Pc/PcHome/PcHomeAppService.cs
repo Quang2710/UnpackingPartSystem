@@ -2,6 +2,7 @@
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,25 +25,19 @@ namespace tmss.Master.Pc
 
 
 
-        public async Task<PagedResultDto<PcHomeDto>> GetAll(PcHomeInputDto input)
+        public async Task<List<PcHomeDto>> GetAll(PcHomeInputDto input)
         {
-            var querry = from PcStore in _pchome.GetAll().AsNoTracking()                       
-                         select new PcHomeDto
-                         {
-                             Id = PcStore.Id,
-                             PartNo = PcStore.PartNo,
-                             PartName = PcStore.PartName,                         
-                         };
+            var query = _pchome.GetAll().AsNoTracking()
+                .Select(PcStore => new PcHomeDto
+                {
+                    Id = PcStore.Id,
+                    PartNo = PcStore.PartNo,
+                    PartName = PcStore.PartName,
+                });
 
-            var totalCount = await querry.CountAsync();
-            var paged = querry.PageBy(input);
-
-
-            return new PagedResultDto<PcHomeDto>(
-                totalCount,
-                await paged.ToListAsync()
-                );
+            return await query.ToListAsync();
         }
+
 
     }
 

@@ -13,42 +13,6 @@
         </div>
     </div>
     <div class="unpacking-detail">
-        <!-- <div class="card">
-      <p-table [value]="rowdata" [tableStyle]="{ 'min-width': '100%' }" [paginator]="false" [rows]="5"
-        [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of
-          {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]">
-        <ng-template pTemplate="header" class="header-p-table">
-          <tr>
-            <th>Part No</th>
-            <th>Part Name</th>
-            <th>Renban</th>
-            <th>Suppiler</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-rowdata class="body-p-table">
-          <tr [ngClass]="getStatusBackgroundClass(rowdata.status)">
-            <td>{{ rowdata.partNo }}</td>
-            <td>{{ rowdata.partName }}</td>
-            <td>{{ rowdata.renban }}</td>
-            <td>{{ rowdata.supplier }}</td>
-            <td>{{ rowdata.status }}</td>
-            <td class="d-flex upk-action justify-content-center">
-                <div class="add-robing w-50 h-100 d-flex justify-content-center align-items-center" (click)="addrobing(rowdata)"  *ngIf="rowdata.status === 'READY' || rowdata.status === 'START'">Robing</div>
-                <div class="upk-finish w-50 h-100 d-flex justify-content-center align-items-center" (click)="finishPart(rowdata)" *ngIf="rowdata.status === 'READY' || rowdata.status === 'START'">Finish</div>
-                <div class="upk-done w-100 h-100 d-flex justify-content-center align-items-center" *ngIf="rowdata.status === 'FINISH'|| rowdata.status === 'ROBBING'">DONE</div>
-            </td>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="paginatorleft">
-          <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-        </ng-template>
-        <ng-template pTemplate="paginatorright">
-          <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
-        </ng-template>
-      </p-table>
-    </div> -->
         <div class="unpacking-table w-100 h-100">
             <div class="table-header w-100 d-flex">
                 <div class="header-title">Part No</div>

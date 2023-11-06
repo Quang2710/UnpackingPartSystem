@@ -15,14 +15,6 @@ export class UnpackingLotComponent extends AppComponentBase implements OnInit {
 
     selectedRowdata: UnpackingDto = new UnpackingDto();
     rowdata: any[] = [];
-    paginationParams: PaginationParamsModel = {
-        pageNum: 1,
-        pageSize: 20,
-        totalCount: 0,
-        skipCount: 0,
-        sorting: '',
-        totalPage: 1,
-    };
     devaningNo;
     moduleNo;
     renban;
@@ -38,9 +30,7 @@ export class UnpackingLotComponent extends AppComponentBase implements OnInit {
     constructor(
         injector: Injector,
         private _service: UnpackingServiceProxy,
-        private gridTableService: GridTableService,
         private _fileDownloadService: FileDownloadService,
-        private datePipe: DatePipe
 
     ) {
         super(injector)
@@ -55,13 +45,10 @@ export class UnpackingLotComponent extends AppComponentBase implements OnInit {
             this.devaningNo,
             this.renban,
             this.supplier,
-            this.moduleStatus,
-            '',
-            this.paginationParams.skipCount,
-            this.paginationParams.pageSize
+            this.moduleStatus
         )
             .subscribe((result) => {
-                this.rowdata = result.items;
+                this.rowdata = result;
                 console.log(this.rowdata);
             });
 
@@ -74,7 +61,6 @@ export class UnpackingLotComponent extends AppComponentBase implements OnInit {
 
     }
     exportToExcel(): void {
-        // this.loaderVisible();
         this._service
             .getUnpackingToExcel(
                 this.moduleNo,
@@ -88,7 +74,6 @@ export class UnpackingLotComponent extends AppComponentBase implements OnInit {
             )
             .subscribe((result) => {
                 this._fileDownloadService.downloadTempFile(result);
-                //this.loaderHidden();
             });
     }
     onRowSelect(event) {

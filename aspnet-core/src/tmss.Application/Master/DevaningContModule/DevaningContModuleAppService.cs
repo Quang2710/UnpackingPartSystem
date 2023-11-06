@@ -8,6 +8,7 @@ using Abp.EntityFrameworkCore.Uow;
 using Abp.Linq.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,39 +75,34 @@ namespace tmss.Master.DevaningContModule
             var result = await _repo.GetAll().FirstOrDefaultAsync(e => e.Id == input.Id);
             await _repo.DeleteAsync((long)result.Id);
         }
-        
 
-        public async Task<PagedResultDto<DevaningContModuleDto>> GetAll(GetDevaningContModuleInput input)
+
+        public async Task<List<DevaningContModuleDto>> GetAll(GetDevaningContModuleInput input)
         {
-            var querry = from DvnContList in _repo.GetAll().AsNoTracking()
-                         .Where(e => string.IsNullOrWhiteSpace(input.DevaningNo) || e.DevaningNo.Contains(input.DevaningNo))
-                          .Where(e => string.IsNullOrWhiteSpace(input.DevaningStatus) || e.DevaningStatus.Contains(input.DevaningStatus))
-                         select new DevaningContModuleDto
-                         {
-                             Id = DvnContList.Id,
-                             DevaningNo = DvnContList.DevaningNo,
-                             ContainerNo = DvnContList.ContainerNo,
-                             Renban = DvnContList.Renban,
-                             SuppilerNo = DvnContList.SuppilerNo,
-                             ShiftNo = DvnContList.ShiftNo,
-                             WorkingDate = DvnContList.WorkingDate,
-                             PlanDevaningDate = DvnContList.PlanDevaningDate,
-                             ActDevaningDate = DvnContList.ActDevaningDate,
-                             ActDevaningDateFinish = DvnContList.ActDevaningDateFinish,
-                             DevaningType = DvnContList.DevaningType,
-                             DevaningStatus = DvnContList.DevaningStatus,
-                         };
+            var query = _repo.GetAll().AsNoTracking()
+                .Where(e => string.IsNullOrWhiteSpace(input.DevaningNo) || e.DevaningNo.Contains(input.DevaningNo))
+                .Where(e => string.IsNullOrWhiteSpace(input.DevaningStatus) || e.DevaningStatus.Contains(input.DevaningStatus))
+                .Select(DvnContList => new DevaningContModuleDto
+                {
+                    Id = DvnContList.Id,
+                    DevaningNo = DvnContList.DevaningNo,
+                    ContainerNo = DvnContList.ContainerNo,
+                    Renban = DvnContList.Renban,
+                    SuppilerNo = DvnContList.SuppilerNo,
+                    ShiftNo = DvnContList.ShiftNo,
+                    WorkingDate = DvnContList.WorkingDate,
+                    PlanDevaningDate = DvnContList.PlanDevaningDate,
+                    ActDevaningDate = DvnContList.ActDevaningDate,
+                    ActDevaningDateFinish = DvnContList.ActDevaningDateFinish,
+                    DevaningType = DvnContList.DevaningType,
+                    DevaningStatus = DvnContList.DevaningStatus,
+                });
 
-                var totalCount = await querry.CountAsync();
-                var paged = querry.PageBy(input);
+            return await query.ToListAsync();
+        }
 
 
-                return new PagedResultDto<DevaningContModuleDto>(
-                    totalCount,
-                    await paged.ToListAsync()
-                    );
 
-        }   
 
         public async Task FinishDvnCont(int dvn_id)
         {

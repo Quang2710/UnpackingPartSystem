@@ -10,7 +10,7 @@ namespace tmss.Master.Pc
         public string PartName { get; set; }
      
     }
-    public class PcHomeInputDto :PagedAndSortedResultRequestDto
+    public class PcHomeInputDto 
     {
     
         public string PartNo { get; set; }

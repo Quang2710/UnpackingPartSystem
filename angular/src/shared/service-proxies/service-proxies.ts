@@ -2673,12 +2673,9 @@ export class DevaningContModuleServiceProxy {
      * @param shiftNo (optional) 
      * @param devaningType (optional) 
      * @param devaningStatus (optional) 
-     * @param sorting (optional) 
-     * @param skipCount (optional) 
-     * @param maxResultCount (optional) 
      * @return Success
      */
-    getAll(devaningNo: string | null | undefined, containerNo: string | null | undefined, renban: string | null | undefined, suppilerNo: string | null | undefined, shiftNo: string | null | undefined, devaningType: string | null | undefined, devaningStatus: string | null | undefined, sorting: string | null | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PagedResultDtoOfDevaningContModuleDto> {
+    getAll(devaningNo: string | null | undefined, containerNo: string | null | undefined, renban: string | null | undefined, suppilerNo: string | null | undefined, shiftNo: string | null | undefined, devaningType: string | null | undefined, devaningStatus: string | null | undefined): Observable<DevaningContModuleDto[]> {
         let url_ = this.baseUrl + "/api/services/app/DevaningContModule/GetAll?";
         if (devaningNo !== undefined)
             url_ += "DevaningNo=" + encodeURIComponent("" + devaningNo) + "&"; 
@@ -2694,16 +2691,6 @@ export class DevaningContModuleServiceProxy {
             url_ += "DevaningType=" + encodeURIComponent("" + devaningType) + "&"; 
         if (devaningStatus !== undefined)
             url_ += "DevaningStatus=" + encodeURIComponent("" + devaningStatus) + "&"; 
-        if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (skipCount === null)
-            throw new Error("The parameter 'skipCount' cannot be null.");
-        else if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
-        if (maxResultCount === null)
-            throw new Error("The parameter 'maxResultCount' cannot be null.");
-        else if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -2721,14 +2708,14 @@ export class DevaningContModuleServiceProxy {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<PagedResultDtoOfDevaningContModuleDto>><any>_observableThrow(e);
+                    return <Observable<DevaningContModuleDto[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<PagedResultDtoOfDevaningContModuleDto>><any>_observableThrow(response_);
+                return <Observable<DevaningContModuleDto[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<PagedResultDtoOfDevaningContModuleDto> {
+    protected processGetAll(response: HttpResponseBase): Observable<DevaningContModuleDto[]> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -2739,7 +2726,11 @@ export class DevaningContModuleServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PagedResultDtoOfDevaningContModuleDto.fromJS(resultData200);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(DevaningContModuleDto.fromJS(item));
+            }
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -2747,7 +2738,7 @@ export class DevaningContModuleServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<PagedResultDtoOfDevaningContModuleDto>(<any>null);
+        return _observableOf<DevaningContModuleDto[]>(<any>null);
     }
 
     /**
@@ -9204,27 +9195,14 @@ export class PcHomeServiceProxy {
     /**
      * @param partNo (optional) 
      * @param partName (optional) 
-     * @param sorting (optional) 
-     * @param skipCount (optional) 
-     * @param maxResultCount (optional) 
      * @return Success
      */
-    getAll(partNo: string | null | undefined, partName: string | null | undefined, sorting: string | null | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PagedResultDtoOfPcHomeDto> {
+    getAll(partNo: string | null | undefined, partName: string | null | undefined): Observable<PcHomeDto[]> {
         let url_ = this.baseUrl + "/api/services/app/PcHome/GetAll?";
         if (partNo !== undefined)
             url_ += "PartNo=" + encodeURIComponent("" + partNo) + "&"; 
         if (partName !== undefined)
             url_ += "PartName=" + encodeURIComponent("" + partName) + "&"; 
-        if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (skipCount === null)
-            throw new Error("The parameter 'skipCount' cannot be null.");
-        else if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
-        if (maxResultCount === null)
-            throw new Error("The parameter 'maxResultCount' cannot be null.");
-        else if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -9242,14 +9220,14 @@ export class PcHomeServiceProxy {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<PagedResultDtoOfPcHomeDto>><any>_observableThrow(e);
+                    return <Observable<PcHomeDto[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<PagedResultDtoOfPcHomeDto>><any>_observableThrow(response_);
+                return <Observable<PcHomeDto[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<PagedResultDtoOfPcHomeDto> {
+    protected processGetAll(response: HttpResponseBase): Observable<PcHomeDto[]> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -9260,7 +9238,11 @@ export class PcHomeServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PagedResultDtoOfPcHomeDto.fromJS(resultData200);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(PcHomeDto.fromJS(item));
+            }
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -9268,7 +9250,7 @@ export class PcHomeServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<PagedResultDtoOfPcHomeDto>(<any>null);
+        return _observableOf<PcHomeDto[]>(<any>null);
     }
 }
 
@@ -9286,27 +9268,14 @@ export class PcStoreServiceProxy {
     /**
      * @param partNo (optional) 
      * @param partName (optional) 
-     * @param sorting (optional) 
-     * @param skipCount (optional) 
-     * @param maxResultCount (optional) 
      * @return Success
      */
-    getAll(partNo: string | null | undefined, partName: string | null | undefined, sorting: string | null | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PagedResultDtoOfPcStoreDto> {
+    getAll(partNo: string | null | undefined, partName: string | null | undefined): Observable<PcStoreDto[]> {
         let url_ = this.baseUrl + "/api/services/app/PcStore/GetAll?";
         if (partNo !== undefined)
             url_ += "PartNo=" + encodeURIComponent("" + partNo) + "&"; 
         if (partName !== undefined)
             url_ += "PartName=" + encodeURIComponent("" + partName) + "&"; 
-        if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (skipCount === null)
-            throw new Error("The parameter 'skipCount' cannot be null.");
-        else if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
-        if (maxResultCount === null)
-            throw new Error("The parameter 'maxResultCount' cannot be null.");
-        else if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -9324,14 +9293,14 @@ export class PcStoreServiceProxy {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<PagedResultDtoOfPcStoreDto>><any>_observableThrow(e);
+                    return <Observable<PcStoreDto[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<PagedResultDtoOfPcStoreDto>><any>_observableThrow(response_);
+                return <Observable<PcStoreDto[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<PagedResultDtoOfPcStoreDto> {
+    protected processGetAll(response: HttpResponseBase): Observable<PcStoreDto[]> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -9342,7 +9311,11 @@ export class PcStoreServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PagedResultDtoOfPcStoreDto.fromJS(resultData200);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(PcStoreDto.fromJS(item));
+            }
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -9350,7 +9323,7 @@ export class PcStoreServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<PagedResultDtoOfPcStoreDto>(<any>null);
+        return _observableOf<PcStoreDto[]>(<any>null);
     }
 }
 
@@ -13353,12 +13326,9 @@ export class UnpackingServiceProxy {
      * @param renban (optional) 
      * @param supplier (optional) 
      * @param moduleStatus (optional) 
-     * @param sorting (optional) 
-     * @param skipCount (optional) 
-     * @param maxResultCount (optional) 
      * @return Success
      */
-    getAll(moduleNo: string | null | undefined, devaningNo: string | null | undefined, renban: string | null | undefined, supplier: string | null | undefined, moduleStatus: string | null | undefined, sorting: string | null | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<PagedResultDtoOfUnpackingDto> {
+    getAll(moduleNo: string | null | undefined, devaningNo: string | null | undefined, renban: string | null | undefined, supplier: string | null | undefined, moduleStatus: string | null | undefined): Observable<UnpackingDto[]> {
         let url_ = this.baseUrl + "/api/services/app/Unpacking/GetAll?";
         if (moduleNo !== undefined)
             url_ += "ModuleNo=" + encodeURIComponent("" + moduleNo) + "&"; 
@@ -13370,16 +13340,6 @@ export class UnpackingServiceProxy {
             url_ += "Supplier=" + encodeURIComponent("" + supplier) + "&"; 
         if (moduleStatus !== undefined)
             url_ += "ModuleStatus=" + encodeURIComponent("" + moduleStatus) + "&"; 
-        if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (skipCount === null)
-            throw new Error("The parameter 'skipCount' cannot be null.");
-        else if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
-        if (maxResultCount === null)
-            throw new Error("The parameter 'maxResultCount' cannot be null.");
-        else if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -13397,14 +13357,14 @@ export class UnpackingServiceProxy {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<PagedResultDtoOfUnpackingDto>><any>_observableThrow(e);
+                    return <Observable<UnpackingDto[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<PagedResultDtoOfUnpackingDto>><any>_observableThrow(response_);
+                return <Observable<UnpackingDto[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<PagedResultDtoOfUnpackingDto> {
+    protected processGetAll(response: HttpResponseBase): Observable<UnpackingDto[]> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -13415,7 +13375,11 @@ export class UnpackingServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PagedResultDtoOfUnpackingDto.fromJS(resultData200);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(UnpackingDto.fromJS(item));
+            }
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -13423,7 +13387,7 @@ export class UnpackingServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<PagedResultDtoOfUnpackingDto>(<any>null);
+        return _observableOf<UnpackingDto[]>(<any>null);
     }
 
     /**
@@ -13644,11 +13608,12 @@ export class UnpackingServiceProxy {
      * @param partNo (optional) 
      * @param partName (optional) 
      * @param supplier (optional) 
+     * @param moduleNo (optional) 
      * @param type (optional) 
      * @param description (optional) 
      * @return Success
      */
-    addPartToRobbing(id: number | undefined, partNo: string | null | undefined, partName: string | null | undefined, supplier: string | null | undefined, type: string | null | undefined, description: string | null | undefined): Observable<void> {
+    addPartToRobbing(id: number | undefined, partNo: string | null | undefined, partName: string | null | undefined, supplier: string | null | undefined, moduleNo: string | null | undefined, type: string | null | undefined, description: string | null | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Unpacking/AddPartToRobbing?";
         if (id === null)
             throw new Error("The parameter 'id' cannot be null.");
@@ -13660,6 +13625,8 @@ export class UnpackingServiceProxy {
             url_ += "PartName=" + encodeURIComponent("" + partName) + "&"; 
         if (supplier !== undefined)
             url_ += "Supplier=" + encodeURIComponent("" + supplier) + "&"; 
+        if (moduleNo !== undefined)
+            url_ += "ModuleNo=" + encodeURIComponent("" + moduleNo) + "&"; 
         if (type !== undefined)
             url_ += "Type=" + encodeURIComponent("" + type) + "&"; 
         if (description !== undefined)
@@ -18207,54 +18174,6 @@ export interface IDevaningContModuleDto {
     devaningType: string | undefined;
     devaningStatus: string | undefined;
     id: number | undefined;
-}
-
-export class PagedResultDtoOfDevaningContModuleDto implements IPagedResultDtoOfDevaningContModuleDto {
-    totalCount!: number;
-    items!: DevaningContModuleDto[] | undefined;
-
-    constructor(data?: IPagedResultDtoOfDevaningContModuleDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.totalCount = _data["totalCount"];
-            if (Array.isArray(_data["items"])) {
-                this.items = [] as any;
-                for (let item of _data["items"])
-                    this.items!.push(DevaningContModuleDto.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): PagedResultDtoOfDevaningContModuleDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new PagedResultDtoOfDevaningContModuleDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["totalCount"] = this.totalCount;
-        if (Array.isArray(this.items)) {
-            data["items"] = [];
-            for (let item of this.items)
-                data["items"].push(item.toJSON());
-        }
-        return data; 
-    }
-}
-
-export interface IPagedResultDtoOfDevaningContModuleDto {
-    totalCount: number;
-    items: DevaningContModuleDto[] | undefined;
 }
 
 export class CoutPlanDvn implements ICoutPlanDvn {
@@ -23825,54 +23744,6 @@ export interface IPcHomeDto {
     id: number;
 }
 
-export class PagedResultDtoOfPcHomeDto implements IPagedResultDtoOfPcHomeDto {
-    totalCount!: number;
-    items!: PcHomeDto[] | undefined;
-
-    constructor(data?: IPagedResultDtoOfPcHomeDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.totalCount = _data["totalCount"];
-            if (Array.isArray(_data["items"])) {
-                this.items = [] as any;
-                for (let item of _data["items"])
-                    this.items!.push(PcHomeDto.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): PagedResultDtoOfPcHomeDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new PagedResultDtoOfPcHomeDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["totalCount"] = this.totalCount;
-        if (Array.isArray(this.items)) {
-            data["items"] = [];
-            for (let item of this.items)
-                data["items"].push(item.toJSON());
-        }
-        return data; 
-    }
-}
-
-export interface IPagedResultDtoOfPcHomeDto {
-    totalCount: number;
-    items: PcHomeDto[] | undefined;
-}
-
 export class PcStoreDto implements IPcStoreDto {
     partNo!: string | undefined;
     partName!: string | undefined;
@@ -23915,54 +23786,6 @@ export interface IPcStoreDto {
     partNo: string | undefined;
     partName: string | undefined;
     id: number;
-}
-
-export class PagedResultDtoOfPcStoreDto implements IPagedResultDtoOfPcStoreDto {
-    totalCount!: number;
-    items!: PcStoreDto[] | undefined;
-
-    constructor(data?: IPagedResultDtoOfPcStoreDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.totalCount = _data["totalCount"];
-            if (Array.isArray(_data["items"])) {
-                this.items = [] as any;
-                for (let item of _data["items"])
-                    this.items!.push(PcStoreDto.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): PagedResultDtoOfPcStoreDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new PagedResultDtoOfPcStoreDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["totalCount"] = this.totalCount;
-        if (Array.isArray(this.items)) {
-            data["items"] = [];
-            for (let item of this.items)
-                data["items"].push(item.toJSON());
-        }
-        return data; 
-    }
-}
-
-export interface IPagedResultDtoOfPcStoreDto {
-    totalCount: number;
-    items: PcStoreDto[] | undefined;
 }
 
 export class FlatPermissionWithLevelDto implements IFlatPermissionWithLevelDto {
@@ -27951,54 +27774,6 @@ export interface IUnpackingDto {
     actUnpackingDateFinish: moment.Moment | undefined;
     moduleStatus: string | undefined;
     id: number | undefined;
-}
-
-export class PagedResultDtoOfUnpackingDto implements IPagedResultDtoOfUnpackingDto {
-    totalCount!: number;
-    items!: UnpackingDto[] | undefined;
-
-    constructor(data?: IPagedResultDtoOfUnpackingDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.totalCount = _data["totalCount"];
-            if (Array.isArray(_data["items"])) {
-                this.items = [] as any;
-                for (let item of _data["items"])
-                    this.items!.push(UnpackingDto.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): PagedResultDtoOfUnpackingDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new PagedResultDtoOfUnpackingDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["totalCount"] = this.totalCount;
-        if (Array.isArray(this.items)) {
-            data["items"] = [];
-            for (let item of this.items)
-                data["items"].push(item.toJSON());
-        }
-        return data; 
-    }
-}
-
-export interface IPagedResultDtoOfUnpackingDto {
-    totalCount: number;
-    items: UnpackingDto[] | undefined;
 }
 
 export class PartInModuleDto implements IPartInModuleDto {

@@ -60,18 +60,16 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
 
   // GetModule Unpacking
   getModulePlan() {
-    this._service.getModulePlan()
-      .subscribe((result) => {
-        this.modulePlan = result;
-        this.moduleNoCurrent = this.modulePlan.filter(item => item.moduleStatus === 'UPK')[0].moduleNo;
-        this.moduleActual = this.modulePlan.length;
-        this.moduleFinish = this.modulePlan.filter(item => item.moduleStatus === 'FINISH').length;
-        if (this.moduleFinish == 0) {
-          this.moduleFinish = 0
-        }
-        this.moduleNoStatus = this.modulePlan[0].moduleStatus;
-        this.getDatas();
-      });
+    this._service.getModulePlan().subscribe((result) => {
+
+      const upkModule = result.find(item => item.moduleStatus === 'UPK');
+      this.moduleNoCurrent = upkModule ? upkModule.moduleNo : null;
+      this.moduleActual = result.length;
+      this.moduleFinish = result.filter(item => item.moduleStatus === 'FINISH').length;
+
+      this.moduleNoStatus = upkModule ? 'UPK' : null;
+      this.getDatas();
+    });
   }
 
   // Get Part in Module Unpacking Current
@@ -79,7 +77,6 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
     this._service.getPartInModule(this.moduleNoCurrent)
       .subscribe((result) => {
         this.rowdata = result;
-       //this.partNoCurrent = this.rowdata.filter(item => item.status === 'START')[0].partNo;
         console.log('module current',this.moduleNoCurrent);
         console.log('part',this.rowdata);
       });

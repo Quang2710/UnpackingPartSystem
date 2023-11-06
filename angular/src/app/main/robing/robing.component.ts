@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { DataFormatService } from '@app/shared/common/services/data-format.service';
 import { GridTableService } from '@app/shared/common/services/grid-table.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
-import { RobingServiceProxy } from '@shared/service-proxies/service-proxies';
+import { RobingServiceProxy, UnpackingServiceProxy } from '@shared/service-proxies/service-proxies';
 import { error } from 'console';
 import * as moment from 'moment';
 
@@ -15,6 +15,7 @@ import * as moment from 'moment';
 })
 export class RobingComponent extends AppComponentBase implements OnInit {
 
+    dateNow;
 
     robingToday;
     partFail;
@@ -26,6 +27,7 @@ export class RobingComponent extends AppComponentBase implements OnInit {
     partNo: string;
     renban: string;
     supplier: string;
+    moduleNo: string;
     robingTime: any;
     description: string;
 
@@ -34,9 +36,13 @@ export class RobingComponent extends AppComponentBase implements OnInit {
     increaseLoan;
     increaseTotal;
 
+    arrayTest = ['1','2','3','4','5']
+    listPartInModule;
+
     constructor(
         injector: Injector,
         private _service: RobingServiceProxy,
+        private _unpackingProxy: UnpackingServiceProxy,
     ) {
         super(injector)
     }
@@ -44,6 +50,24 @@ export class RobingComponent extends AppComponentBase implements OnInit {
     ngOnInit() {
         this.getAllRobing();
     }
+
+    ngAfterViewInit() {
+        setInterval(() => {
+            this.getTimeNow();
+        }, 1000);
+    }
+
+    ngOnDestroy(): void {
+        // clearTimeout(this.clearTimeLoadData);
+    }
+
+
+    getTimeNow() {
+        const d = new Date();
+        const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        this.dateNow = (((d.getHours() + "").length == 1) ? ("0" + d.getHours()) : d.getHours()) + ":" + (((d.getMinutes() + "").length == 1) ? ("0" + d.getMinutes()) : d.getMinutes()) + " : " + (((d.getSeconds() + "").length == 1) ? ("0" + d.getSeconds()) : d.getSeconds()) + " ( " + (((month[d.getMonth()] + "").length == 1) ? ("0" + month[d.getMonth()]) : month[d.getMonth()]) + " - " + (((d.getDay() + "").length == 1) ? ("0" + d.getDay()) : d.getDay()) + " ) "
+    }
+
     getAllRobing(partNo?) {
         this._service.getAllRobing(partNo)
             .subscribe((res) => {
@@ -89,9 +113,10 @@ export class RobingComponent extends AppComponentBase implements OnInit {
         this.renban = this.rowdata[index].renban
         this.supplier = this.rowdata[index].supplier
         this.robingTime = this.rowdata[index].creationTime
+        this.moduleNo = this.rowdata[index].moduleNo
         this.description = this.rowdata[index].description
 
-        console.log(this.robingTime);
+        this.getPartInModule()
 
 
         // const iconRecommed = document.querySelector<HTMLElement>('.recommeded-icon .icon');
@@ -100,6 +125,12 @@ export class RobingComponent extends AppComponentBase implements OnInit {
         //     iconRecommed.classList.remove('icon-slide')
         // },1000)
 
+    }
+
+    getPartInModule(){
+        this._unpackingProxy.getPartInModule(this.moduleNo).subscribe((res)=>{
+            this.listPartInModule =  res
+        })
     }
 
     requestGiveBack(){
