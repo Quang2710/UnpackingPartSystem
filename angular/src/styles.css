@@ -154,14 +154,13 @@ ngx-spinner .loading-text {
 
 /* --------------------------DASHBOARD-------------------------- */
 
-.ng-star-inserted,
-.masthead {
+/* .ng-star-inserted{
     height: 100%;
 }
 
 .ng-star-inserted customizable-dashboard>.ng-tns-c293-7 {
     height: 100%;
-}
+} */
 
 .btn-search {
     height: 38.39px;

@@ -51,13 +51,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
                     {
                         path: 'pc/home',
                         loadChildren: () => import('./pc/pchome/pchome.module').then(m => m.PcHomeModule),
-                    },
-
-                    // {
-                    //     path: 'master/workingpattern',
-                    //     loadChildren: () => import('./master/workingpatter/dashborad-custome.module').then(m => m.DashBoradCustomeModule),
-                    //     data: { permission: 'Pages.Master.WorkingPattern' }
-                    // },
+                    },                
 
                     { path: '**', redirectTo: 'dashboard' }
                 ]

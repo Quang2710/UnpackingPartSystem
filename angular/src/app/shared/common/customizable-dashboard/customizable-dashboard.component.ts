@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, Input, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Injector, Input, ViewChild, OnDestroy, HostListener } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { DashboardViewConfigurationService } from './dashboard-view-configuration.service';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
@@ -58,8 +58,8 @@ export class CustomizableDashboardComponent extends AppComponentBase implements 
   }
 
   ngOnInit() {
-    this.loading = true;  
-  
+    this.loading = true;
+
     this._dashboardCustomizationServiceProxy.getDashboardDefinition(this.dashboardName, DashboardCustomizationConst.Applications.Angular)
       .subscribe((dashboardDefinitionResult: DashboardOutput) => {
         this.dashboardDefinition = dashboardDefinitionResult;
@@ -85,6 +85,20 @@ export class CustomizableDashboardComponent extends AppComponentBase implements 
       });
 
     this.subAsideTogglerClick();
+    this.setHeightDashBoard();
+  }
+  @HostListener('load', ['$event'])
+  onLoad(){
+    this.setHeightDashBoard()
+  }
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(){
+    this.setHeightDashBoard()
+  }
+
+  setHeightDashBoard() {
+    var y = document.getElementById('kt_header')
+    return document.querySelector<HTMLElement>('.masthead').style.height = (window.innerHeight - y.offsetHeight)+'px'
   }
 
   ngOnDestroy(): void {

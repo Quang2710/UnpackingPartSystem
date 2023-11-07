@@ -1,4 +1,4 @@
-import { Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Component, Injector, OnInit, ViewEncapsulation } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { DashboardCustomizationConst } from '@app/shared/common/customizable-dashboard/DashboardCustomizationConsts';
 
@@ -8,20 +8,21 @@ import { DashboardCustomizationConst } from '@app/shared/common/customizable-das
     encapsulation: ViewEncapsulation.None
 })
 
-export class DashboardComponent extends AppComponentBase {
+export class DashboardComponent extends AppComponentBase implements OnInit {
     dashboardName = DashboardCustomizationConst.dashboardNames.defaultTenantDashboard;
 
     constructor(
         injector: Injector) {
         super(injector);
     }
-   
+
     ngOnInit() {
-    this.loadForm();
+        this.loadForm();        
     }
-    loadForm(){
+    loadForm() {
         var kt_wrapper = document.getElementById('kt_wrapper');
         kt_wrapper.style.display = 'none';
     }
-    
+  
+
 }

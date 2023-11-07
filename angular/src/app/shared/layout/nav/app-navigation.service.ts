@@ -22,12 +22,12 @@ export class AppNavigationService {
             new AppMenuItem('Statistics', '', 'flaticon-graphic-2', '/app/main/statistics'),
 
 
-            new AppMenuItem('Master', '', 'flaticon-interface-8', '', [], [
-                new AppMenuItem("WorkingPattern", '', 'flaticon-book', '', [], [
-                    new AppMenuItem('WorkingTime', 'Pages.Master.WorkingPattern.WorkingTime', 'flaticon-line-graph', '/app/main/master/workingpattern/workingtime'),
-                ]),
+            // new AppMenuItem('Master', '', 'flaticon-interface-8', '', [], [
+            //     new AppMenuItem("WorkingPattern", '', 'flaticon-book', '', [], [
+            //         new AppMenuItem('WorkingTime', 'Pages.Master.WorkingPattern.WorkingTime', 'flaticon-line-graph', '/app/main/master/workingpattern/workingtime'),
+            //     ]),
 
-            ]),
+            // ]),
             new AppMenuItem('Devaning', '', 'flaticon-truck', '', [], [
                 new AppMenuItem('DvnContainer', '', 'flaticon-squares', '/app/main/devaning/devaningCont'),
                 new AppMenuItem('DvnScreen', '', 'flaticon-pie-chart-1', '/screens/devaningScreen')
