@@ -165,10 +165,12 @@ ngx-spinner .loading-text {
 .btn-search {
     height: 38.39px;
 }
-
+.modal-header{
+    padding-top: 0px !important;
+}
 .ui-table-wrapper {
     max-height: 500px;
-    height: 455px;
+    height: 395px !important;
     overflow-y: auto;
 
 }
@@ -220,4 +222,13 @@ ngx-spinner .loading-text {
 
 .kt-grid__item {
     /* margin-top: -65px; */
+}
+#kt_login{
+    overflow: hidden;
+}
+.ng-star-inserted{
+    height: 100%;
+}
+.ui-dropdown-items-wrapper{
+    background-color:white;
 }

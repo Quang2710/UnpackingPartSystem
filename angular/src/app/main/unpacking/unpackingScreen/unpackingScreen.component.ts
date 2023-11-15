@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, Injectable, Injector, OnInit } from '@angular/core';
+import { Component, Injectable, Injector, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { PaginationParamsModel } from '@app/shared/common/models/base.model';
 import { GridTableService } from '@app/shared/common/services/grid-table.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
@@ -15,9 +15,11 @@ import { error } from 'console';
   styleUrls: ['./unpackingScreen.component.less']
 })
 @Injectable({
-    providedIn: 'root'
-  })
+  providedIn: 'root'
+})
 export class UnpackingScreenComponent extends AppComponentBase implements OnInit {
+
+  @ViewChild('addrobing') childModal :AddRobingComponent;
 
   rowdata;
   paginationParams: PaginationParamsModel = {
@@ -49,7 +51,8 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
     private _service: UnpackingServiceProxy,
     private gridTableService: GridTableService,
     private _fileDownloadService: FileDownloadService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private viewContainerRef: ViewContainerRef
   ) {
     super(injector)
   }
@@ -57,6 +60,15 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
   ngOnInit() {
     this.getModulePlan();
   }
+  ngAfterViewInit() {
+    setInterval(() => {
+      this.getDatas();
+    }, 1000);
+  }
+
+  ngOnDestroy():void{
+    }
+
 
   // GetModule Unpacking
   getModulePlan() {
@@ -77,10 +89,7 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
     this._service.getPartInModule(this.moduleNoCurrent)
       .subscribe((result) => {
         this.rowdata = result;
-        console.log('module current',this.moduleNoCurrent);
-        console.log('part',this.rowdata);
       });
-
   }
 
   finishUpkModule(id: string) {
@@ -101,8 +110,8 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
     } else if (status === 'FINISH') {
       return 'FINISH';
     }
-    else if (status === 'ROBBING'){
-        return 'ROBBING';
+    else if (status === 'ROBBING') {
+      return 'ROBBING';
     }
   }
   checkStatusModule(moduleStatus: string): string {
@@ -112,26 +121,28 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
       return 'DELAY';
     }
   }
-  addrobing(data){
-    this.bsModalRef = this.modalService.show(AddRobingComponent,{
-        initialState:{
-            partDetail: data
-        }
+  addrobing(data) {
+    this.bsModalRef = this.modalService.show(AddRobingComponent, {
+      initialState: {
+        partDetail: data
+      }
     });
   }
-  finishPart(record){
+  finishPart(record) {
     this.message.confirm(this.l('Are You Sure To Finish Part'), 'FINISH PART', (isConfirmed) => {
-        if (isConfirmed) {
-            this._service.finishPart(record.id).subscribe(_=>{
-                this.notify.success(this.l('Finish success'));
-                this.getModulePlan();
-                console.log('finish part',record.id);
-            },(error)=>{
-                this.notify.error('Finish Error',error)
-            })
-        }
+      if (isConfirmed) {
+        this._service.finishPart(record.id).subscribe(_ => {
+          this.notify.success(this.l('Finish success'));
+          this.getModulePlan();
+          console.log('finish part', record.id);
+        }, (error) => {
+          this.notify.error('Finish Error', error)
+        })
+      }
 
     });
   }
-
+test(){
+  alert('HIDE')
+}
 }
