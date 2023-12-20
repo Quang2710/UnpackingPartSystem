@@ -144,6 +144,8 @@
             //flex-direction: column;
             width: 100%;
             height: 70%;
+            overflow-x: auto;
+
 
             .progress-item {
                 width: calc(100% / 5);
@@ -185,8 +187,14 @@
             }
 
         }
+
+        .progress::-webkit-scrollbar {
+            display: none;
+        }
+       
     }
 }
+
 .container-devaning,
 .header,
 .body,

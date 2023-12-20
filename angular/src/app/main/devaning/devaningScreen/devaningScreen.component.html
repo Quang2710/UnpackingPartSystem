@@ -27,12 +27,12 @@
           <div class="containerName">{{containerNameCurrent}}</div>
         </div>
       </div>
-    </div>x`
+    </div>
 
   </div>
   <div class="fotter content">
     <div class="plan_actual">
-      <div class="plan_actual_item" *ngFor="let item of fornumbersProcess()"
+      <div class="plan_actual_item" *ngFor="let item of fornumbersProcess();let i = index"
         [style.width.%]="100 / fornumbersProcess().length"></div>
     </div>
     <div class="progress">
