@@ -27,6 +27,15 @@
             <img src="/assets/common/images/pcstore.jpg" class="logo-warehouse" />
         </div>
         <div class="pcstore-table-data">
+            <div class="input-search w-100 position-relative mr-5 mb-2">
+                <input type="text" class="w-100 h-100 input-search-robing" placeholder="Search Item" [(ngModel)]="partNo">
+                <button class="input-search-btn btn-search" (click)="searchOrClear()">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="input-search-btn btn-clear" (click)="searchOrClear('Clear')">
+                    <i class="fas fa-backspace"></i>
+                </button>
+            </div>
             <div class="pcstore-table w-100 h-75 mr-5">
                 <div class="table-header w-100 d-flex">
                     <div class="header-title">Part No</div>
@@ -40,6 +49,11 @@
                     </div>
                 </div>
             </div>
+            <div class="button-action w-100 d-flex justify-content-end mr-5 mt-3">
+                <button class="btn btn-success font-weight-bold" id="exportToExcel" (click)="exportToExcel()">
+                  <i class="fas fa-file-excel mr-1"></i>{{ l('Export Excel') }}
+                </button>
+              </div>
         </div>
     </div>
 </div>

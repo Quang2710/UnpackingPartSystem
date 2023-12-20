@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { PaginationParamsModel } from '@app/shared/common/models/base.model';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { PcHomeServiceProxy } from '@shared/service-proxies/service-proxies';
+import { FileDownloadService } from '@shared/utils/file-download.service';
 
 @Component({
     selector: 'app-pchome',
@@ -18,6 +19,7 @@ export class PcHomeComponent extends AppComponentBase implements OnInit {
     constructor(
         injector: Injector,
         private _service: PcHomeServiceProxy,
+        private _fileDownloadService: FileDownloadService,
     ) {
         super(injector)
     }
@@ -26,9 +28,9 @@ export class PcHomeComponent extends AppComponentBase implements OnInit {
         this.getDatas();
     }
 
-    getDatas() {
+    getDatas(partNo?) {
         this._service.getAll(
-            this.partNo,
+            partNo,
             this.partName
         )
             .subscribe((result) => {
@@ -38,6 +40,20 @@ export class PcHomeComponent extends AppComponentBase implements OnInit {
 
             });
 
+    }
+     searchOrClear(type?) {
+        this.partNo = (type === "Clear") ? '' : this.partNo;
+        this.getDatas(this.partNo);
+    }
+    exportToExcel(): void {
+        this._service
+            .getPcHomeToExcel(
+                this.partNo,
+                this.partName,               
+            )
+            .subscribe((result) => {
+                this._fileDownloadService.downloadTempFile(result);
+            });
     }
 
 }

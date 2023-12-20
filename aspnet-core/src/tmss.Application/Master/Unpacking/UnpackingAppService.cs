@@ -10,8 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using tmss.Dto;
+using tmss.Master.Robing.Dto;
 using tmss.Master.Unpacking.Dto;
 using tmss.Master.Unpacking.Exporting;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace tmss.Master.Unpacking
 {
@@ -87,7 +89,29 @@ namespace tmss.Master.Unpacking
             return await query.ToListAsync();
         }
 
-
+        public async Task<List<PartListDto>> GetAllPartList(string partNo, string moduleNo, string status)
+        {
+            var a = await _upkscreen.QueryAsync<PartListDto>(
+                @"select * from Part where (ISNULL(@partNo, '') = '' OR PartNo LIKE CONCAT('%', @partNo, '%')) and (ISNULL(@moduleNo, '') = '' OR ModuleNo LIKE CONCAT('%', @moduleNo, '%')) and  (ISNULL(@status, '') = '' OR Status LIKE CONCAT('%', @status, '%'))", new
+            {
+                partNo = partNo,
+                moduleNo = moduleNo,
+                status = status
+            });
+            return a.ToList();
+        }
+        public async Task<FileDto> GetAllPartListExcel(string partNo,string moduleNo, string status)
+        {
+            var a = await _upkscreen.QueryAsync<PartListDto>(
+                @"select * from Part where (ISNULL(@partNo, '') = '' OR PartNo LIKE CONCAT('%', @partNo, '%')) and (ISNULL(@moduleNo, '') = '' OR ModuleNo LIKE CONCAT('%', @moduleNo, '%')) and  (ISNULL(@status, '') = '' OR Status LIKE CONCAT('%', @status, '%'))", new
+                {
+                    partNo = partNo,
+                    moduleNo = moduleNo,
+                    status = status
+                });
+            var exportToExcel = a.ToList();
+            return _calendarListExcelExporter.ExportToFilePartList(exportToExcel);
+        }
         public async Task<List<PartInModuleDto>> GetPartInModule(string module_no)
         {
             string _sql = "Exec GET_PART_IN_MODULE @ModuleNo";

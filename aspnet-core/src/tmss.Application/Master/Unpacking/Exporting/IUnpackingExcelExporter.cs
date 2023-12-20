@@ -10,5 +10,7 @@ namespace tmss.Master.Unpacking.Exporting
     public interface IUnpackingExcelExporter : IApplicationService
     {
         FileDto ExportToFile(List<UnpackingDto> unpacking);
+
+        FileDto ExportToFilePartList(List<PartListDto> partlist);
     }
 }

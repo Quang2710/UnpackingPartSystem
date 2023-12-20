@@ -35,6 +35,7 @@ export class AppNavigationService {
             ]),
             new AppMenuItem('Unpacking', '', 'flaticon-cogwheel', '', [], [
                 new AppMenuItem('UpkLot', '', 'flaticon-grid-menu-v2', '/app/main/unpacking/unpackingLot'),
+                new AppMenuItem('UpkPartList', '', 'flaticon-grid-menu-v2', '/app/main/unpacking/unpackingPartList'),
                 new AppMenuItem('UpkScreen', '', 'flaticon-list-3', '/screens/unpackingScreen')
 
             ]),

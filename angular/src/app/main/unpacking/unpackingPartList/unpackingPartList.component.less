@@ -1,0 +1,93 @@
+.container {
+    width: 100%;
+    background-color: aliceblue;
+    height: 100%;
+
+    .title {
+        h1 {
+            text-align: center;
+            color: linear-gradient(red 0%, orange 25%, yellow 50%, green 75%, blue 100%);
+            font-family: 'Raleway', sans-serif;
+            font-size: 62px;
+            font-weight: 800;
+            line-height: 72px;
+            margin: 0 0 24px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+
+    .header-search {
+        display: flex;
+        margin-bottom: 10px;
+
+        >div {
+            display: flex;
+            margin-right: 5px;
+        }
+
+        .input-search {
+            label {
+                color: white;
+                font-weight: 800;
+                background-color: #384AD7;
+            }
+        }
+    }
+
+    .footer-button-action {
+        margin-top: 20px;
+    }
+}
+.card {
+    position: relative;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    p-table {
+        ::ng-deep {
+            thead {
+                position: sticky;
+                top: 0;
+                z-index: 111;
+            }
+
+            .ui-table-thead {
+                tr {
+                    th {
+                        width: 150px;
+                        background-color: #c8deff;
+                    }
+
+                    td {
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            .ui-table-wrapper::-webkit-scrollbar {
+                height: 7px;
+            }
+
+        }
+
+        body .ui-widget {
+            height: 50vw;
+        }
+
+        .header-p-table {
+            margin-bottom: 10px;
+        }
+
+    }
+
+}
+.UPK {
+    background-color: rgb(36, 108, 196) !important;
+
+}
+
+.FINISH {
+    background-color: rgb(36, 196, 36) !important;
+}

@@ -42,4 +42,14 @@ namespace tmss.Master.Unpacking.Dto
 
   
     }
+    public class PartListDto : Entity<long?>
+    {
+        public string PartNo { get; set; }
+        public string ModuleNo { get; set; }
+        public string PartName { get; set; }
+        public string Renban { get; set; }        
+        public string Supplier { get; set; }
+        public string Status { get; set; }
+    }
+    
 }

@@ -3,6 +3,7 @@ import { inject } from '@angular/core/testing';
 import { PaginationParamsModel } from '@app/shared/common/models/base.model';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { PcStoreServiceProxy } from '@shared/service-proxies/service-proxies';
+import { FileDownloadService } from '@shared/utils/file-download.service';
 
 @Component({
     selector: 'app-pcstore',
@@ -19,6 +20,7 @@ export class PcStoreComponent extends AppComponentBase implements OnInit {
     constructor(
         injector: Injector,
         private _service: PcStoreServiceProxy,
+        private _fileDownloadService: FileDownloadService,
     ) {
         super(injector)
     }
@@ -27,9 +29,9 @@ export class PcStoreComponent extends AppComponentBase implements OnInit {
         this.getDatas();
     }
 
-    getDatas() {
+    getDatas(partNo?) {
         this._service.getAll(
-            this.partNo,
+            partNo,
             this.partName
         )
             .subscribe((result) => {
@@ -40,6 +42,20 @@ export class PcStoreComponent extends AppComponentBase implements OnInit {
 
             });
 
+    }
+    searchOrClear(type?) {
+        this.partNo = (type === "Clear") ? '' : this.partNo;
+        this.getDatas(this.partNo)
+    }
+    exportToExcel(): void {
+        this._service
+            .getPcStoreToExcel(
+                this.partNo,
+                this.partName,               
+            )
+            .subscribe((result) => {
+                this._fileDownloadService.downloadTempFile(result);
+            });
     }
 
 }

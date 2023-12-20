@@ -34,9 +34,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
                         path: 'unpacking/unpackingLot',
                         loadChildren: () => import('./unpacking/unpackingLot/unpackingLot.module').then(m => m.UnpackingLotModule),
                     },
+                    {
+                        path: 'unpacking/unpackingPartList',
+                        loadChildren: () => import('./unpacking/unpackingPartList/unpackingPartList.module').then(m => m.UnpackingPartListModule),
+                    },
 
                     {
-                        path: 'unpacking/unpackingLot',
+                        path: 'unpacking/unpackingScreen',
                         loadChildren: () => import('./unpacking/unpackingScreen/unpackingScreen.module').then(m => m.UnpackingScreenModule),
                     },
 

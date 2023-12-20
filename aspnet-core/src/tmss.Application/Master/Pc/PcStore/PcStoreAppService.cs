@@ -10,28 +10,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using tmss.Dto;
+using tmss.Master.Exporting;
 using tmss.Master.Pc;
-using tmss.Master.Unpacking.Dto;
-using tmss.Master.Unpacking.Exporting;
+using tmss.Master.Pc.PcStore.Exporting;
 
-namespace tmss.Master.Pc
+namespace tmss.Master
 {
-    public class PcStoreAppService : tmssAppServiceBase , IPcStoreAppService
+    public class PcStoreAppService : tmssAppServiceBase, IPcStoreAppService
     {
         private readonly IRepository<PcStore, long> _pcstore;
+        private readonly IPcStoreExcelExporter _calendarListExcelExporter;
 
 
-        public PcStoreAppService(IRepository<PcStore, long> pcstore
-
-            )
-
+        public PcStoreAppService(IRepository<PcStore, long> pcstore,
+                                IPcStoreExcelExporter calendarListExcelExporter)
         {
             _pcstore = pcstore;
+            _calendarListExcelExporter = calendarListExcelExporter;
         }
-          
+
         public async Task<List<PcStoreDto>> GetAll(PcStoreInputDto input)
         {
             var query = _pcstore.GetAll().AsNoTracking()
+                 .Where(e => string.IsNullOrWhiteSpace(input.PartNo) || e.PartNo.Contains(input.PartNo))
                 .Select(PcStore => new PcStoreDto
                 {
                     Id = PcStore.Id,
@@ -40,6 +41,19 @@ namespace tmss.Master.Pc
                 });
 
             return await query.ToListAsync();
+        }
+        public async Task<FileDto> GetPcStoreToExcel(PcStoreInputDto input)
+        {
+            var query = _pcstore.GetAll().AsNoTracking()
+                 .Where(e => string.IsNullOrWhiteSpace(input.PartNo) || e.PartNo.Contains(input.PartNo))
+                 .Select(PcStore => new PcStoreDto
+                 {
+                     Id = PcStore.Id,
+                     PartNo = PcStore.PartNo,
+                     PartName = PcStore.PartName,
+                 });
+            var exportToExcel = await query.ToListAsync();
+            return _calendarListExcelExporter.ExportToFile(exportToExcel);
         }
 
     }

@@ -49,5 +49,37 @@ namespace tmss.Master.Unpacking.Exporting
                     }
                 });
         }
+        public FileDto ExportToFilePartList(List<PartListDto> partlist)
+        {
+            return CreateExcelPackage(
+                "PartList.xlsx",
+                excelPackage =>
+                {
+                    var sheet = excelPackage.CreateSheet("PartList");
+                    AddHeader(
+                                sheet,
+                                    ("PartNo"),
+                                    ("ModuleNo"),
+                                    ("PartName"),
+                                    ("Renban"),
+                                    ("Supplier"),
+                                    ("Status")                                   
+                                   );
+                    AddObjects(
+                         sheet, 1, partlist,
+                                _ => _.PartNo,
+                                _ => _.ModuleNo,
+                                _ => _.PartName,
+                                _ => _.Renban,
+                                _ => _.Supplier,
+                                _ => _.Status                            
+                                );
+
+                    for (var i = 0; i < 8; i++)
+                    {
+                        sheet.AutoSizeColumn(i);
+                    }
+                });
+        }
     }
 }
