@@ -4,6 +4,7 @@ import { DataFormatService } from '@app/shared/common/services/data-format.servi
 import { GridTableService } from '@app/shared/common/services/grid-table.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { RobingServiceProxy, UnpackingServiceProxy } from '@shared/service-proxies/service-proxies';
+import { FileDownloadService } from '@shared/utils/file-download.service';
 import { error } from 'console';
 import * as moment from 'moment';
 
@@ -43,6 +44,7 @@ export class RobingComponent extends AppComponentBase implements OnInit {
         injector: Injector,
         private _service: RobingServiceProxy,
         private _unpackingProxy: UnpackingServiceProxy,
+        private _fileDownloadService: FileDownloadService,
     ) {
         super(injector)
     }
@@ -141,7 +143,15 @@ export class RobingComponent extends AppComponentBase implements OnInit {
           });
     }
 
-
+    exportToExcel(): void {
+        this._service
+            .getRobingToExcel(
+                this.partNo,
+            )
+            .subscribe((result) => {
+                this._fileDownloadService.downloadTempFile(result);
+            });
+    }
 
 
 }

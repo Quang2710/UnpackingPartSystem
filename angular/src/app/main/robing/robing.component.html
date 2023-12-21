@@ -21,17 +21,17 @@
                     <div class="statistic statistic-today h-100 d-flex justify-content-center align-items-center">
                         <p>Robbing Today</p>
                         <h3>{{robingToday || 0}}</h3>
-                        <span> <i class="fas fa-vr-cardboard"></i> +8.51%</span>
+                        <!-- <span> <i class="fas fa-vr-cardboard"></i> +8.51%</span> -->
                     </div>
                     <div class="statistic statistic-today h-100 d-flex justify-content-center align-items-center">
                         <p>Part Fail</p>
                         <h3>{{partFail || 0}}</h3>
-                        <span> <i class="fas fa-vr-cardboard"></i> +8.51%</span>
+                        <!-- <span> <i class="fas fa-vr-cardboard"></i> +8.51%</span> -->
                     </div>
                     <div class="statistic statistic-today h-100 d-flex justify-content-center align-items-center">
                         <p>Part Loan</p>
                         <h3>{{partLoan || 0}}</h3>
-                        <span> <i class="fas fa-vr-cardboard"></i> +8.51%</span>
+                        <!-- <span> <i class="fas fa-vr-cardboard"></i> +8.51%</span> -->
                     </div>
                     <div class="statistic statistic-today h-100 d-flex justify-content-center align-items-center">
                         <p>Total robbing</p>
@@ -48,23 +48,30 @@
         <div class="robing-list-detail w-100 ">
             <div class="robing-table w-100 h-100">
                 <div class="table-header w-100 d-flex">
-                    <div class="header-title">Part No</div>
-                    <div class="header-title">Part Name</div>
-                    <div class="header-title">Suppiler</div>
-                    <div class="header-title">Type</div>
+                    <div class="header-title col-1">No.</div>
+                    <div class="header-title col-3">Part No</div>
+                    <div class="header-title col-3">Part Name</div>
+                    <div class="header-title col-2">Suppiler</div>
+                    <div class="header-title col-3">Type</div>
                 </div>
                 <div class="table-body w-100 mt-2">
                     <div class="list-item w-100 d-flex" *ngFor="let item of rowdata;let i = index"
                         (click)="onchangeSelection(item,i)"
                         [ngClass]="{'selected-background': selectedDiv === item}">
-                        <div class="body-content">{{item.partNo}}</div>
-                        <div class="body-content">{{item.partName}}</div>
-                        <div class="body-content">{{item.supplier}}</div>
-                        <div class="body-content">{{item.type}}</div>
+                        <div class="body-content col-1">{{i + 1}}</div>
+                        <div class="body-content col-3">{{item.partNo}}</div>
+                        <div class="body-content col-3">{{item.partName}}</div>
+                        <div class="body-content col-2">{{item.supplier}}</div>
+                        <div class="body-content col-3">{{item.type}}</div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="button-action w-100 d-flex justify-content-end mr-5 mt-3">
+            <button class="btn btn-success font-weight-bold" (click)="exportToExcel()">
+              <i class="fas fa-file-excel mr-1"></i>{{ l('Export Excel') }}
+            </button>
+          </div>
     </div>
     <div class="robing-detail h-100">
         <div class="robing-detail-content w-100 h-100">

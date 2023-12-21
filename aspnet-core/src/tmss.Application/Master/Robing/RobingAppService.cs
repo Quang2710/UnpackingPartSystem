@@ -6,7 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using tmss.Dto;
 using tmss.Master.Robing.Dto;
+using tmss.Master.Robing.Exporting;
+using tmss.Master.Unpacking.Exporting;
 
 namespace tmss.Master.Robing
 {
@@ -14,15 +17,17 @@ namespace tmss.Master.Robing
     {
         private readonly IRepository<Robings, long> _robing;
         private readonly IDapperRepository<Robings, long> _robingScreen;
-
+        private readonly IRobingExcelExporter _calendarListExcelExporter;
         public RobingAppService(IRepository<Robings, long> robing,
-                                     IDapperRepository<Robings, long> robingScreen
+                                     IDapperRepository<Robings, long> robingScreen,
+                                     IRobingExcelExporter calendarListExcelExporter
             )
 
         {
 
             _robing = robing;
             _robingScreen = robingScreen;
+            _calendarListExcelExporter = calendarListExcelExporter;
         }
 
 
@@ -33,6 +38,15 @@ namespace tmss.Master.Robing
                 partNo = partNo
             });
             return a.ToList();
+        }
+        public async Task<FileDto> GetRobingToExcel(string partNo)
+        {
+            var a = await _robingScreen.QueryAsync<RobingDto>(@"select * from Robing where (ISNULL(@partNo, '') = '' OR PartNo LIKE CONCAT('%', @partNo, '%'))", new
+            {
+                partNo = partNo
+            });
+            var exportToExcel =  a.ToList();
+            return _calendarListExcelExporter.ExportToFile(exportToExcel);
         }
     }
     }

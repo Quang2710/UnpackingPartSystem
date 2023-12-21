@@ -109,8 +109,8 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
     } else if (status === 'FINISH') {
       return 'FINISH';
     }
-    else if (status === 'ROBBING') {
-      return 'ROBBING';
+    else if (status === 'ROBING') {
+      return 'ROBING';
     }
   }
   checkStatusModule(moduleStatus: string): string {

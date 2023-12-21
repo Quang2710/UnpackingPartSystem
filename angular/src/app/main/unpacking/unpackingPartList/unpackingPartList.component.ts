@@ -68,8 +68,8 @@ export class UnpackingPartListComponent extends AppComponentBase implements OnIn
         console.log('Selected Unpacking No: ', this.selectedRowdata);
     }
     getStatusBackgroundClass(status: string): string {
-        if (status === 'UPK') {
-            return 'UPK';
+        if (status === 'ROBING') {
+            return 'ROBING';
         } else if (status === 'FINISH') {
             return 'FINISH';
         }
