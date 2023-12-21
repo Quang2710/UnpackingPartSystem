@@ -87,11 +87,11 @@ export class DevaningScreenComponent extends AppComponentBase implements OnInit 
             this.currentIndex = 0; 
             this.resetColor();
             this.startColorChangeInterval();
-            // this._service.finishDvnCont(this.containerCurren.id)
-            // .subscribe(() => {
-            //     this.notify.success(this.l('FINISH Successfully '));               
-            //         this.getDevaningPlan();         
-            // });
+            this._service.finishDvnCont(this.containerCurren.id)
+            .subscribe(() => {
+                this.notify.success(this.l('FINISH Successfully '));               
+                    this.getDevaningPlan();         
+            });
             console.log('done');
             
         }

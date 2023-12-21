@@ -107,6 +107,7 @@ export class StatisticsComponent extends AppComponentBase implements OnInit {
     countContainer: number;
     countRobing : number;
     countModule : number;
+    countPart : number;
     countPcStore : number;
     countPcHome : number;
 
@@ -151,6 +152,11 @@ export class StatisticsComponent extends AppComponentBase implements OnInit {
     getModule(){
         this._unpackingService.getAll('','','','','',).subscribe((result) => {
                 this.countModule = result.length;
+            });
+    }
+    getPart(){
+        this._unpackingService.getAllPartList('','','').subscribe((result) => {
+                this.countPart = result.length;
             });
     }
     getPcStore(){

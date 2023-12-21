@@ -22,14 +22,8 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
   @ViewChild('addrobing') childModal :AddRobingComponent;
 
   rowdata;
-  paginationParams: PaginationParamsModel = {
-    pageNum: 1,
-    pageSize: 20,
-    totalCount: 0,
-    skipCount: 0,
-    sorting: '',
-    totalPage: 1,
-  };
+  partStatus;
+  partCurrent;
   modulePlan;
   moduleActual;
   moduleFinish;
@@ -43,6 +37,8 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
   supplier;
   partNoCurrent;
   moduleStatus;
+
+
 
   bsModalRef: BsModalRef;
 
@@ -89,6 +85,9 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
     this._service.getPartInModule(this.moduleNoCurrent)
       .subscribe((result) => {
         this.rowdata = result;
+        this.partStatus = result.filter(item => item.status !== 'READY').length;
+        this.partCurrent = result.filter(item => item.status).length;
+
       });
   }
 
@@ -134,6 +133,7 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
         this._service.finishPart(record.id).subscribe(_ => {
           this.notify.success(this.l('Finish success'));
           this.getModulePlan();
+          this.checkFinishModule();
           console.log('finish part', record.id);
         }, (error) => {
           this.notify.error('Finish Error', error)
@@ -142,7 +142,13 @@ export class UnpackingScreenComponent extends AppComponentBase implements OnInit
 
     });
   }
-test(){
-  alert('HIDE')
-}
+  checkFinishModule(){
+    if(this.partStatus + 1 == this.partCurrent){
+      this._service.finishUpkModule(this.moduleNoCurrent)
+          .subscribe(() => {
+            this.notify.success(this.l('FINISH Successfully '));
+            this.getModulePlan();
+          });
+    }
+  }
 }
