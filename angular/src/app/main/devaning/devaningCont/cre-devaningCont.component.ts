@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, Injector, OnInit, Output, ViewChild } from '@angular/core';
 import { DataFormatService } from '@app/shared/common/services/data-format.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
-import { CreateOrEditDevaningContModuleDto, DevaningContModuleServiceProxy } from '@shared/service-proxies/service-proxies';
+import {  DevaningContModuleDto, DevaningContModuleServiceProxy } from '@shared/service-proxies/service-proxies';
 import * as moment from 'moment';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { finalize } from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class CreateEditDvnContComponent extends AppComponentBase {
 
     active: boolean = false;
     saving: boolean = false;
-    rowdata: CreateOrEditDevaningContModuleDto = new CreateOrEditDevaningContModuleDto();
+    rowdata: DevaningContModuleDto = new DevaningContModuleDto();
 
     constructor(
         public bsModalRef: BsModalRef,
@@ -29,7 +29,12 @@ export class CreateEditDvnContComponent extends AppComponentBase {
         super(injector);
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        console.log('edit',this.rowdata);
+        if(this.rowdata == undefined){
+            this.rowdata = new DevaningContModuleDto
+        }      
+     }
 
 
     ngAfterViewInit() {
@@ -41,7 +46,7 @@ export class CreateEditDvnContComponent extends AppComponentBase {
         this.rowdata.actDevaningDate = moment(this.rowdata.actDevaningDate)
         this.rowdata.planDevaningDate = moment(this.rowdata.planDevaningDate)
         this.rowdata.workingDate = moment(this.rowdata.workingDate)
-        this._service.createOrEdit(this.rowdata)
+        this._service.updateOrCreate(this.rowdata)
             .pipe(finalize(() => this.saving = false))
             .subscribe(() => {
                 this.notify.info(this.l('Saved Successfully'));

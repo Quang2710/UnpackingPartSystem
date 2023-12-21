@@ -62,7 +62,7 @@
         </p-table>
     </div>
     <div class="footer-button-action d-flex justify-content-center">
-        <button class="btn btn-success font-weight-bold" id="exportToExcel" (click)="exportToExcel()">
+        <button class="btn btn-success font-weight-bold" id="exportToExcel" (click)="exportToExcel()" [disabled]="!selectedRowdata">
             <i class="fas fa-file-excel mr-1"></i>{{ l('Export Excel') }}
         </button>
 

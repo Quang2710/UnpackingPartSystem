@@ -76,11 +76,11 @@
             <i class="fa fa-plus mr-1"></i>{{ l('Add') }}
         </button>
 
-        <button class="btn btn-warning font-weight-bold">
+        <button class="btn btn-warning font-weight-bold" [disabled]="!selectedRowdata" (click)="openModal(selectedRowdata)">
             <i class="far fa-edit mr-1"></i>{{ 'Edit' }}
         </button>
 
-        <button class="btn btn-danger font-weight-bold" (click)="deleteRow(selectedRowdata)">
+        <button class="btn btn-danger font-weight-bold" (click)="deleteRow(selectedRowdata)" [disabled]="!selectedRowdata">
             <i class="fas fa-trash-alt mr-1"></i>{{ 'Delete' }}
         </button>
     </div>

@@ -12,7 +12,7 @@ namespace tmss.Master.DevaningModule
     {
         Task<List<DevaningContModuleDto>> GetAll(GetDevaningContModuleInput input);
 
-        Task CreateOrEdit(CreateOrEditDevaningContModuleDto input);
+        Task UpdateOrCreate(DevaningContModuleDto input);
 
         Task Delete(EntityDto<long> input);
 

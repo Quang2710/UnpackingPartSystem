@@ -163,7 +163,7 @@ namespace tmss
             //User Delegations
             configuration.CreateMap<CreateUserDelegationDto, UserDelegation>();
             //Devaning
-            configuration.CreateMap<CreateOrEditDevaningContModuleDto, DvnContList>().ReverseMap();
+            configuration.CreateMap<DevaningContModuleDto, DvnContList>().ReverseMap();
             //Unpacking
             configuration.CreateMap<CreateOrEditUnpackingDto, LupContModule>().ReverseMap();
             //module

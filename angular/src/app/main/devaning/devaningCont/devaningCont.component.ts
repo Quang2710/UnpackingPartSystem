@@ -15,6 +15,7 @@ import { forEach } from 'lodash';
     templateUrl: './devaningCont.component.html',
     styleUrls: ['./devaningCont.component.less'],
 })
+
 export class DevaningContComponent extends AppComponentBase implements OnInit {
 
     statusBackground;
@@ -22,7 +23,7 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
     filterText: string = '';
     isLoading;
     rowdata: any[] = [];
-    selectedRowdata: DevaningContModuleDto = new DevaningContModuleDto();
+    selectedRowdata: DevaningContModuleDto = null;
     selectedRow: DevaningContModuleDto = new DevaningContModuleDto();
     data: DevaningContModuleDto = new DevaningContModuleDto();
 
@@ -110,8 +111,14 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
             });
     }
 
-    openModal() {
-        this.bsModalRef = this.modalService.show(CreateEditDvnContComponent, {});
+    openModal(rowdata?) {
+        const initialState = {
+            rowdata: rowdata
+          };
+        this.bsModalRef = this.modalService.show(CreateEditDvnContComponent, {
+            initialState: initialState,
+            class: 'modal-lg'
+          });
     }
 
     onRowSelect(event) {

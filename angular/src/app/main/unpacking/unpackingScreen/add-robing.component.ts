@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Inject, Injector, OnInit, Output, ViewChild } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
-import { CreateOrEditDevaningContModuleDto, DevaningContModuleServiceProxy, UnpackingServiceProxy } from '@shared/service-proxies/service-proxies';
+import { UnpackingServiceProxy } from '@shared/service-proxies/service-proxies';
 import { error } from 'console';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { finalize } from 'rxjs/operators';
@@ -20,13 +20,12 @@ export class AddRobingComponent extends AppComponentBase {
 
     active: boolean = false;
     saving: boolean = false;
-    rowdata: CreateOrEditDevaningContModuleDto = new CreateOrEditDevaningContModuleDto();
 
     constructor(
         public bsModalRef: BsModalRef,
         private injector: Injector,
         private _service: UnpackingServiceProxy,
-        private unpackingScreen: UnpackingScreenComponent
+        private unpackingScreen: UnpackingScreenComponent,
     ) {
         super(injector);
     }

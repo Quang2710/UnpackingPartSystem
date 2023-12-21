@@ -2,6 +2,7 @@
 using Abp.Authorization;
 using Abp.Collections.Extensions;
 using Abp.Dapper.Repositories;
+using Abp.Domain.Entities;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.EntityFrameworkCore.Uow;
@@ -41,8 +42,8 @@ namespace tmss.Master.DevaningContModule
             _calendarListExcelExporter = calendarListExcelExporter;
         }
 
-        
-        public async Task CreateOrEdit(CreateOrEditDevaningContModuleDto input)
+
+        public async Task UpdateOrCreate(DevaningContModuleDto input)
         {
             if (input.Id == null)
             {
@@ -52,24 +53,35 @@ namespace tmss.Master.DevaningContModule
             {
                 await Update(input);
             }
-
         }
 
         //Create
-        protected virtual async Task Create(CreateOrEditDevaningContModuleDto input)
+        protected virtual async Task Create(DevaningContModuleDto input)
         {
             var mainObj = ObjectMapper.Map<DvnContList>(input);
             await _repo.InsertAsync(mainObj);
         }
+
         //Update
-        protected virtual async Task Update(CreateOrEditDevaningContModuleDto input)
-        {       
+        protected virtual async Task Update(DevaningContModuleDto input)
+        {
             var mainObj = await _repo.FirstOrDefaultAsync((long)input.Id);
-            ObjectMapper.Map(input, mainObj);
-        }        
+
+            if (mainObj != null)
+            {
+                ObjectMapper.Map(input, mainObj);
+                // You might want to add additional logic for updating related entities or perform other actions
+                await _repo.UpdateAsync(mainObj);
+            }
+            else
+            {              
+                 throw new EntityNotFoundException(typeof(DvnContList), input.Id);
+            }
+        }
+
 
         //Delete
-        
+
         public async Task Delete(EntityDto<long> input)
         {            
             var result = await _repo.GetAll().FirstOrDefaultAsync(e => e.Id == input.Id);
