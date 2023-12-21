@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Inject, Injector, OnInit, Output, ViewChild } from '@angular/core';
+import { DataFormatService } from '@app/shared/common/services/data-format.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { CreateOrEditDevaningContModuleDto, DevaningContModuleServiceProxy } from '@shared/service-proxies/service-proxies';
+import * as moment from 'moment';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { finalize } from 'rxjs/operators';
 
@@ -36,6 +38,9 @@ export class CreateEditDvnContComponent extends AppComponentBase {
     }
     save(): void {
         this.saving = true;
+        this.rowdata.actDevaningDate = moment(this.rowdata.actDevaningDate)
+        this.rowdata.planDevaningDate = moment(this.rowdata.planDevaningDate)
+        this.rowdata.workingDate = moment(this.rowdata.workingDate)
         this._service.createOrEdit(this.rowdata)
             .pipe(finalize(() => this.saving = false))
             .subscribe(() => {

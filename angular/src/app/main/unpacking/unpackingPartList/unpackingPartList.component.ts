@@ -18,7 +18,7 @@ export class UnpackingPartListComponent extends AppComponentBase implements OnIn
     partNo;
     moduleNo;
     status;
-  
+
 
     constructor(
         injector: Injector,
@@ -34,7 +34,7 @@ export class UnpackingPartListComponent extends AppComponentBase implements OnIn
     }
     getDatas() {
         this._service.getAllPartList(
-            this.partNo,    
+            this.partNo,
             this.moduleNo,
             this.status
         )
@@ -57,10 +57,14 @@ export class UnpackingPartListComponent extends AppComponentBase implements OnIn
             .getAllPartListExcel(
                 this.partNo,
                 this.moduleNo,
-                this.status               
+                this.status
             )
             .subscribe((result) => {
                 this._fileDownloadService.downloadTempFile(result);
+                this.notify.success('Export success')
+
+            },(error)=>{
+                this.notify.error('Export failed',error)
             });
     }
     onRowSelect(event) {

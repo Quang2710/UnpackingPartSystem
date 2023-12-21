@@ -103,6 +103,10 @@ export class DevaningContComponent extends AppComponentBase implements OnInit {
             )
             .subscribe((result) => {
                 this._fileDownloadService.downloadTempFile(result);
+                this.notify.success('Export success')
+
+            },(error)=>{
+                this.notify.error('Export failed',error)
             });
     }
 

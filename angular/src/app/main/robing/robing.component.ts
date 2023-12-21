@@ -37,7 +37,7 @@ export class RobingComponent extends AppComponentBase implements OnInit {
     increaseLoan;
     increaseTotal;
 
-    arrayTest = ['1','2','3','4','5']
+    arrayTest = ['1', '2', '3', '4', '5']
     listPartInModule;
 
     constructor(
@@ -67,7 +67,7 @@ export class RobingComponent extends AppComponentBase implements OnInit {
     getTimeNow() {
         const d = new Date();
         const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        this.dateNow = (((d.getHours() + "").length == 1) ?     ("0" + d.getHours()) : d.getHours()) + ":" + (((d.getMinutes() + "").length == 1) ? ("0" + d.getMinutes()) : d.getMinutes()) + " : " + (((d.getSeconds() + "").length == 1) ? ("0" + d.getSeconds()) : d.getSeconds()) + " ( " + (((month[d.getMonth()] + "").length == 1) ? ("0" + month[d.getMonth()]) : month[d.getMonth()]) + " - " + (((d.getDay() + "").length == 1) ? ("0" + d.getDay()) : d.getDay()) + " ) "
+        this.dateNow = (((d.getHours() + "").length == 1) ? ("0" + d.getHours()) : d.getHours()) + ":" + (((d.getMinutes() + "").length == 1) ? ("0" + d.getMinutes()) : d.getMinutes()) + " : " + (((d.getSeconds() + "").length == 1) ? ("0" + d.getSeconds()) : d.getSeconds()) + " ( " + (((month[d.getMonth()] + "").length == 1) ? ("0" + month[d.getMonth()]) : month[d.getMonth()]) + " - " + (((d.getDay() + "").length == 1) ? ("0" + d.getDay()) : d.getDay()) + " ) "
     }
 
     getAllRobing(partNo?) {
@@ -129,18 +129,18 @@ export class RobingComponent extends AppComponentBase implements OnInit {
 
     }
 
-    getPartInModule(){
-        this._unpackingProxy.getPartInModule(this.moduleNo).subscribe((res)=>{
-            this.listPartInModule =  res
+    getPartInModule() {
+        this._unpackingProxy.getPartInModule(this.moduleNo).subscribe((res) => {
+            this.listPartInModule = res
         })
     }
 
-    requestGiveBack(){
-        this.message.confirm(this.l(''), 'REQUEST GIVE BACK TO '+this.supplier, (isConfirmed) => {
+    requestGiveBack() {
+        this.message.confirm(this.l(''), 'REQUEST GIVE BACK TO ' + this.supplier, (isConfirmed) => {
             if (isConfirmed) {
                 return;
             }
-          });
+        });
     }
 
     exportToExcel(): void {
@@ -150,6 +150,8 @@ export class RobingComponent extends AppComponentBase implements OnInit {
             )
             .subscribe((result) => {
                 this._fileDownloadService.downloadTempFile(result);
+                this.notify.success('Export success')
+
             });
     }
 
