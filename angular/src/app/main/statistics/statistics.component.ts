@@ -129,6 +129,7 @@ export class StatisticsComponent extends AppComponentBase implements OnInit {
         this.getModule();
         this.getPcStore();
         this.getPcHome();
+        this.getPart()
     }
     openRoute(route) {
         if (route == 'dvnContainer') {
