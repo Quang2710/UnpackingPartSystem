@@ -135,3 +135,5 @@ src/tmss.Web.Public/wwwroot/view-resources/Views/_Bundles
 src/tmss.Web.Public/wwwroot/view-resources/**/*.min.*
 src/tmss.Web.Public/wwwroot/Common/**/*.min.*
 src/tmss.Web.Public/node_modules
+
+build/outputs
