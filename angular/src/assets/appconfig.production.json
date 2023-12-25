@@ -1,6 +1,6 @@
 {
-  "remoteServiceBaseUrl": "https://localhost:44301",
-  "appBaseUrl": "http://localhost:4200",
+  "remoteServiceBaseUrl": "http://vnquang.id.vn:8080",
+  "appBaseUrl": "http://vnquang.id.vn",
   "localeMappings": {
     "angular": [
       {
