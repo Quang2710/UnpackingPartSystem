@@ -62,7 +62,7 @@
                         <div class="body-content col-3">{{item.partNo}}</div>
                         <div class="body-content col-3">{{item.partName}}</div>
                         <div class="body-content col-2">{{item.supplier}}</div>
-                        <div class="body-content col-3">{{item.type}}</div>
+                        <div class="body-content col-3" [ngClass]="checkTypeRobing(item.type)">{{item.type}}</div>
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div class="detail-content detail-action d-flex justify-content-center align-items-center">
-                <button class="request-give-back" (click)="requestGiveBack()">Request Give Back</button>
+                <button class="request-give-back" [disabled]="disable" (click)="requestGiveBack()">Request Give Back</button>
             </div>
         </div>
     </div>

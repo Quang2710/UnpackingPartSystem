@@ -29,7 +29,15 @@ namespace tmss.Master.Robing
             _robingScreen = robingScreen;
             _calendarListExcelExporter = calendarListExcelExporter;
         }
+        public async Task RequestGiveBack(long? id)
+        {
+            string sql = "UPDATE Robing SET Type = 'PENDING' WHERE id = @Id";
+            await _robingScreen.ExecuteAsync(sql, new
+            {
+                Id = id
+            }); ;
 
+        }
 
         public async Task<List<RobingDto>> GetAllRobing(string partNo)
         {

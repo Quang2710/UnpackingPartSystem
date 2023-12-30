@@ -39,6 +39,8 @@ export class RobingComponent extends AppComponentBase implements OnInit {
 
     arrayTest = ['1', '2', '3', '4', '5']
     listPartInModule;
+    disable;
+
 
     constructor(
         injector: Injector,
@@ -102,7 +104,6 @@ export class RobingComponent extends AppComponentBase implements OnInit {
         this.partNo = (type === "Clear") ? '' : this.partNo;
         this.getAllRobing(this.partNo);
     }
-
     onchangeSelection(item, index) {
         if (this.selectedDiv === item) {
             this.selectedDiv = null;
@@ -111,7 +112,11 @@ export class RobingComponent extends AppComponentBase implements OnInit {
         }
         // ?? error
         //this.robingDetail = this.rowdata[index]
+        //Framework lỗi khi đặt [disabled]="selectedDiv.type == 'LOAN' || selectedDiv.type == 'PENDING'" 
 
+        this.disable = this.selectedDiv.type === 'LOAN' || this.selectedDiv.type === 'PENDING';
+
+        
         this.renban = this.rowdata[index].renban
         this.supplier = this.rowdata[index].supplier
         this.robingTime = this.rowdata[index].creationTime
@@ -135,10 +140,15 @@ export class RobingComponent extends AppComponentBase implements OnInit {
         })
     }
 
-    requestGiveBack() {
+    requestGiveBack() {        
         this.message.confirm(this.l(''), 'REQUEST GIVE BACK TO ' + this.supplier, (isConfirmed) => {
             if (isConfirmed) {
-                return;
+                this._service.requestGiveBack(this.selectedDiv.id).subscribe(()=>{
+                    this.notify.success('Request Success')
+                    this.getAllRobing()
+                },(error)=>{
+                    this.notify.error('Request failed',error)
+                })
             }
         });
     }
@@ -154,7 +164,13 @@ export class RobingComponent extends AppComponentBase implements OnInit {
 
             });
     }
-
+    checkTypeRobing(robingStatus: string): string {
+        if (robingStatus === 'PENDING') {
+          return 'PENDING';
+        }
+      }
+        
+      
 
 }
 
